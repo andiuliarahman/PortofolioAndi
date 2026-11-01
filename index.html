@@ -487,6 +487,16 @@ header.nav.stuck{
 .c-val{font-size:12.5px;color:var(--txt);word-break:break-word;line-height:1.4;transition:color .25s;}
 .c-item:hover .c-lbl{color:var(--dim);}
 .c-item:hover .c-val{color:var(--br,var(--lime));}
+.contact-box .sj-quote{margin:46px auto 0;padding-top:34px;max-width:700px;border-top:1px solid var(--line);}
+.contact-box .sj-quote p{
+  font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;
+  font-size:clamp(1.3rem,2.5vw,1.8rem);line-height:1.42;letter-spacing:-.01em;
+  color:var(--txt);max-width:none;margin:0 0 14px;text-wrap:balance;
+}
+.contact-box .sj-quote cite{
+  display:block;font-family:'JetBrains Mono',monospace;font-style:normal;
+  font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);opacity:.8;
+}
 footer{border-top:1px solid var(--line);padding:30px 0;}
 .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--mute);}
 
@@ -956,17 +966,17 @@ footer{border-top:1px solid var(--line);padding:30px 0;}
       <div class="tl-item rv d2">
         <div>
           <div class="tl-when">2019 — 2022</div>
-          <h3>SMA &middot; Jurusan IPA</h3>
-          <div class="where">Jurusan IPA &middot; <span class="todo">nama sekolah menyusul</span></div>
-          <p>Jurusan IPA &mdash; fondasi matematika yang kemudian saya bawa ke statistika.</p>
+          <h3>SMA Negeri 1 Unggul Bukittinggi</h3>
+          <div class="where">Jurusan IPA &middot; Bukittinggi, Sumatera Barat</div>
+          <p>Fondasi matematika yang kemudian saya bawa ke statistika.</p>
         </div>
-        <figure class="ph" data-cap="Masa SMA">
-          <img src="assets/photos/sma-1.jpg" alt="Dokumentasi masa SMA" loading="lazy" />
+        <figure class="ph" data-cap="SMA Negeri 1 Unggul Bukittinggi">
+          <img src="assets/photos/sma-1.jpg" alt="Dokumentasi masa SMA di SMA Negeri 1 Unggul Bukittinggi" loading="lazy" />
           <div class="ph-empty">
             <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg>
             <span>sma-1.jpg</span>
           </div>
-          <figcaption class="ph-cap">Masa SMA</figcaption>
+          <figcaption class="ph-cap">SMA Negeri 1 Unggul Bukittinggi</figcaption>
         </figure>
       </div>
 
@@ -1110,7 +1120,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;}
     <div class="contact-box rv">
       <div class="eyebrow" style="justify-content:center;">Kontak</div>
       <h2>Punya data yang<br><em>butuh cerita?</em></h2>
-      <p>Saya lulus 2026 dan terbuka untuk peran Data Analyst, Data Scientist, atau Business Analyst — juga proyek analisis lepas. Kirim pesan, saya balas secepatnya.</p>
+      <p>Tertarik kolaborasi? Saya terbuka untuk posisi Data &amp; Business Analyst atau proyek analisis lepas. Bebas mau ngobrolin peluang kerja atau sekadar sapa via WA/Email.</p>
       <div class="contact-links">
         <a href="mailto:andiuliarahman@gmail.com" class="btn btn-primary" data-magnet>Kirim Email →</a>
         <a href="https://wa.me/6282285103001" target="_blank" rel="noopener" class="btn btn-ghost" data-magnet>WhatsApp</a>
@@ -1153,6 +1163,10 @@ footer{border-top:1px solid var(--line);padding:30px 0;}
           <span class="c-val">@andi.ulrhmn</span>
         </a>
       </div>
+      <blockquote class="sj-quote">
+        <p>&ldquo;Hidup yang tidak dipertaruhkan tidak akan pernah dimenangkan&rdquo;</p>
+        <cite>Sutan Sjahrir</cite>
+      </blockquote>
     </div>
   </div>
 </section>
