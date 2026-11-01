@@ -636,6 +636,45 @@ footer{border-top:1px solid var(--line);padding:30px 0;}
 }
 .dt-gal .ph{aspect-ratio:4/3;border-radius:11px;}
 .dt-gal .ph-empty{font-size:8.5px;}
+
+/* ---------- MUSIC TOGGLE ---------- */
+.music{
+  position:fixed;left:22px;bottom:22px;z-index:150;
+  width:46px;height:46px;border-radius:50%;display:grid;place-items:center;cursor:pointer;
+  border:1px solid var(--line-2);background:rgba(10,12,18,.82);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  color:var(--dim);box-shadow:0 8px 24px rgba(0,0,0,.45);
+  transition:color .25s,border-color .25s,background .25s,transform .3s var(--ease);
+}
+.music:hover{color:var(--lime);border-color:rgba(201,247,61,.42);transform:translateY(-2px);}
+.music .eq{display:flex;align-items:flex-end;gap:3px;height:16px;}
+.music .eq i{width:3px;height:6px;border-radius:2px;background:currentColor;}
+.music .eq i:nth-child(1){height:6px;}
+.music .eq i:nth-child(2){height:11px;}
+.music .eq i:nth-child(3){height:8px;}
+.music .eq i:nth-child(4){height:14px;}
+.music.playing{color:var(--lime);border-color:rgba(201,247,61,.48);background:rgba(201,247,61,.1);}
+.music.playing .eq i{animation:eqbar .9s ease-in-out infinite;}
+.music.playing .eq i:nth-child(2){animation-delay:.15s;}
+.music.playing .eq i:nth-child(3){animation-delay:.3s;}
+.music.playing .eq i:nth-child(4){animation-delay:.45s;}
+@keyframes eqbar{0%,100%{height:5px}50%{height:15px}}
+.music .note{display:none;width:16px;height:16px;}
+.music.empty .eq{display:none;}
+.music.empty .note{display:block;}
+.music.empty{display:none;}
+.music::after{
+  content:attr(data-label);position:absolute;left:56px;top:50%;transform:translateY(-50%);
+  white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim);background:rgba(10,12,18,.94);border:1px solid var(--line);
+  padding:6px 10px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.music:hover::after{opacity:1;}
+.music.pulse::before{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  border:1px solid rgba(201,247,61,.4);animation:mpulse 2.4s ease-out 3;
+}
+@keyframes mpulse{0%{transform:scale(.9);opacity:.8}100%{transform:scale(1.4);opacity:0}}
 </style>
 </head>
 <body>
@@ -644,6 +683,14 @@ footer{border-top:1px solid var(--line);padding:30px 0;}
 <div class="cursor-dot" id="cDot"></div>
 <div class="cursor-ring" id="cRing"></div>
 <div class="progress" id="progress"></div>
+
+<button class="music pulse" id="musicBtn" aria-pressed="false" aria-label="Putar musik latar" data-label="Putar musik">
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <svg class="note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 17.5V5.2l10-2v12.3"/><circle cx="6.4" cy="17.6" r="2.7"/><circle cx="16.4" cy="15.5" r="2.7"/></svg>
+</button>
+<audio id="bgm" loop preload="none" src="assets/audio/bgm.mp3"></audio>
+
+
 
 <!-- ================= NAV ================= -->
 <header class="nav" id="nav">
@@ -1869,6 +1916,43 @@ $$('.bcard').forEach(card=>{
   addEventListener('keydown', function(e){
     if(e.key === 'Escape' && dt.classList.contains('open')) close();
   });
+})();
+
+
+/* ============================================================
+   MUSIC TOGGLE (opt-in, tidak autoplay)
+   ============================================================ */
+(function(){
+  const btn = $('#musicBtn'), a = $('#bgm');
+  if(!btn || !a) return;
+  a.volume = 0.35;
+
+  function setUI(on){
+    btn.classList.toggle('playing', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.dataset.label = on ? 'Jeda musik' : 'Putar musik';
+    btn.setAttribute('aria-label', on ? 'Jeda musik latar' : 'Putar musik latar');
+  }
+  function fail(){
+    btn.classList.add('empty');
+    btn.dataset.label = 'Musik belum tersedia';
+    btn.setAttribute('aria-label', 'Musik belum tersedia');
+    a.pause();
+  }
+
+  a.addEventListener('error', fail);
+  btn.addEventListener('click', function(){
+    if(btn.classList.contains('empty')) return;
+    if(a.paused){
+      const pr = a.play();
+      if(pr && pr.then) pr.then(function(){ setUI(true); }).catch(fail);
+      else setUI(true);
+    } else {
+      a.pause();
+      setUI(false);
+    }
+  });
+  setTimeout(function(){ btn.classList.remove('pulse'); }, 8000);
 })();
 
 /* ============================================================
