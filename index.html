@@ -170,6 +170,13 @@ header.nav.stuck{
 .stat-chip:hover{border-color:var(--line-2);background:rgba(255,255,255,.05);transform:translateY(-2px);}
 .stat-chip b{display:block;font-family:'Space Grotesk';font-size:1.45rem;letter-spacing:-.03em;line-height:1.1;}
 .stat-chip span{font-size:11px;color:var(--mute);letter-spacing:.04em;}
+.cum{
+  display:inline-block;margin-left:7px;padding:2px 8px;border-radius:100px;vertical-align:1px;
+  font-family:'JetBrains Mono',monospace;font-style:normal;font-size:8.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--lime);border:1px solid rgba(201,247,61,.34);
+  background:rgba(201,247,61,.08);
+}
+.cum-t{font-style:normal;color:var(--lime);}
 
 /* chart card */
 .chart-card{
@@ -674,7 +681,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;}
         <a href="#sentiment" class="btn btn-ghost" data-magnet>Coba Detektor Sentimen</a>
       </div>
       <div class="hero-stats">
-        <div class="stat-chip"><b data-count="3.64">0.00</b><span>IPK / 4.00</span></div>
+        <div class="stat-chip"><b data-count="3.64">0.00</b><span>IPK / 4.00</span><i class="cum">Cumlaude</i></div>
         <div class="stat-chip"><b data-count="4">0</b><span>Pengalaman Kerja</span></div>
         <div class="stat-chip"><b data-count="6">0</b><span>Proyek Data</span></div>
       </div>
@@ -785,7 +792,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;}
 
       <div class="bcard b-stat rv d2">
         <div class="bt">Sekilas</div>
-        <div class="row"><b data-count="3.64">0.00</b><span>IPK</span></div>
+        <div class="row"><b data-count="3.64">0.00</b><span>IPK &middot; <i class="cum-t">Cumlaude</i></span></div>
         <div class="row"><b data-count="4">0</b><span>Pengalaman</span></div>
         <div class="row"><b data-count="6">0</b><span>Proyek</span></div>
       </div>
@@ -1006,7 +1013,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;}
         <div>
           <div class="tl-when">2022 — 2026</div>
           <h3>S1 Statistika</h3>
-          <div class="where">Universitas Sebelas Maret (UNS) &middot; Surakarta &middot; IPK 3.64 / 4.00</div>
+          <div class="where">Universitas Sebelas Maret (UNS) &middot; Surakarta &middot; IPK 3.64 / 4.00 &middot; Cumlaude</div>
           <p>Fondasi teori peluang, inferensia, dan pemodelan statistik. Di sinilah saya mulai terbiasa mempertanyakan angka sebelum mempercayainya.</p>
           <button class="dt-btn" data-detail="kampus">Lihat detail <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
@@ -1636,8 +1643,8 @@ $$('.bcard').forEach(card=>{
     kampus:{
       when:'2022 — 2026 &middot; PENDIDIKAN',
       title:'S1 Statistika &mdash; Universitas Sebelas Maret',
-      where:'Surakarta &middot; IPK 3.64 / 4.00 &middot; lulus 2026',
-      intro:'Sarjana Statistika di UNS dengan IPK 3.64 dari 4.00. Fokus yang paling saya tekuni: pemodelan statistik dan penerapannya untuk peramalan.',
+      where:'Surakarta &middot; IPK 3.64 / 4.00 &middot; cumlaude &middot; lulus 2026',
+      intro:'Sarjana Statistika di UNS dengan IPK 3.64 dari 4.00 dan predikat cumlaude. Fokus yang paling saya tekuni: pemodelan statistik dan penerapannya untuk peramalan.',
       blocks:[
         {h:'Yang saya dalami', items:[
           'Teori peluang dan inferensia statistik sebagai dasar mengambil kesimpulan dari data sampel.',
