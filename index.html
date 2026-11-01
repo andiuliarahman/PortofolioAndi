@@ -456,9 +456,17 @@ header.nav.stuck{
 .contact-box p{color:var(--dim);max-width:560px;margin:0 auto 34px;font-size:1rem;}
 .contact-box .eyebrow::before{display:none;}
 .contact-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
-.social-row{display:flex;justify-content:center;gap:26px;margin-top:38px;flex-wrap:wrap;}
-.social-row a{font-size:12px;color:var(--mute);letter-spacing:.04em;transition:.25s;}
-.social-row a:hover{color:var(--lime);}
+.contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:34px;text-align:left;}
+.c-item{
+  display:flex;flex-direction:column;gap:6px;padding:16px 18px;
+  border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);
+  transition:border-color .25s,background .25s,transform .25s;
+}
+.c-item:hover{border-color:rgba(201,247,61,.45);background:rgba(201,247,61,.055);transform:translateY(-2px);}
+.c-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);transition:color .25s;}
+.c-val{font-size:12.5px;color:var(--txt);word-break:break-word;line-height:1.4;}
+.c-item:hover .c-lbl{color:var(--cyan);}
+.c-item:hover .c-val{color:var(--lime);}
 footer{border-top:1px solid var(--line);padding:30px 0;}
 .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--mute);}
 
@@ -495,6 +503,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;}
   .work-grid{grid-template-columns:1fr 1fr;}
   .org-grid{grid-template-columns:1fr 1fr;}
   .tl-item{grid-template-columns:1fr 170px;gap:18px;}
+  .contact-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media (max-width:760px){
   section{padding:78px 0;}
@@ -521,6 +530,10 @@ footer{border-top:1px solid var(--line);padding:30px 0;}
   .tl-item .ph{aspect-ratio:16/9;}
   .float-chip{left:auto;right:12px;}
   .lb{padding:18px;}
+  .contact-grid{grid-template-columns:1fr 1fr;gap:8px;}
+  .c-item{padding:13px 14px;}
+  .c-val{font-size:11.5px;}
+  .contact-links{flex-direction:column;align-items:stretch;}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
@@ -1050,12 +1063,25 @@ footer{border-top:1px solid var(--line);padding:30px 0;}
       <p>Saya lulus 2026 dan terbuka untuk peran Data Analyst, Data Scientist, atau Business Analyst — juga proyek analisis lepas. Kirim pesan, saya balas secepatnya.</p>
       <div class="contact-links">
         <a href="mailto:andiuliarahman@gmail.com" class="btn btn-primary" data-magnet>Kirim Email →</a>
-        <a href="https://www.linkedin.com/in/andiulia" target="_blank" rel="noopener" class="btn btn-ghost" data-magnet>LinkedIn</a>
+        <a href="https://wa.me/6282285103001" target="_blank" rel="noopener" class="btn btn-ghost" data-magnet>WhatsApp</a>
       </div>
-      <div class="social-row">
-        <a href="https://www.linkedin.com/in/andiulia" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a href="mailto:andiuliarahman@gmail.com">Email ↗</a>
-        <a href="#home">Surakarta, Indonesia</a>
+      <div class="contact-grid">
+        <a class="c-item" href="mailto:andiuliarahman@gmail.com">
+          <span class="c-lbl">Email</span>
+          <span class="c-val">andiuliarahman@gmail.com</span>
+        </a>
+        <a class="c-item" href="https://wa.me/6282285103001" target="_blank" rel="noopener">
+          <span class="c-lbl">WhatsApp / HP</span>
+          <span class="c-val">+62 822-8510-3001</span>
+        </a>
+        <a class="c-item" href="https://www.linkedin.com/in/andiulia" target="_blank" rel="noopener">
+          <span class="c-lbl">LinkedIn</span>
+          <span class="c-val">/in/andiulia</span>
+        </a>
+        <a class="c-item" href="https://www.instagram.com/andi.ulrhmn/" target="_blank" rel="noopener">
+          <span class="c-lbl">Instagram</span>
+          <span class="c-val">@andi.ulrhmn</span>
+        </a>
       </div>
     </div>
   </div>
