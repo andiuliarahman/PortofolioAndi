@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Andi Ulia Rahman — Statistika &amp; Machine Learning</title>
+<meta name="description" content="Portofolio Andi Ulia Rahman — Sarjana Statistika UNS 2026. Machine learning, data cleaning, MySQL, dan visualisasi data." />
+<meta name="theme-color" content="#06070c" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2306070c'/%3E%3Cpath d='M12 46 L26 32 L38 38 L52 18' fill='none' stroke='%23c9f73d' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='52' cy='18' r='5' fill='%2338e1ff'/%3E%3C/svg%3E" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Andi Ulia Rahman — Statistika & Machine Learning" />
+<meta property="og:description" content="Membedakan pola nyata dari kebetulan. Statistika, machine learning, dan visualisasi data." />
+<meta property="og:locale" content="id_ID" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Andi Ulia Rahman — Statistika & Machine Learning" />
+<meta name="twitter:description" content="Membedakan pola nyata dari kebetulan." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   0 · TOKENS
+   ============================================================ */
+:root{
+  --ink:      #06070c;
+  --ink-2:    #0a0c14;
+  --card:     #0c0f18;
+  --line:     rgba(255,255,255,.085);
+  --line-2:   rgba(255,255,255,.17);
+  --txt:      #eef1f7;
+  --dim:      #9aa6bd;
+  --mute:     #626e87;
+  --lime:     #c9f73d;
+  --cyan:     #38e1ff;
+  --violet:   #a78bfa;
+  --pink:     #fb7185;
+  --radius:   20px;
+  --maxw:     1200px;
+  --ease:     cubic-bezier(.22,1,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;overflow-x:clip;}
+body{
+  margin:0;background:var(--ink);color:var(--txt);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+h1,h2,h3,h4{font-family:'Space Grotesk','Inter',sans-serif;line-height:1.06;margin:0;letter-spacing:-.03em;font-weight:600;}
+p{margin:0;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;}
+::selection{background:var(--lime);color:#06070c;}
+
+/* ============================================================
+   1 · BACKGROUND
+   ============================================================ */
+.bg{position:fixed;inset:0;z-index:-2;pointer-events:none;}
+.bg::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(880px 520px at 82% -10%, rgba(56,225,255,.13), transparent 62%),
+    radial-gradient(720px 460px at 4% 4%, rgba(201,247,61,.07), transparent 60%),
+    radial-gradient(760px 560px at 50% 112%, rgba(167,139,250,.09), transparent 66%);
+}
+.bg::after{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.024) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.024) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 22%,#000 18%,transparent 76%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 22%,#000 18%,transparent 76%);
+}
+.cursor-dot,.cursor-ring{
+  position:fixed;top:0;left:0;z-index:400;pointer-events:none;border-radius:50%;
+  opacity:0;transition:opacity .3s;
+}
+.cursor-dot{width:6px;height:6px;background:var(--lime);}
+.cursor-ring{
+  width:34px;height:34px;border:1px solid rgba(201,247,61,.45);
+  transition:opacity .3s,width .28s var(--ease),height .28s var(--ease),background .28s,border-color .28s;
+}
+body.pointer-fine .cursor-dot,body.pointer-fine .cursor-ring{opacity:1;}
+body.hovering .cursor-ring{width:56px;height:56px;background:rgba(201,247,61,.1);border-color:rgba(201,247,61,.7);}
+
+/* ============================================================
+   2 · LAYOUT
+   ============================================================ */
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 26px;}
+section{position:relative;padding:118px 0;}
+.progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:300;background:linear-gradient(90deg,var(--lime),var(--cyan));}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--lime);margin-bottom:20px;
+}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--lime);}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-bottom:54px;}
+.sec-title{font-size:clamp(2rem,4.4vw,3.2rem);letter-spacing:-.04em;}
+.sec-title em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--lime);letter-spacing:0;}
+.sec-sub{color:var(--dim);max-width:520px;font-size:1rem;line-height:1.7;margin-top:14px;}
+
+/* ============================================================
+   3 · NAV
+   ============================================================ */
+header.nav{position:fixed;top:0;left:0;right:0;z-index:200;transition:background .35s,border-color .35s;}
+header.nav.stuck{
+  background:rgba(6,7,12,.8);backdrop-filter:blur(18px) saturate(150%);
+  -webkit-backdrop-filter:blur(18px) saturate(150%);border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px;}
+.logo{display:flex;align-items:center;gap:11px;font-family:'Space Grotesk';font-weight:600;font-size:15px;}
+.logo-mark{
+  width:32px;height:32px;border-radius:9px;display:grid;place-items:center;
+  background:var(--lime);color:#06070c;font-weight:700;font-size:13px;letter-spacing:-.02em;
+}
+.nav-links{display:flex;align-items:center;gap:30px;}
+.nav-links a{font-size:13.5px;color:var(--dim);position:relative;padding:6px 0;transition:color .25s;}
+.nav-links a::after{content:'';position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--lime);transition:right .35s var(--ease);}
+.nav-links a:hover,.nav-links a.active{color:var(--txt);}
+.nav-links a:hover::after,.nav-links a.active::after{right:0;}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-size:13.5px;font-weight:550;padding:12px 22px;border-radius:999px;
+  border:1px solid transparent;cursor:pointer;white-space:nowrap;
+  transition:transform .3s var(--ease),box-shadow .3s,background .3s,border-color .3s,color .3s;
+}
+.btn-primary{background:var(--lime);color:#06070c;}
+.btn-primary:hover{box-shadow:0 12px 30px rgba(201,247,61,.28);}
+.btn-ghost{border-color:var(--line-2);color:var(--txt);background:rgba(255,255,255,.03);}
+.btn-ghost:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.34);}
+.burger{display:none;background:none;border:0;padding:8px;cursor:pointer;}
+.burger span{display:block;width:22px;height:1.5px;background:var(--txt);margin:5px 0;transition:.3s;}
+
+/* ============================================================
+   4 · HERO
+   ============================================================ */
+.hero{padding:150px 0 90px;min-height:100vh;display:flex;align-items:center;}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;width:100%;}
+.pill{
+  display:inline-flex;align-items:center;gap:9px;padding:7px 15px 7px 11px;
+  border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.03);
+  font-size:12.5px;color:var(--dim);margin-bottom:28px;
+}
+.dot-live{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2.4s infinite;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(201,247,61,.6);}70%{box-shadow:0 0 0 9px rgba(201,247,61,0);}100%{box-shadow:0 0 0 0 rgba(201,247,61,0);}}
+
+.hero h1{font-size:clamp(2.3rem,4.6vw,3.9rem);line-height:1.02;letter-spacing:-.045em;}
+.hero h1 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--lime);letter-spacing:-.01em;}
+.hero h1 .ln{display:block;}
+.role-line{
+  font-family:'JetBrains Mono',monospace;font-size:clamp(.85rem,1.4vw,1rem);
+  color:var(--cyan);margin:26px 0 18px;min-height:1.7em;display:flex;align-items:center;
+}
+.role-line .caret{display:inline-block;width:2px;height:1.05em;background:var(--cyan);margin-left:3px;animation:blink 1.05s step-end infinite;}
+@keyframes blink{50%{opacity:0;}}
+.hero .lede{color:var(--dim);font-size:1.04rem;max-width:500px;line-height:1.75;}
+.hero-cta{display:flex;gap:13px;margin-top:34px;flex-wrap:wrap;}
+.hero-stats{display:flex;gap:14px;margin-top:44px;flex-wrap:wrap;}
+.stat-chip{
+  border:1px solid var(--line);border-radius:14px;padding:13px 18px;background:rgba(255,255,255,.025);
+  transition:border-color .3s,background .3s,transform .3s var(--ease);
+}
+.stat-chip:hover{border-color:var(--line-2);background:rgba(255,255,255,.05);transform:translateY(-2px);}
+.stat-chip b{display:block;font-family:'Space Grotesk';font-size:1.45rem;letter-spacing:-.03em;line-height:1.1;}
+.stat-chip span{font-size:11px;color:var(--mute);letter-spacing:.04em;}
+
+/* chart card */
+.chart-card{
+  position:relative;border-radius:22px;border:1px solid var(--line);
+  background:linear-gradient(165deg,rgba(255,255,255,.055),rgba(255,255,255,.012));
+  overflow:hidden;box-shadow:0 40px 90px -34px rgba(0,0,0,.95);
+}
+.chart-top{display:flex;justify-content:space-between;align-items:flex-start;padding:20px 22px 0;}
+.chart-top h4{font-size:13px;font-weight:500;color:var(--dim);letter-spacing:.01em;}
+.chart-top .big{font-family:'Space Grotesk';font-size:1.9rem;letter-spacing:-.03em;margin-top:4px;}
+.chart-top .big span{font-size:12px;color:var(--mute);font-family:'Inter';letter-spacing:0;margin-left:6px;}
+.tag-live{
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;
+  padding:5px 9px;border-radius:6px;background:rgba(201,247,61,.12);
+  border:1px solid rgba(201,247,61,.28);color:var(--lime);display:flex;align-items:center;gap:6px;
+}
+.tag-live i{width:5px;height:5px;border-radius:50%;background:var(--lime);display:block;animation:pulse 2s infinite;}
+#heroChart{display:block;width:100%;height:210px;cursor:crosshair;}
+.chart-foot{
+  display:flex;justify-content:space-between;padding:0 22px 18px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mute);letter-spacing:.05em;
+}
+.chart-tip{
+  position:absolute;pointer-events:none;opacity:0;transform:translate(-50%,-118%);
+  background:rgba(10,12,20,.96);border:1px solid var(--line-2);border-radius:9px;
+  padding:7px 11px;font-size:11px;white-space:nowrap;transition:opacity .18s;
+  box-shadow:0 12px 30px rgba(0,0,0,.7);z-index:5;
+}
+.chart-tip b{font-family:'Space Grotesk';font-size:13px;color:var(--lime);display:block;letter-spacing:-.01em;}
+.float-chip{
+  position:absolute;left:-14px;bottom:74px;padding:10px 15px;border-radius:12px;
+  border:1px solid var(--line-2);background:rgba(10,12,20,.94);backdrop-filter:blur(14px);
+  font-size:10.5px;color:var(--dim);box-shadow:0 18px 44px rgba(0,0,0,.65);
+  animation:floaty 6s ease-in-out infinite;
+}
+.float-chip b{display:block;font-family:'Space Grotesk';font-size:1rem;color:var(--lime);margin-top:2px;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+/* ============================================================
+   5 · TICKER
+   ============================================================ */
+.ticker{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;overflow:hidden;
+  background:rgba(255,255,255,.012);
+  mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+}
+.ticker-track{display:flex;gap:46px;width:max-content;animation:scroll-x 38s linear infinite;}
+.ticker-track span{
+  font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mute);
+  letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:46px;white-space:nowrap;
+}
+.ticker-track span::after{content:'◆';font-size:6px;color:rgba(201,247,61,.6);}
+@keyframes scroll-x{to{transform:translateX(-50%);}}
+
+/* ============================================================
+   6 · SENTIMENT WIDGET
+   ============================================================ */
+.sent-wrap{
+  border:1px solid var(--line);border-radius:26px;overflow:hidden;
+  background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.008));
+  display:grid;grid-template-columns:1.15fr .85fr;
+}
+.sent-left{padding:30px;border-right:1px solid var(--line);}
+.sent-right{padding:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;}
+.sent-label{
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);margin-bottom:12px;display:block;
+}
+#sentText{
+  width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;
+  padding:15px 16px;color:var(--txt);font-family:'Inter';font-size:15px;line-height:1.6;
+  resize:none;outline:none;transition:border-color .25s,background .25s;
+}
+#sentText:focus{border-color:rgba(201,247,61,.45);background:rgba(201,247,61,.03);}
+#sentText::placeholder{color:var(--mute);}
+.preview{
+  margin-top:14px;min-height:46px;font-size:14.5px;line-height:1.75;color:var(--dim);
+  border-left:2px solid var(--line-2);padding-left:13px;
+}
+.preview .w-pos{color:var(--lime);font-weight:500;}
+.preview .w-neg{color:var(--pink);font-weight:500;}
+.preview .w-flip{text-decoration:line-through;opacity:.6;}
+.samples{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+.samples button{
+  font-size:11.5px;padding:7px 13px;border-radius:999px;cursor:pointer;
+  border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--dim);
+  transition:.25s;
+}
+.samples button:hover{border-color:rgba(201,247,61,.5);color:var(--lime);background:rgba(201,247,61,.07);}
+
+.avatar{width:132px;height:132px;position:relative;transition:transform .4s var(--ease);}
+.avatar.bump{animation:bump .45s var(--ease);}
+@keyframes bump{0%{transform:scale(.9);}55%{transform:scale(1.06);}100%{transform:scale(1);}}
+.avatar svg{width:100%;height:100%;overflow:visible;}
+.av-head{fill:rgba(255,255,255,.04);stroke:var(--av,#6b7793);stroke-width:2.5;transition:stroke .4s;}
+.av-eye,.av-mouth{fill:none;stroke:var(--av,#6b7793);stroke-width:3.4;stroke-linecap:round;transition:stroke .4s;}
+.avatar.pos{--av:var(--lime);filter:drop-shadow(0 0 22px rgba(201,247,61,.35));}
+.avatar.neg{--av:var(--pink);filter:drop-shadow(0 0 22px rgba(251,113,133,.35));}
+.avatar.neu{--av:#6b7793;}
+
+.verdict{font-family:'Space Grotesk';font-size:1.5rem;letter-spacing:-.02em;transition:color .4s;}
+.verdict.pos{color:var(--lime);}
+.verdict.neg{color:var(--pink);}
+.verdict.neu{color:var(--dim);}
+.meter{width:100%;max-width:240px;height:5px;border-radius:99px;background:rgba(255,255,255,.08);position:relative;overflow:hidden;}
+.meter i{position:absolute;left:50%;top:0;bottom:0;width:0;border-radius:99px;background:var(--lime);transition:width .45s var(--ease),left .45s var(--ease),background .45s;}
+.meter::after{content:'';position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:rgba(255,255,255,.22);}
+.tokens{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;min-height:22px;}
+.tokens span{
+  font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:5px;
+  letter-spacing:.03em;animation:pop .3s var(--ease);
+}
+@keyframes pop{from{opacity:0;transform:scale(.85);}to{opacity:1;transform:none;}}
+.tokens .t-pos{background:rgba(201,247,61,.12);border:1px solid rgba(201,247,61,.3);color:var(--lime);}
+.tokens .t-neg{background:rgba(251,113,133,.12);border:1px solid rgba(251,113,133,.3);color:var(--pink);}
+.sent-note{font-size:11px;color:var(--mute);text-align:center;line-height:1.6;max-width:250px;}
+
+/* ============================================================
+   7 · BENTO
+   ============================================================ */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(166px,auto);gap:16px;}
+.bcard{
+  border:1px solid var(--line);border-radius:18px;padding:24px;
+  background:linear-gradient(168deg,rgba(255,255,255,.04),rgba(255,255,255,.008));
+  position:relative;overflow:hidden;
+  transition:transform .4s var(--ease),border-color .4s;
+}
+.bcard::after{
+  content:'';position:absolute;inset:0;opacity:0;transition:opacity .4s;pointer-events:none;
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(201,247,61,.1),transparent 62%);
+}
+.bcard:hover{transform:translateY(-4px);border-color:var(--line-2);}
+.bcard:hover::after{opacity:1;}
+.bcard .bt{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:14px;}
+.b-quote{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;padding:30px;}
+.b-quote blockquote{
+  margin:0;font-family:'Space Grotesk';font-size:clamp(1.2rem,2vw,1.66rem);
+  line-height:1.34;letter-spacing:-.025em;font-weight:500;
+}
+.b-quote blockquote em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--lime);}
+.b-quote .sig{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--mute);margin-top:24px;}
+.b-quote .sig i{width:26px;height:1px;background:var(--lime);display:block;}
+.b-photo{grid-column:span 1;grid-row:span 2;padding:0;overflow:hidden;}
+.b-photo .ph{height:100%;border:0;border-radius:0;aspect-ratio:auto;}
+.b-stat{display:flex;flex-direction:column;justify-content:center;}
+.b-stat .row{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line);}
+.b-stat .row:last-child{border-bottom:0;}
+.b-stat .row b{font-family:'Space Grotesk';font-size:1.15rem;color:var(--txt);letter-spacing:-.02em;}
+.b-stat .row span{font-size:11.5px;color:var(--mute);}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;}
+.chips span{
+  font-size:11.5px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);
+  color:var(--dim);background:rgba(255,255,255,.025);transition:.25s;
+}
+.bcard:hover .chips span{border-color:rgba(201,247,61,.28);color:var(--txt);}
+.b-steps{grid-column:span 2;display:flex;flex-direction:column;gap:12px;}
+.step{display:flex;gap:12px;align-items:flex-start;}
+.step i{
+  flex:0 0 22px;height:22px;border-radius:7px;display:grid;place-items:center;
+  background:rgba(201,247,61,.1);border:1px solid rgba(201,247,61,.25);
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--lime);font-style:normal;
+}
+.step div{font-size:13px;color:var(--dim);line-height:1.55;}
+.step div b{color:var(--txt);font-weight:550;}
+
+/* ============================================================
+   8 · WORK
+   ============================================================ */
+.filters{display:flex;gap:8px;flex-wrap:wrap;}
+.filters button{
+  font-size:12px;padding:8px 16px;border-radius:999px;cursor:pointer;
+  border:1px solid var(--line);background:transparent;color:var(--dim);transition:.28s;
+}
+.filters button:hover{border-color:var(--line-2);color:var(--txt);}
+.filters button.on{background:var(--lime);border-color:var(--lime);color:#06070c;font-weight:550;}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.card{
+  border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  background:linear-gradient(175deg,rgba(255,255,255,.04),rgba(255,255,255,.008));
+  display:flex;flex-direction:column;position:relative;
+  transition:transform .45s var(--ease),border-color .45s,box-shadow .45s;
+}
+.card.hide{display:none;}
+.card:hover{transform:translateY(-6px);border-color:var(--line-2);box-shadow:0 34px 70px -34px rgba(0,0,0,.95);}
+.card-thumb{
+  height:148px;position:relative;overflow:hidden;border-bottom:1px solid var(--line);
+  background:radial-gradient(120% 130% at 20% 0%,rgba(56,225,255,.14),transparent 60%),rgba(255,255,255,.015);
+}
+.card-thumb svg{width:100%;height:100%;display:block;transition:transform .6s var(--ease);}
+.card:hover .card-thumb svg{transform:scale(1.05);}
+.badge{
+  position:absolute;top:11px;right:11px;padding:5px 10px;border-radius:7px;white-space:nowrap;
+  background:rgba(6,7,12,.86);border:1px solid var(--line-2);backdrop-filter:blur(8px);
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--cyan);letter-spacing:.04em;
+}
+.badge.hi{color:#06070c;background:var(--lime);border-color:var(--lime);font-weight:600;}
+.card-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1;}
+.card-body h3{font-size:1rem;margin-bottom:8px;line-height:1.35;}
+.card-body p{font-size:12.8px;color:var(--mute);line-height:1.65;flex:1;}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:15px;}
+.tags span{
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.03em;
+  padding:4px 8px;border-radius:5px;background:rgba(56,225,255,.08);
+  border:1px solid rgba(56,225,255,.16);color:var(--cyan);
+}
+
+/* ============================================================
+   9 · JOURNEY + PHOTOS
+   ============================================================ */
+.tl{position:relative;padding-left:32px;}
+.tl::before{content:'';position:absolute;left:5px;top:10px;bottom:10px;width:1px;background:linear-gradient(180deg,rgba(201,247,61,.55),rgba(56,225,255,.3),transparent);}
+.tl-item{position:relative;padding-bottom:34px;display:grid;grid-template-columns:1fr 210px;gap:26px;align-items:start;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item::before{
+  content:'';position:absolute;left:-32px;top:9px;width:11px;height:11px;border-radius:50%;
+  background:var(--ink);border:2px solid rgba(201,247,61,.5);box-shadow:0 0 0 4px rgba(201,247,61,.06);
+}
+.tl-item:first-child::before{background:var(--lime);box-shadow:0 0 0 4px rgba(201,247,61,.15),0 0 18px rgba(201,247,61,.7);}
+.tl-when{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--lime);letter-spacing:.1em;margin-bottom:7px;}
+.tl-item h3{font-size:1.08rem;margin-bottom:4px;}
+.tl-item .where{font-size:12.5px;color:var(--dim);margin-bottom:9px;}
+.tl-item p{font-size:13.2px;color:var(--mute);line-height:1.68;max-width:640px;}
+
+.ph{
+  position:relative;margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);
+  aspect-ratio:4/3;background:rgba(255,255,255,.02);
+  transition:border-color .3s,transform .35s var(--ease);
+}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s;}
+.ph.has-img img{opacity:1;}
+.ph.has-img{cursor:zoom-in;}
+.ph.has-img:hover{border-color:var(--line-2);transform:scale(1.02);}
+.ph-empty{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  color:var(--mute);font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;
+  text-align:center;padding:12px;line-height:1.5;
+}
+.ph-empty::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.028) 0 6px,transparent 6px 13px);
+}
+.ph-empty svg{width:22px;height:22px;stroke:var(--mute);fill:none;stroke-width:1.5;opacity:.8;}
+.ph.has-img .ph-empty{display:none;}
+.ph-cap{
+  position:absolute;left:0;right:0;bottom:0;padding:22px 12px 9px;
+  font-size:10px;color:#dfe6f2;background:linear-gradient(transparent,rgba(6,7,12,.92));
+  opacity:0;transition:opacity .35s;
+}
+.ph.has-img:hover .ph-cap{opacity:1;}
+
+.org-sub{
+  margin-top:64px;margin-bottom:20px;display:flex;align-items:center;gap:14px;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);
+}
+.org-sub::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent);}
+.org-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;}
+.org-card{
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  background:linear-gradient(170deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
+  transition:transform .35s var(--ease),border-color .35s;
+}
+.org-card:hover{transform:translateY(-4px);border-color:var(--line-2);}
+.org-card .ph{border-radius:0;border:0;border-bottom:1px solid var(--line);aspect-ratio:16/10;}
+.org-body{padding:15px 16px 17px;}
+.org-body h4{font-size:.92rem;margin-bottom:5px;line-height:1.3;}
+.org-body .role{font-size:11.5px;color:var(--cyan);margin-bottom:7px;line-height:1.45;}
+.org-body .when{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--mute);letter-spacing:.04em;}
+
+/* ============================================================
+   10 · CONTACT / FOOTER / LIGHTBOX
+   ============================================================ */
+.contact-box{
+  border:1px solid var(--line);border-radius:26px;padding:clamp(34px,5vw,64px);
+  background:
+    radial-gradient(700px 340px at 84% 0%,rgba(201,247,61,.1),transparent 62%),
+    radial-gradient(560px 320px at 6% 100%,rgba(56,225,255,.09),transparent 60%),
+    linear-gradient(170deg,rgba(255,255,255,.05),rgba(255,255,255,.01));
+  text-align:center;position:relative;overflow:hidden;
+}
+.contact-box h2{font-size:clamp(2rem,4.4vw,3.2rem);margin-bottom:16px;letter-spacing:-.04em;}
+.contact-box h2 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--lime);}
+.contact-box p{color:var(--dim);max-width:560px;margin:0 auto 34px;font-size:1rem;}
+.contact-box .eyebrow::before{display:none;}
+.contact-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.social-row{display:flex;justify-content:center;gap:26px;margin-top:38px;flex-wrap:wrap;}
+.social-row a{font-size:12px;color:var(--mute);letter-spacing:.04em;transition:.25s;}
+.social-row a:hover{color:var(--lime);}
+footer{border-top:1px solid var(--line);padding:30px 0;}
+.foot-inner{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--mute);}
+
+.lb{
+  position:fixed;inset:0;z-index:500;background:rgba(4,5,9,.94);backdrop-filter:blur(10px);
+  display:grid;place-items:center;padding:40px;opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.lb.open{opacity:1;pointer-events:auto;}
+.lb img{max-width:min(92vw,1000px);max-height:82vh;border-radius:12px;border:1px solid var(--line-2);}
+.lb button{
+  position:absolute;top:24px;right:28px;width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:1px solid var(--line-2);color:var(--txt);
+  font-size:20px;cursor:pointer;line-height:1;
+}
+
+/* ============================================================
+   11 · REVEAL
+   ============================================================ */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .85s var(--ease),transform .85s var(--ease);}
+.rv.in{opacity:1;transform:none;}
+.rv.d1{transition-delay:.08s;}.rv.d2{transition-delay:.16s;}.rv.d3{transition-delay:.24s;}.rv.d4{transition-delay:.32s;}
+
+/* ============================================================
+   12 · RESPONSIVE
+   ============================================================ */
+@media (max-width:1080px){
+  .hero-grid{grid-template-columns:1fr;gap:46px;}
+  .sent-wrap{grid-template-columns:1fr;}
+  .sent-left{border-right:0;border-bottom:1px solid var(--line);}
+  .bento{grid-template-columns:repeat(2,1fr);}
+  .b-quote{grid-column:span 2;grid-row:auto;}
+  .b-photo{grid-column:span 1;grid-row:auto;}
+  .b-steps{grid-column:span 2;}
+  .work-grid{grid-template-columns:1fr 1fr;}
+  .org-grid{grid-template-columns:1fr 1fr;}
+  .tl-item{grid-template-columns:1fr 170px;gap:18px;}
+}
+@media (max-width:760px){
+  section{padding:78px 0;}
+  .wrap{padding:0 20px;}
+  .nav-links{
+    position:fixed;top:70px;left:0;right:0;flex-direction:column;gap:0;
+    background:rgba(6,7,12,.98);backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--line);padding:8px 20px 20px;
+    transform:translateY(-150%);transition:transform .45s var(--ease);
+  }
+  .nav-links.open{transform:none;}
+  .nav-links a{padding:13px 0;width:100%;border-bottom:1px solid rgba(255,255,255,.05);font-size:14.5px;}
+  .nav-links a::after{display:none;}
+  .nav-inner .btn-primary{display:none;}
+  .burger{display:block;}
+  .hero{padding:118px 0 60px;min-height:auto;}
+  .hero-stats{gap:10px;}
+  .stat-chip{padding:11px 14px;}
+  .bento{grid-template-columns:1fr;}
+  .b-quote,.b-steps,.b-photo{grid-column:span 1;grid-row:auto;}
+  .work-grid{grid-template-columns:1fr;}
+  .org-grid{grid-template-columns:1fr;}
+  .tl-item{grid-template-columns:1fr;}
+  .tl-item .ph{aspect-ratio:16/9;}
+  .float-chip{left:auto;right:12px;}
+  .lb{padding:18px;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+  html{scroll-behavior:auto;}
+  .rv{opacity:1;transform:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="cursor-dot" id="cDot"></div>
+<div class="cursor-ring" id="cRing"></div>
+<div class="progress" id="progress"></div>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#home" class="logo"><span class="logo-mark">AU</span><span>Andi Ulia Rahman</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#sentiment">Coba Widget</a>
+      <a href="#about">Tentang</a>
+      <a href="#work">Karya</a>
+      <a href="#journey">Perjalanan</a>
+      <a href="#contact">Kontak</a>
+    </nav>
+    <a href="#contact" class="btn btn-primary">Mari Bicara</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="pill"><span class="dot-live"></span> Sarjana Statistika UNS · Lulus 2026</div>
+      <h1>
+        <span class="ln">Membedakan pola</span>
+        <span class="ln"><em>dari kebetulan.</em></span>
+      </h1>
+      <div class="role-line"><span id="typed"></span><span class="caret"></span></div>
+      <p class="lede">
+        Saya <strong style="color:var(--txt);font-weight:550">Andi Ulia Rahman</strong> — bekerja di titik temu
+        statistika dan machine learning. Merapikan data yang berantakan, membangun model, lalu menyajikannya
+        jadi sesuatu yang bisa dipakai orang yang tidak punya waktu membaca tabel.
+      </p>
+      <div class="hero-cta">
+        <a href="#work" class="btn btn-primary" data-magnet>Lihat Karya Saya →</a>
+        <a href="#sentiment" class="btn btn-ghost" data-magnet>Coba Detektor Sentimen</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-chip"><b data-count="3.64">0.00</b><span>IPK / 4.00</span></div>
+        <div class="stat-chip"><b data-count="4">0</b><span>Pengalaman Kerja</span></div>
+        <div class="stat-chip"><b data-count="6">0</b><span>Proyek Data</span></div>
+      </div>
+    </div>
+
+    <div class="chart-card rv">
+      <div class="chart-top">
+        <div>
+          <h4>Proyeksi Penumpang · YIA</h4>
+          <div class="big" id="chartBig">510<span>rb pax / bulan</span></div>
+        </div>
+        <div class="tag-live"><i></i>LIVE</div>
+      </div>
+      <canvas id="heroChart"></canvas>
+      <div class="chart-foot">
+        <span>2025 — 2026</span>
+        <span id="chartHint">geser kursor ke grafik</span>
+      </div>
+      <div class="chart-tip" id="chartTip"><b>—</b><span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TICKER ================= -->
+<div class="ticker">
+  <div class="ticker-track" id="ticker">
+    <span>Python</span><span>MySQL</span><span>Prophet</span><span>scikit-learn</span>
+    <span>pandas</span><span>Power BI</span><span>Looker Studio</span><span>Tableau</span>
+    <span>R / RStudio</span><span>SPSS</span><span>Minitab</span><span>Excel</span>
+  </div>
+</div>
+
+<!-- ================= SENTIMENT ================= -->
+<section id="sentiment">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Interactive</div>
+        <h2 class="sec-title">Detektor Sentimen <em>Live</em></h2>
+        <p class="sec-sub">Ketik kalimat apa pun dalam Bahasa Indonesia. Sistem menilai nada kalimatnya secara langsung — sepenuhnya berjalan di browser kamu.</p>
+      </div>
+    </div>
+
+    <div class="sent-wrap rv d1">
+      <div class="sent-left">
+        <label class="sent-label" for="sentText">Kalimat uji</label>
+        <textarea id="sentText" rows="3" placeholder="Contoh: Pelayanannya cepat dan ramah, saya sangat puas."></textarea>
+        <div class="preview" id="preview">Hasil analisis akan muncul di sini…</div>
+        <div class="samples">
+          <button data-sample="Pelayanannya cepat dan ramah, saya sangat puas.">Coba: positif</button>
+          <button data-sample="Antrinya lama banget dan petugasnya cuek, saya kecewa.">Coba: negatif</button>
+          <button data-sample="Saya datang jam sembilan pagi ke kantor itu.">Coba: netral</button>
+          <button data-sample="Makanannya tidak enak, tapi pelayanannya sangat memuaskan.">Coba: campuran</button>
+        </div>
+      </div>
+
+      <div class="sent-right">
+        <div class="avatar neu" id="avatar">
+          <svg viewBox="0 0 120 120">
+            <circle class="av-head" cx="60" cy="60" r="42"/>
+            <path class="av-eye" id="eyeL" d="M44,52 h12"/>
+            <path class="av-eye" id="eyeR" d="M64,52 h12"/>
+            <path class="av-mouth" id="mouth" d="M46,74 h28"/>
+          </svg>
+        </div>
+        <div class="verdict neu" id="verdict">Menunggu kalimat…</div>
+        <div class="meter"><i id="meterFill"></i></div>
+        <div class="tokens" id="tokens"></div>
+        <p class="sent-note">Demo berbasis leksikon &amp; aturan negasi — bukan model terlatih. Cukup untuk menunjukkan cara kerja analisis teks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BENTO ================= -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Tentang</div>
+        <h2 class="sec-title">Cara saya <em>berpikir</em></h2>
+      </div>
+    </div>
+
+    <div class="bento">
+      <div class="bcard b-quote rv d1">
+        <div>
+          <div class="bt">Filosofi kerja</div>
+          <blockquote>
+            “Statistika mengajarkan saya membedakan mana <em>pola nyata</em> dan mana kebetulan.
+            Jika sebuah grafik tidak bisa dipahami dalam lima detik, yang salah adalah grafiknya —
+            bukan audiensnya.”
+          </blockquote>
+        </div>
+        <div class="sig"><i></i>Andi Ulia Rahman · Statistika UNS 2026</div>
+      </div>
+
+      <div class="bcard b-photo rv d2">
+        <figure class="ph" data-cap="Andi Ulia Rahman">
+          <img src="assets/photos/portrait.jpg" alt="Foto Andi Ulia Rahman" loading="lazy" />
+          <div class="ph-empty">
+            <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg>
+            <span>PORTRAIT<br>portrait.jpg</span>
+          </div>
+          <figcaption class="ph-cap">Andi Ulia Rahman</figcaption>
+        </figure>
+      </div>
+
+      <div class="bcard b-stat rv d2">
+        <div class="bt">Sekilas</div>
+        <div class="row"><b data-count="3.64">0.00</b><span>IPK</span></div>
+        <div class="row"><b data-count="4">0</b><span>Pengalaman</span></div>
+        <div class="row"><b data-count="6">0</b><span>Proyek</span></div>
+      </div>
+
+      <div class="bcard rv d3" style="display:flex;flex-direction:column;">
+        <div class="bt">Perangkat</div>
+        <div class="chips">
+          <span>Python</span><span>MySQL</span><span>scikit-learn</span><span>Prophet</span>
+          <span>Power BI</span><span>Tableau</span><span>R</span><span>SPSS</span><span>Excel</span>
+        </div>
+      </div>
+
+      <div class="bcard b-steps rv d4">
+        <div class="bt">Cara saya bekerja</div>
+        <div class="step"><i>01</i><div><b>Rapikan dulu.</b> Delapan puluh persen pekerjaan ada di pembersihan data — sebelum bicara model.</div></div>
+        <div class="step"><i>02</i><div><b>Uji, jangan percaya.</b> Setiap pola diuji signifikansinya sebelum dianggap nyata.</div></div>
+        <div class="step"><i>03</i><div><b>Baru bercerita.</b> Hasil yang tidak dipahami pengambil keputusan sama saja tidak ada.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORK ================= -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Karya</div>
+        <h2 class="sec-title">Yang pernah saya <em>bangun</em></h2>
+        <p class="sec-sub">Dari forecasting operasional bandara sampai segmentasi pelanggan — mulai dari merapikan data mentah, membangun model, sampai menyajikannya.</p>
+      </div>
+      <div class="filters" id="filters">
+        <button class="on" data-f="all">Semua</button>
+        <button data-f="magang">Magang</button>
+        <button data-f="proyek">Proyek</button>
+        <button data-f="dash">Visualisasi</button>
+      </div>
+    </div>
+
+    <div class="work-grid" id="workGrid">
+
+      <article class="card rv d1" data-cat="proyek">
+        <div class="card-thumb">
+          <span class="badge hi">★ Proyek Utama</span>
+          <svg viewBox="0 0 300 152">
+            <defs><linearGradient id="gfan" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#c9f73d" stop-opacity=".4"/>
+              <stop offset="100%" stop-color="#c9f73d" stop-opacity=".02"/>
+            </linearGradient></defs>
+            <path d="M190,56 L206,40 L222,24 L234,16 L246,30 L258,44 L270,34 L280,24 L280,56 L270,64 L258,74 L246,60 L234,44 L222,52 L206,64 L190,76 Z" fill="url(#gfan)"/>
+            <line x1="190" y1="10" x2="190" y2="142" stroke="rgba(255,255,255,.22)" stroke-dasharray="3 4"/>
+            <path d="M18,104 L34,96 L50,100 L66,84 L82,92 L98,70 L114,88 L130,64 L146,82 L162,58 L178,74 L190,66" fill="none" stroke="#38e1ff" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M190,66 L206,52 L222,38 L234,30 L246,44 L258,58 L270,48 L280,40" fill="none" stroke="#c9f73d" stroke-width="2" stroke-dasharray="5 4" stroke-linejoin="round"/>
+            <g fill="#38e1ff"><circle cx="98" cy="70" r="2.4"/><circle cx="130" cy="64" r="2.4"/><circle cx="162" cy="58" r="2.4"/></g>
+            <circle cx="234" cy="30" r="3.6" fill="#06070c" stroke="#c9f73d" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Forecasting Penumpang, Traffic &amp; Cargo Bandara</h3>
+          <p>Web app untuk memproyeksikan jumlah penumpang, pergerakan pesawat, dan kargo di Yogyakarta International Airport pada periode puncak — Natal &amp; Tahun Baru serta mudik Lebaran. Model Prophet menangkap musiman tahunan sekaligus lonjakan hari raya, lalu dipublikasikan sebagai aplikasi web lewat RStudio.</p>
+          <div class="tags"><span>Prophet</span><span>R</span><span>Time Series</span><span>Web App</span></div>
+        </div>
+      </article>
+
+      <article class="card rv d2" data-cat="magang">
+        <div class="card-thumb">
+          <span class="badge">Magang</span>
+          <svg viewBox="0 0 300 152">
+            <g fill="#a78bfa" opacity=".85">
+              <rect x="34" y="92" width="26" height="60" rx="4"/><rect x="76" y="66" width="26" height="86" rx="4"/>
+              <rect x="118" y="80" width="26" height="72" rx="4"/><rect x="160" y="42" width="26" height="110" rx="4"/>
+              <rect x="202" y="58" width="26" height="94" rx="4"/><rect x="244" y="26" width="26" height="126" rx="4"/>
+            </g>
+            <g fill="#38e1ff" opacity=".9">
+              <rect x="34" y="126" width="26" height="26" rx="4"/><rect x="76" y="112" width="26" height="40" rx="4"/>
+              <rect x="118" y="118" width="26" height="34" rx="4"/><rect x="160" y="96" width="26" height="56" rx="4"/>
+              <rect x="202" y="104" width="26" height="48" rx="4"/><rect x="244" y="82" width="26" height="70" rx="4"/>
+            </g>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Analisis Data Bisnis &amp; Rekomendasi Strategi</h3>
+          <p>Magang di divisi Business Development PT Solusi 247. Merapikan data klien dan penjualan yang tersebar di banyak file, mencari pola yang menentukan, lalu menyusun rekomendasi yang dipakai tim.</p>
+          <div class="tags"><span>Excel</span><span>SQL</span><span>Business Analysis</span></div>
+        </div>
+      </article>
+
+      <article class="card rv d3" data-cat="magang">
+        <div class="card-thumb">
+          <span class="badge">Magang</span>
+          <svg viewBox="0 0 300 152">
+            <g stroke="rgba(255,255,255,.08)" stroke-width="1">
+              <line x1="24" y1="44" x2="276" y2="44"/><line x1="24" y1="76" x2="276" y2="76"/><line x1="24" y1="108" x2="276" y2="108"/>
+            </g>
+            <rect x="30" y="34" width="52" height="9" rx="4.5" fill="#38e1ff" opacity=".9"/>
+            <rect x="96" y="34" width="40" height="9" rx="4.5" fill="#38e1ff" opacity=".5"/>
+            <rect x="150" y="34" width="64" height="9" rx="4.5" fill="#38e1ff" opacity=".72"/>
+            <rect x="228" y="34" width="34" height="9" rx="4.5" fill="#38e1ff" opacity=".38"/>
+            <rect x="42" y="66" width="46" height="9" rx="4.5" fill="#c9f73d" opacity=".85"/>
+            <rect x="104" y="66" width="58" height="9" rx="4.5" fill="#c9f73d" opacity=".58"/>
+            <rect x="176" y="66" width="42" height="9" rx="4.5" fill="#c9f73d" opacity=".9"/>
+            <rect x="232" y="66" width="30" height="9" rx="4.5" fill="#c9f73d" opacity=".42"/>
+            <rect x="36" y="98" width="38" height="9" rx="4.5" fill="#a78bfa" opacity=".7"/>
+            <rect x="88" y="98" width="54" height="9" rx="4.5" fill="#a78bfa" opacity=".9"/>
+            <rect x="158" y="98" width="48" height="9" rx="4.5" fill="#a78bfa" opacity=".52"/>
+            <rect x="218" y="98" width="44" height="9" rx="4.5" fill="#a78bfa" opacity=".8"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Apron Movement Control — Data Operasi Airside</h3>
+          <p>Internship di PT Angkasa Pura Indonesia (InJourney) — YIA, Department Operasional Airside. Mengawasi pergerakan pesawat, kendaraan, dan personel di apron, sekaligus data entry penerbangan harian.</p>
+          <div class="tags"><span>Data Operasional</span><span>Data Entry</span><span>Reporting</span></div>
+        </div>
+      </article>
+
+      <article class="card rv d1" data-cat="proyek">
+        <div class="card-thumb">
+          <span class="badge">Proyek</span>
+          <svg viewBox="0 0 300 152">
+            <g fill="#c9f73d" opacity=".9">
+              <circle cx="66" cy="44" r="4"/><circle cx="88" cy="40" r="3.4"/><circle cx="74" cy="62" r="3.8"/>
+              <circle cx="95" cy="58" r="3.2"/><circle cx="58" cy="56" r="3"/>
+            </g>
+            <g fill="#38e1ff" opacity=".9">
+              <circle cx="186" cy="38" r="3.6"/><circle cx="210" cy="44" r="4"/><circle cx="196" cy="60" r="3.2"/>
+              <circle cx="220" cy="56" r="3.4"/><circle cx="180" cy="56" r="3"/>
+            </g>
+            <g fill="#a78bfa" opacity=".9">
+              <circle cx="132" cy="104" r="3.4"/><circle cx="160" cy="98" r="4"/><circle cx="148" cy="120" r="3.2"/>
+              <circle cx="172" cy="112" r="3.6"/><circle cx="140" cy="116" r="3"/>
+            </g>
+            <g fill="none" stroke-width="1.2" stroke-dasharray="3 3">
+              <circle cx="76" cy="52" r="15" stroke="rgba(201,247,61,.5)"/>
+              <circle cx="198" cy="51" r="15" stroke="rgba(56,225,255,.5)"/>
+              <circle cx="151" cy="110" r="15" stroke="rgba(167,139,250,.5)"/>
+            </g>
+            <g fill="none" stroke="rgba(255,255,255,.42)" stroke-width="1.4">
+              <path d="M70,52 h12 M76,46 v12"/><path d="M192,51 h12 M198,45 v12"/><path d="M145,110 h12 M151,104 v12"/>
+            </g>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Segmentasi Pelanggan dengan K-Means</h3>
+          <p>Mengelompokkan pelanggan berdasarkan perilaku transaksi, lalu menerjemahkan tiap cluster menjadi persona yang bisa ditindaklanjuti — bukan sekadar nomor cluster di tabel.</p>
+          <div class="tags"><span>Python</span><span>scikit-learn</span><span>Clustering</span></div>
+        </div>
+      </article>
+
+      <article class="card rv d2" data-cat="proyek">
+        <div class="card-thumb">
+          <span class="badge">Statistika</span>
+          <svg viewBox="0 0 300 152">
+            <g fill="#fb7185" opacity=".8">
+              <rect x="30" y="98" width="34" height="54" rx="4"/><rect x="74" y="70" width="34" height="82" rx="4"/><rect x="118" y="88" width="34" height="64" rx="4"/>
+            </g>
+            <g fill="#38e1ff" opacity=".85">
+              <rect x="176" y="58" width="34" height="94" rx="4"/><rect x="220" y="42" width="34" height="110" rx="4"/><rect x="264" y="72" width="34" height="80" rx="4"/>
+            </g>
+            <line x1="150" y1="16" x2="150" y2="140" stroke="rgba(255,255,255,.28)" stroke-dasharray="3 4"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Perancangan &amp; Evaluasi Uji A/B</h3>
+          <p>Merancang eksperimen dari nol: menentukan ukuran sampel, memilih uji yang tepat, mengecek asumsi, sampai membaca p-value tanpa jatuh ke kesalahan interpretasi.</p>
+          <div class="tags"><span>Uji-t</span><span>SciPy</span><span>Statistika</span></div>
+        </div>
+      </article>
+
+      <article class="card rv d3" data-cat="dash">
+        <div class="card-thumb">
+          <span class="badge">Dashboard</span>
+          <svg viewBox="0 0 300 152">
+            <g fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.11)">
+              <rect x="26" y="18" width="76" height="40" rx="7"/><rect x="112" y="18" width="76" height="40" rx="7"/><rect x="198" y="18" width="76" height="40" rx="7"/>
+            </g>
+            <g font-family="monospace" font-size="11" fill="#38e1ff">
+              <text x="38" y="36">12.4k</text><text x="124" y="36">86%</text><text x="210" y="36">24</text>
+            </g>
+            <g font-family="monospace" font-size="6.5" fill="rgba(255,255,255,.35)">
+              <text x="38" y="50">TOTAL</text><text x="124" y="50">TARGET</text><text x="210" y="50">SEGMEN</text>
+            </g>
+            <rect x="26" y="68" width="152" height="64" rx="7" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.11)"/>
+            <path d="M38,116 L60,104 L82,110 L104,92 L126,98 L148,80 L166,86" fill="none" stroke="#c9f73d" stroke-width="2" stroke-linejoin="round"/>
+            <g fill="#a78bfa" opacity=".8">
+              <rect x="190" y="104" width="14" height="28" rx="3"/><rect x="210" y="88" width="14" height="44" rx="3"/>
+              <rect x="230" y="96" width="14" height="36" rx="3"/><rect x="250" y="76" width="14" height="56" rx="3"/>
+            </g>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Dashboard Visualisasi Data Operasional</h3>
+          <p>Merangkum data yang tadinya tersebar di banyak spreadsheet menjadi satu dashboard interaktif — supaya tren bisa dilihat dalam hitungan detik, bukan hasil rekap manual berjam-jam.</p>
+          <div class="tags"><span>Power BI</span><span>MySQL</span><span>Looker Studio</span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= JOURNEY ================= -->
+<section id="journey">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Perjalanan</div>
+        <h2 class="sec-title">Pendidikan, kerja, <em>dan dokumentasinya</em></h2>
+        <p class="sec-sub">Setiap pengalaman punya cerita di baliknya. Slot foto di bawah siap diisi dokumentasi asli — cukup taruh file di folder <code style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--lime)">assets/photos/</code>.</p>
+      </div>
+    </div>
+
+    <div class="tl">
+
+      <div class="tl-item rv d1">
+        <div>
+          <div class="tl-when">MAGANG · BUSINESS DEVELOPMENT</div>
+          <h3>PT Solusi 247</h3>
+          <div class="where">Divisi Business Development · 2025</div>
+          <p>Mengolah data klien dan penjualan untuk mendukung penyusunan strategi. Bagian yang paling saya nikmati: mengubah tabel yang membosankan menjadi rekomendasi yang bisa dieksekusi.</p>
+        </div>
+        <figure class="ph" data-cap="Tim Business Development · PT Solusi 247">
+          <img src="assets/photos/solusi247-1.jpg" alt="Dokumentasi magang PT Solusi 247" loading="lazy" />
+          <div class="ph-empty">
+            <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg>
+            <span>solusi247-1.jpg</span>
+          </div>
+          <figcaption class="ph-cap">Tim Business Development · PT Solusi 247</figcaption>
+        </figure>
+      </div>
+
+      <div class="tl-item rv d2">
+        <div>
+          <div class="tl-when">DES 2024 — FEB 2025</div>
+          <h3>Internship — Apron Movement Control</h3>
+          <div class="where">PT Angkasa Pura Indonesia (InJourney) · YIA · Dept. Operasional Airside</div>
+          <p>Mengawasi pergerakan pesawat, kendaraan, dan personel di apron, serta melakukan data entry penerbangan. Di sini saya belajar bahwa data di lapangan jarang rapi — dan justru di situ pekerjaan analis paling terasa.</p>
+        </div>
+        <figure class="ph" data-cap="Apron Movement Control · YIA">
+          <img src="assets/photos/apron-1.jpg" alt="Dokumentasi magang Apron Movement Control di YIA" loading="lazy" />
+          <div class="ph-empty">
+            <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg>
+            <span>apron-1.jpg</span>
+          </div>
+          <figcaption class="ph-cap">Apron Movement Control · YIA</figcaption>
+        </figure>
+      </div>
+
+      <div class="tl-item rv d3">
+        <div>
+          <div class="tl-when">AGU — DES 2024</div>
+          <h3>Asisten Dosen</h3>
+          <div class="where">Universitas Sebelas Maret · Metode Peramalan, Kalkulus 1, Kalkulus Peubah Banyak, Probabilitas</div>
+          <p>Mengoreksi tugas, proyek, dan ujian mahasiswa sesuai pedoman. Mengajar ulang statistik memaksa saya memahami dasarnya, bukan sekadar menghafal rumus.</p>
+        </div>
+        <figure class="ph" data-cap="Asisten Dosen · UNS">
+          <img src="assets/photos/asdos-1.jpg" alt="Dokumentasi sebagai asisten dosen" loading="lazy" />
+          <div class="ph-empty">
+            <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg>
+            <span>asdos-1.jpg</span>
+          </div>
+          <figcaption class="ph-cap">Asisten Dosen · UNS</figcaption>
+        </figure>
+      </div>
+
+      <div class="tl-item rv d4">
+        <div>
+          <div class="tl-when">JAN — JUL 2024</div>
+          <h3>Surveyor</h3>
+          <div class="where">Media Eksplorasi Informasi · Solo Raya, Jawa Tengah</div>
+          <p>Menjalankan survei aspirasi masyarakat Solo Raya sebagai masukan bagi Kepala Daerah. Pengalaman pertama saya merancang instrumen dan berhadapan langsung dengan responden.</p>
+        </div>
+        <figure class="ph" data-cap="Survei lapangan · Solo Raya">
+          <img src="assets/photos/surveyor-1.jpg" alt="Dokumentasi survei lapangan" loading="lazy" />
+          <div class="ph-empty">
+            <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg>
+            <span>surveyor-1.jpg</span>
+          </div>
+          <figcaption class="ph-cap">Survei lapangan · Solo Raya</figcaption>
+        </figure>
+      </div>
+
+      <div class="tl-item rv">
+        <div>
+          <div class="tl-when">2022 — 2026</div>
+          <h3>S1 Statistika</h3>
+          <div class="where">Universitas Sebelas Maret (UNS) · Surakarta · IPK 3.64 / 4.00</div>
+          <p>Fondasi teori peluang, inferensia, dan pemodelan statistik. Di sinilah saya mulai terbiasa mempertanyakan angka sebelum mempercayainya.</p>
+        </div>
+        <figure class="ph" data-cap="Statistika UNS">
+          <img src="assets/photos/kampus-1.jpg" alt="Dokumentasi kampus UNS" loading="lazy" />
+          <div class="ph-empty">
+            <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg>
+            <span>kampus-1.jpg</span>
+          </div>
+          <figcaption class="ph-cap">Statistika UNS</figcaption>
+        </figure>
+      </div>
+
+    </div>
+
+    <div class="org-sub rv">Organisasi &amp; Kepanitiaan</div>
+    <div class="org-grid">
+      <div class="org-card rv d1">
+        <figure class="ph" data-cap="BEM FMIPA UNS">
+          <img src="assets/photos/bem-1.jpg" alt="Dokumentasi BEM FMIPA UNS" loading="lazy" />
+          <div class="ph-empty"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg><span>bem-1.jpg</span></div>
+          <figcaption class="ph-cap">BEM FMIPA UNS</figcaption>
+        </figure>
+        <div class="org-body">
+          <h4>BEM FMIPA UNS</h4>
+          <div class="role">Staf Media &amp; Branding</div>
+          <div class="when">FEB — DES 2023</div>
+        </div>
+      </div>
+
+      <div class="org-card rv d2">
+        <figure class="ph" data-cap="Sebelas Maret Statistic Fair">
+          <img src="assets/photos/statfair-1.jpg" alt="Dokumentasi Sebelas Maret Statistic Fair" loading="lazy" />
+          <div class="ph-empty"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg><span>statfair-1.jpg</span></div>
+          <figcaption class="ph-cap">Sebelas Maret Statistic Fair</figcaption>
+        </figure>
+        <div class="org-body">
+          <h4>Sebelas Maret Statistic Fair</h4>
+          <div class="role">Staf Media &amp; Branding</div>
+          <div class="when">AGU — DES 2023</div>
+        </div>
+      </div>
+
+      <div class="org-card rv d3">
+        <figure class="ph" data-cap="PKKMB FMIPA UNS 2023">
+          <img src="assets/photos/pkkmb-1.jpg" alt="Dokumentasi PKKMB FMIPA UNS" loading="lazy" />
+          <div class="ph-empty"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg><span>pkkmb-1.jpg</span></div>
+          <figcaption class="ph-cap">PKKMB FMIPA UNS 2023</figcaption>
+        </figure>
+        <div class="org-body">
+          <h4>PKKMB FMIPA UNS 2023</h4>
+          <div class="role">Koordinator Media</div>
+          <div class="when">APR — AGU 2023</div>
+        </div>
+      </div>
+
+      <div class="org-card rv d4">
+        <figure class="ph" data-cap="Envilm Production">
+          <img src="assets/photos/envilm-1.jpg" alt="Dokumentasi Envilm Production" loading="lazy" />
+          <div class="ph-empty"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg><span>envilm-1.jpg</span></div>
+          <figcaption class="ph-cap">Envilm Production</figcaption>
+        </figure>
+        <div class="org-body">
+          <h4>Envilm Production</h4>
+          <div class="role">Crew — produksi film mahasiswa</div>
+          <div class="when">SEP 2024 — SEKARANG</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box rv">
+      <div class="eyebrow" style="justify-content:center;">Kontak</div>
+      <h2>Punya data yang<br><em>butuh cerita?</em></h2>
+      <p>Saya lulus 2026 dan terbuka untuk peran Data Analyst, Data Scientist, atau Business Analyst — juga proyek analisis lepas. Kirim pesan, saya balas secepatnya.</p>
+      <div class="contact-links">
+        <a href="mailto:andiuliarahman@gmail.com" class="btn btn-primary" data-magnet>Kirim Email →</a>
+        <a href="https://www.linkedin.com/in/andi-ulia-rahman" target="_blank" rel="noopener" class="btn btn-ghost" data-magnet>LinkedIn</a>
+      </div>
+      <div class="social-row">
+        <a href="https://www.linkedin.com/in/andi-ulia-rahman" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="mailto:andiuliarahman@gmail.com">Email ↗</a>
+        <a href="#home">Surakarta, Indonesia</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span>© <span id="year">2026</span> Andi Ulia Rahman. Dibangun dengan tangan, bukan template.</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;">Statistics · Machine Learning · Data</span>
+  </div>
+</footer>
+
+<div class="lb" id="lb"><button aria-label="Tutup">×</button><img id="lbImg" alt="Dokumentasi" /></div>
+
+<script>
+/* ============================================================
+   UTIL
+   ============================================================ */
+const $ = (s,c=document)=>c.querySelector(s);
+const $$ = (s,c=document)=>[...c.querySelectorAll(s)];
+const clamp = (v,a,b)=>Math.min(b,Math.max(a,v));
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ============================================================
+   CURSOR
+   ============================================================ */
+if(matchMedia('(pointer:fine)').matches){
+  document.body.classList.add('pointer-fine');
+  const dot = $('#cDot'), ring = $('#cRing');
+  let mx=innerWidth/2, my=innerHeight/2, rx=mx, ry=my, dx=mx, dy=my;
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function loop(){
+    dx += (mx-dx)*0.55; dy += (my-dy)*0.55;
+    rx += (mx-rx)*0.14; ry += (my-ry)*0.14;
+    dot.style.transform = `translate(${dx}px,${dy}px) translate(-50%,-50%)`;
+    ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(loop);
+  })();
+  $$('a,button,.card,.bcard,.ph,.stat-chip').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+  });
+}
+
+/* ============================================================
+   NAV / PROGRESS / SPY
+   ============================================================ */
+const nav = $('#nav'), links = $('#navLinks'), progress = $('#progress');
+$('#burger').addEventListener('click',()=>links.classList.toggle('open'));
+$$('#navLinks a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+const secs = $$('section[id]');
+function onScroll(){
+  const y = scrollY;
+  nav.classList.toggle('stuck', y > 24);
+  const h = document.documentElement.scrollHeight - innerHeight;
+  progress.style.width = (h>0 ? (y/h)*100 : 0) + '%';
+  let cur='';
+  secs.forEach(s=>{ if(y >= s.offsetTop - 150) cur = s.id; });
+  $$('#navLinks a').forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+cur));
+}
+addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+/* ============================================================
+   TYPED
+   ============================================================ */
+(function(){
+  const el = $('#typed');
+  const roles = ['Machine Learning Enthusiast','Data Analyst','Data Storyteller','Forecasting & Time Series'];
+  if(reduce){ el.textContent = roles[0]; return; }
+  let ri=0, ci=0, del=false;
+  (function tick(){
+    const w = roles[ri];
+    el.textContent = w.slice(0,ci);
+    if(!del){
+      if(ci<w.length){ci++;setTimeout(tick,55);}
+      else{del=true;setTimeout(tick,1700);}
+    }else{
+      if(ci>0){ci--;setTimeout(tick,26);}
+      else{del=false;ri=(ri+1)%roles.length;setTimeout(tick,300);}
+    }
+  })();
+})();
+
+/* ============================================================
+   COUNTERS
+   ============================================================ */
+const cObs = new IntersectionObserver((es)=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const el=e.target, raw=el.dataset.count, target=parseFloat(raw);
+    const dec=(raw.split('.')[1]||'').length, t0=performance.now(), dur=1400;
+    (function step(now){
+      const p=clamp((now-t0)/dur,0,1), k=1-Math.pow(1-p,3);
+      el.textContent=(target*k).toFixed(dec);
+      if(p<1) requestAnimationFrame(step);
+    })(t0);
+    cObs.unobserve(el);
+  });
+},{threshold:.5});
+$$('[data-count]').forEach(el=>cObs.observe(el));
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+const rvObs = new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); rvObs.unobserve(e.target);} });
+},{threshold:.1, rootMargin:'0px 0px -50px 0px'});
+$$('.rv').forEach(el=>rvObs.observe(el));
+
+/* ============================================================
+   HERO CHART
+   ============================================================ */
+(function(){
+  const c = $('#heroChart'); if(!c) return;
+  const ctx = c.getContext('2d');
+  const tip = $('#chartTip'), big = $('#chartBig'), hint = $('#chartHint');
+  const dpr = Math.min(devicePixelRatio||1, 2);
+  const DATA = [312,298,305,318,342,355,389,401,372,348,361,395,412,398,405,418,442,455,489,501,468,445,472,510];
+  const LABEL = ['Jan 25','Feb 25','Mar 25','Apr 25','Mei 25','Jun 25','Jul 25','Agu 25','Sep 25','Okt 25','Nov 25','Des 25',
+                 'Jan 26','Feb 26','Mar 26','Apr 26','Mei 26','Jun 26','Jul 26','Agu 26','Sep 26','Okt 26','Nov 26','Des 26'];
+  let W=0,H=0,hover=-1,prog=1;
+
+  function resize(){
+    const r = c.getBoundingClientRect();
+    W = r.width; H = r.height || 210;
+    c.width = W*dpr; c.height = H*dpr;
+    c.style.width = W+'px'; c.style.height = H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  const PAD = {l:14, r:14, t:14, b:22};
+  const min = Math.min.apply(null,DATA)*0.92, max = Math.max.apply(null,DATA)*1.04;
+  const X = i => PAD.l + (i/(DATA.length-1))*(W-PAD.l-PAD.r);
+  const Y = v => PAD.t + (1-(v-min)/(max-min))*(H-PAD.t-PAD.b);
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='rgba(255,255,255,.05)'; ctx.lineWidth=1;
+    for(let i=0;i<3;i++){
+      const yy = PAD.t + i*(H-PAD.t-PAD.b)/2;
+      ctx.beginPath(); ctx.moveTo(PAD.l,yy); ctx.lineTo(W-PAD.r,yy); ctx.stroke();
+    }
+    const n = Math.max(2, Math.floor(DATA.length*prog));
+
+    ctx.beginPath();
+    ctx.moveTo(X(0), Y(DATA[0]));
+    for(let i=1;i<n;i++) ctx.lineTo(X(i), Y(DATA[i]));
+    ctx.lineTo(X(n-1), H-PAD.b); ctx.lineTo(X(0), H-PAD.b); ctx.closePath();
+    const g = ctx.createLinearGradient(0,PAD.t,0,H-PAD.b);
+    g.addColorStop(0,'rgba(201,247,61,.26)');
+    g.addColorStop(1,'rgba(201,247,61,0)');
+    ctx.fillStyle = g; ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(X(0), Y(DATA[0]));
+    for(let i=1;i<n;i++) ctx.lineTo(X(i), Y(DATA[i]));
+    ctx.strokeStyle = '#c9f73d'; ctx.lineWidth = 2; ctx.lineJoin='round';
+    ctx.shadowColor='rgba(201,247,61,.55)'; ctx.shadowBlur=12;
+    ctx.stroke(); ctx.shadowBlur=0;
+
+    if(hover >= 0 && hover < n){
+      const x = X(hover), y = Y(DATA[hover]);
+      ctx.setLineDash([3,4]); ctx.strokeStyle='rgba(255,255,255,.25)';
+      ctx.beginPath(); ctx.moveTo(x,PAD.t); ctx.lineTo(x,H-PAD.b); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.beginPath(); ctx.arc(x,y,4.5,0,Math.PI*2);
+      ctx.fillStyle='#06070c'; ctx.fill();
+      ctx.strokeStyle='#c9f73d'; ctx.lineWidth=2.4; ctx.stroke();
+    }
+  }
+
+  function animate(){
+    prog += 0.018;
+    if(prog>1) prog=1;
+    draw();
+    if(prog<1) requestAnimationFrame(animate);
+  }
+
+  function move(e){    const r = c.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const i = Math.round((x-PAD.l)/((W-PAD.l-PAD.r)/(DATA.length-1)));
+    hover = clamp(i, 0, DATA.length-1);
+    draw();
+    const px = X(hover), py = Y(DATA[hover]);
+    tip.style.left = px+'px'; tip.style.top = Math.max(48,py)+'px'; tip.style.opacity = 1;
+    tip.querySelector('b').textContent = DATA[hover]+' rb pax';
+    tip.querySelector('span').textContent = LABEL[hover];
+    big.innerHTML = DATA[hover]+'<span>rb pax / bulan</span>';
+    hint.textContent = 'menampilkan '+LABEL[hover];
+  }
+  c.addEventListener('mousemove', move);
+  c.addEventListener('mouseleave', ()=>{
+    hover=-1; tip.style.opacity=0; draw();
+    big.innerHTML = '510<span>rb pax / bulan</span>';
+    hint.textContent = 'geser kursor ke grafik';
+  });
+
+  resize(); draw();
+  addEventListener('resize', ()=>{ resize(); draw(); });
+})();
+
+/* ============================================================
+   SENTIMENT ENGINE
+   ============================================================ */
+(function(){
+  const POS = new Set(['bagus','baik','senang','suka','hebat','keren','mantap','puas','memuaskan','nyaman','mudah','cepat','lancar','membantu','bermanfaat','jelas','rapi','akurat','andal','profesional','ramah','sopan','indah','cantik','menarik','sempurna','tepat','efisien','efektif','inovatif','kreatif','inspiratif','menginspirasi','bangga','berhasil','sukses','maju','meningkat','positif','optimis','asik','seru','menyenangkan','tenang','aman','terpercaya','konsisten','teliti','cermat','sigap','tanggap','solutif','fleksibel','responsif','bersih','teratur','lengkap','sesuai','murah','hemat','praktis','gampang','cerdas','pintar','jujur','adil','stabil','bagusnya','cepatnya','ramahnya','nyamannya']);
+  const NEG = new Set(['buruk','jelek','kecewa','mengecewakan','lambat','lamban','lelet','mahal','sulit','susah','rumit','ribet','error','gagal','rusak','macet','kacau','berantakan','kotor','bingung','membingungkan','salah','keliru','parah','payah','menyesal','marah','kesal','jengkel','sedih','takut','khawatir','cemas','panik','stres','lelah','capek','bosan','membosankan','berisik','kasar','cuek','telat','tertunda','menurun','negatif','pesimis','benci','muak','jijik','bodoh','amatir','kumuh','bohong','menipu','curang','keluhan','komplain','masalah','gangguan','hambatan','kekurangan','kerusakan','buruknya','jeleknya','sulitnya','susahnya','ribetnya','lambatnya']);
+  const NEGATORS = new Set(['tidak','tak','bukan','nggak','gak','enggak','belum','jangan','kurang','tanpa','minim']);
+  const INTENS = new Set(['sangat','banget','sekali','amat','terlalu','begitu','super','paling','cukup','sungguh']);
+  const PHRASES = {'luar biasa':2,'terima kasih':1.5,'tidak profesional':-2,'tidak memuaskan':-2,'tidak sesuai':-1.5};
+
+  const ta = $('#sentText'), prev = $('#preview'), verdict = $('#verdict');
+  const av = $('#avatar'), eyeL = $('#eyeL'), eyeR = $('#eyeR'), mouth = $('#mouth');
+  const fill = $('#meterFill'), tokens = $('#tokens');
+
+  function analyze(text){
+    const rawWords = text.split(/\s+/).filter(Boolean);
+    let i = 0, negate = false, intens = 1, total = 0, hits = [];
+    const parts = [];
+
+    while(i < rawWords.length){
+      const w = rawWords[i];
+      const key = w.toLowerCase().replace(/[^a-z]/g,'');
+      const nextRaw = rawWords[i+1] || '';
+      const nextKey = nextRaw.toLowerCase().replace(/[^a-z]/g,'');
+      const bi = key+' '+nextKey;
+
+      if(nextKey && PHRASES[bi] !== undefined){
+        const v = PHRASES[bi];
+        total += v;
+        if(v !== 0) hits.push({w:key+' '+nextKey, v});
+        parts.push({t:w+' '+nextRaw, cls:v>0?'w-pos':(v<0?'w-neg':'')});
+        i += 2; negate = false; intens = 1; continue;
+      }
+      if(NEGATORS.has(key)){
+        negate = true;
+        parts.push({t:w, cls:'w-flip'});
+        i++; continue;
+      }
+      if(INTENS.has(key)){
+        intens = 1.6;
+        parts.push({t:w, cls:''});
+        i++; continue;
+      }
+      if(POS.has(key) || NEG.has(key)){
+        let v = (POS.has(key) ? 1 : -1) * intens;
+        if(negate) v *= -1;
+        total += v;
+        hits.push({w:key, v});
+        parts.push({t:w, cls:v>0?'w-pos':'w-neg'});
+        negate = false; intens = 1; i++; continue;
+      }
+      parts.push({t:w, cls:''});
+      negate = false; intens = 1; i++;
+    }
+
+    const val = hits.length ? clamp(total / (hits.length*1.4), -1, 1) : 0;
+    return {parts, hits, val, empty: !text.trim()};
+  }
+
+  function setFace(state){
+    if(state==='pos'){
+      eyeL.setAttribute('d','M44,54 q6,-7 12,0');
+      eyeR.setAttribute('d','M64,54 q6,-7 12,0');
+      mouth.setAttribute('d','M44,68 q16,18 32,0');
+    }else if(state==='neg'){
+      eyeL.setAttribute('d','M44,50 q6,7 12,0');
+      eyeR.setAttribute('d','M64,50 q6,7 12,0');
+      mouth.setAttribute('d','M44,80 q16,-14 32,0');
+    }else{
+      eyeL.setAttribute('d','M44,52 h12');
+      eyeR.setAttribute('d','M64,52 h12');
+      mouth.setAttribute('d','M46,74 h28');
+    }
+  }
+
+  function render(){
+    const text = ta.value;
+    const r = analyze(text);
+
+    prev.innerHTML = r.empty
+      ? 'Hasil analisis akan muncul di sini…'
+      : r.parts.map(p=>p.cls ? '<span class="'+p.cls+'">'+p.t+'</span>' : p.t).join(' ');
+
+    if(r.empty){
+      verdict.textContent = 'Menunggu kalimat…';
+      verdict.className = 'verdict neu';
+      av.className = 'avatar neu';
+      fill.style.width='0'; fill.style.left='50%';
+      tokens.innerHTML='';
+      setFace('neu');
+      return;
+    }
+
+    let state='neu', label='Netral';
+    if(r.hits.length){
+      if(r.val > 0.18){ state='pos'; label='Positif'; }
+      else if(r.val < -0.18){ state='neg'; label='Negatif'; }
+    }
+
+    verdict.textContent = label;
+    verdict.className = 'verdict '+state;
+    av.className = 'avatar '+state;
+    av.classList.add('bump');
+    setTimeout(()=>av.classList.remove('bump'), 460);
+    setFace(state);
+
+    const pct = Math.abs(r.val)*50;
+    fill.style.width = pct+'%';
+    fill.style.left = r.val>=0 ? '50%' : (50-pct)+'%';
+    fill.style.background = state==='pos' ? 'var(--lime)' : state==='neg' ? 'var(--pink)' : 'var(--dim)';
+
+    tokens.innerHTML = r.hits.slice(0,8).map(h=>
+      '<span class="'+(h.v>0?'t-pos':'t-neg')+'">'+h.w+' '+(h.v>0?'+':'')+h.v.toFixed(1).replace('.0','')+'</span>'
+    ).join('');
+  }
+
+  let timer;
+  ta.addEventListener('input',()=>{ clearTimeout(timer); timer=setTimeout(render,140); });
+  $$('.samples button').forEach(b=>{
+    b.addEventListener('click',()=>{ ta.value = b.dataset.sample; render(); ta.focus(); });
+  });
+  render();
+})();
+
+/* ============================================================
+   BENTO SPOTLIGHT
+   ============================================================ */
+$$('.bcard').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX-r.left)+'px');
+    card.style.setProperty('--my', (e.clientY-r.top)+'px');
+  });
+});
+
+/* ============================================================
+   PROJECT FILTER
+   ============================================================ */
+(function(){
+  const btns = $$('#filters button'), cards = $$('#workGrid .card');
+  btns.forEach(b=>{
+    b.addEventListener('click',()=>{
+      btns.forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+      const f = b.dataset.f;
+      cards.forEach((c,i)=>{
+        const show = f==='all' || c.dataset.cat===f;
+        c.classList.toggle('hide', !show);
+        if(show){
+          c.style.animation='none';
+          void c.offsetWidth;
+          c.style.animation='pop .45s var(--ease) '+(i*0.04)+'s both';
+        }
+      });
+    });
+  });
+})();
+
+/* ============================================================
+   PHOTOS + LIGHTBOX
+   ============================================================ */
+(function(){
+  const lb = $('#lb'), lbImg = $('#lbImg');
+  $$('.ph').forEach(fig=>{
+    const img = fig.querySelector('img');
+    const mark = ()=>fig.classList.add('has-img');
+    if(img.complete && img.naturalWidth > 0) mark();
+    img.addEventListener('load', mark);
+    img.addEventListener('error', ()=>{ fig.classList.remove('has-img'); });
+    fig.addEventListener('click',()=>{
+      if(!fig.classList.contains('has-img')) return;
+      lbImg.src = img.src;
+      lbImg.alt = img.alt || '';
+      lb.classList.add('open');
+    });
+  });
+  const close = ()=>lb.classList.remove('open');
+  lb.addEventListener('click',close);
+  addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+})();
+
+/* ============================================================
+   MAGNETIC BUTTONS
+   ============================================================ */
+if(matchMedia('(pointer:fine)').matches && !reduce){
+  $$('[data-magnet]').forEach(el=>{
+    el.addEventListener('mousemove',e=>{
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX-r.left-r.width/2)/r.width;
+      const y = (e.clientY-r.top-r.height/2)/r.height;
+      el.style.transform = 'translate('+(x*7)+'px,'+(y*7-2)+'px)';
+    });
+    el.addEventListener('mouseleave',()=>{ el.style.transform=''; });
+  });
+}
+
+/* ============================================================
+   TICKER + YEAR
+   ============================================================ */
+(function(){
+  const t = $('#ticker');
+  t.innerHTML += t.innerHTML;
+  $('#year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
