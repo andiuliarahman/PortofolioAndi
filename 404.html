@@ -5,53 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>404 · Halaman Tidak Ditemukan · Andi Ulia Rahman</title>
 <meta name="robots" content="noindex" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2306070c'/%3E%3Cpath d='M12 46 L26 32 L38 38 L52 18' fill='none' stroke='%23c9f73d' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='52' cy='18' r='5' fill='%2338e1ff'/%3E%3C/svg%3E" />
+<meta name="theme-color" content="#ffffff" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231d1d1f'/%3E%3Cpath d='M12 46 L26 32 L38 38 L52 18' fill='none' stroke='%23ffffff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='52' cy='18' r='5' fill='%232997ff'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
+  :root{
+    --white:#ffffff; --mist:#f5f5f7; --ink:#1d1d1f; --slate:#707070; --steel:#6e6e73;
+    --hair:#d6d6d6; --control:#e6e6e8;
+    --blue:#0066cc; --blue-fill:#0071e3;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
   body{
-    min-height:100vh;display:grid;place-items:center;padding:24px;
-    background:#06070c;color:#eef1f7;position:relative;overflow:hidden;
-    font-family:'Inter',-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;
+    display:grid;place-items:center;padding:32px 24px;
+    background:var(--white);color:var(--ink);
+    font-family:'SF Pro Text','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:17px;line-height:1.47;letter-spacing:-.022em;
+    -webkit-font-smoothing:antialiased;
   }
-  .bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
-  .bg i{position:absolute;border-radius:50%;filter:blur(100px);opacity:.32;}
-  .bg i:nth-child(1){width:420px;height:420px;background:#1d3b8f;top:-140px;left:-120px;}
-  .bg i:nth-child(2){width:380px;height:380px;background:#4d2a80;bottom:-140px;right:-110px;}
-  .box{position:relative;z-index:2;text-align:center;max-width:520px;}
+  main{width:100%;max-width:560px;text-align:center;}
+
+  /* identity motif: short blue rule + small label, same as the portfolio eyebrows */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:12px;font-weight:500;color:var(--steel);letter-spacing:-.01em;
+  }
+  .eyebrow::before{content:'';width:22px;height:1px;background:var(--blue);}
+
   .code{
-    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:110px;line-height:1;
-    letter-spacing:-.06em;
-    background:linear-gradient(140deg,#c9f73d,#38e1ff);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
+    margin-top:22px;
+    font-family:'SF Pro Display','Inter',sans-serif;
+    font-size:clamp(88px,17vw,140px);font-weight:600;line-height:.92;letter-spacing:-.045em;
+    color:var(--ink);
   }
-  h1{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:600;letter-spacing:-.03em;margin-top:14px;}
-  p{color:#9aa6bd;font-size:14.5px;margin-top:11px;line-height:1.65;}
-  .btns{display:flex;gap:11px;justify-content:center;flex-wrap:wrap;margin-top:28px;}
-  a.btn{
-    display:inline-block;padding:12px 22px;border-radius:12px;font-size:14px;font-weight:550;
-    text-decoration:none;transition:transform .25s cubic-bezier(.22,1,.36,1),background .25s,border-color .25s;
+  h1{
+    margin-top:18px;
+    font-family:'SF Pro Display','Inter',sans-serif;
+    font-size:clamp(24px,3.4vw,32px);font-weight:600;line-height:1.15;letter-spacing:-.021em;
   }
-  a.btn:hover{transform:translateY(-2px);}
-  .p{background:#c9f73d;color:#06070c;}
-  .g{border:1px solid rgba(255,255,255,.17);color:#eef1f7;background:rgba(255,255,255,.03);}
-  .g:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.07);}
-  .mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:#626e87;margin-top:32px;letter-spacing:.08em;}
+  p{margin-top:14px;color:var(--slate);font-size:17px;line-height:1.5;}
+
+  .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:7px;
+    padding:13px 24px;border-radius:9999px;
+    font-size:15px;font-weight:500;letter-spacing:-.01em;
+    text-decoration:none;white-space:nowrap;
+    transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease);
+  }
+  .btn-primary{background:var(--blue-fill);color:#fff;border:1px solid var(--blue-fill);}
+  .btn-primary:hover{background:#0066cc;border-color:#0066cc;}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--hair);}
+  .btn-ghost:hover{background:var(--mist);border-color:var(--ink);}
+  .btn:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+
+  .domain{
+    margin-top:44px;padding-top:22px;border-top:1px solid var(--control);
+    font-size:12px;color:var(--steel);letter-spacing:-.01em;
+  }
+
+  /* MOTION 2: one quiet entrance, never a cascade */
+  .rise{animation:rise .6s var(--ease) both;}
+  .rise:nth-child(2){animation-delay:.05s;}
+  .rise:nth-child(3){animation-delay:.1s;}
+  .rise:nth-child(4){animation-delay:.15s;}
+  @keyframes rise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+  @media(prefers-reduced-motion:reduce){ .rise{animation:none;} }
+
+  @media(max-width:420px){
+    .btn{width:100%;justify-content:center;}
+  }
 </style>
 </head>
 <body>
-<div class="bg" aria-hidden="true"><i></i><i></i></div>
-<div class="box">
-  <div class="code">404</div>
-  <h1>Halaman ini tidak ditemukan</h1>
-  <p>Mungkin tautannya sudah berubah, atau halaman tersebut memang belum ada. Kembali ke beranda untuk melihat semua tautan, atau langsung buka portofolio.</p>
+<main>
+  <div class="eyebrow rise">Kesalahan 404</div>
+  <div class="code rise">404</div>
+  <h1 class="rise">Halaman ini tidak ditemukan</h1>
+  <p class="rise">Mungkin tautannya sudah berubah, atau halaman tersebut memang belum ada. Kembali ke beranda untuk melihat semua tautan, atau langsung buka portofolio.</p>
   <div class="btns">
-    <a class="btn p" href="/">Kembali ke Beranda</a>
-    <a class="btn g" href="/portofolio/">Lihat Portofolio</a>
+    <a class="btn btn-primary" href="/">Kembali ke Beranda</a>
+    <a class="btn btn-ghost" href="/portofolio/">Lihat Portofolio</a>
   </div>
-  <div class="mono">andiulia.my.id</div>
-</div>
+  <div class="domain">andiulia.my.id</div>
+</main>
 </body>
 </html>

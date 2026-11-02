@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Andi Ulia Rahman · Statistika &amp; Machine Learning</title>
-<meta name="description" content="Portofolio Andi Ulia Rahman, Sarjana Statistika UNS 2026. Machine learning, data cleaning, MySQL, dan visualisasi data." />
+<meta name="description" content="Portofolio Andi Ulia Rahman, Sarjana Statistika UNS 2026. Machine learning, data cleaning, MySQL, dan visualisasi data, plus tiga alat statistik interaktif yang berjalan di browser." />
 <meta name="theme-color" content="#ffffff" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2306070c'/%3E%3Cpath d='M12 46 L26 32 L38 38 L52 18' fill='none' stroke='%23c9f73d' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='52' cy='18' r='5' fill='%2338e1ff'/%3E%3C/svg%3E" />
 
@@ -741,7 +741,7 @@ header{background:rgba(255,255,255,.86);border-bottom:1px solid #d6d6d6;}
 /* --- section rhythm: white gallery alternating with Studio Mist --- */
 .hero{background:#ffffff;min-height:auto;padding:120px 0 90px;}
 #sentiment,#work,#contact{background:#f5f5f7;}
-#about,#journey{background:#ffffff;}
+#about,#journey,#lab{background:#ffffff;}
 section{padding-top:90px;padding-bottom:90px;}
 
 /* --- typography scale --- */
@@ -898,6 +898,77 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
 .contact-box .sj-quote cite{font-style:normal;text-transform:none;letter-spacing:-.01em;color:#6e6e73;font-size:12px;}
 .contact-box .sj-quote{border-top:1px solid #d6d6d6;}
 
+/* --- laboratorium --- */
+.lab{background:#ffffff;border:1px solid #d6d6d6;border-radius:28px;padding:8px;}
+.lab-tabs{display:flex;gap:4px;background:#f5f5f7;border-radius:9999px;padding:4px;margin:8px 8px 0;}
+.lab-tabs button{
+  flex:1;border:0;background:transparent;border-radius:9999px;cursor:pointer;
+  font-family:'SF Pro Text','Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:-.01em;
+  color:#707070;padding:11px 14px;white-space:nowrap;
+  transition:background .22s var(--ease),color .22s var(--ease);
+}
+.lab-tabs button:hover{color:#1d1d1f;}
+.lab-tabs button.on{background:#1d1d1f;color:#ffffff;}
+.lab-tabs button:focus-visible{outline:2px solid #0066cc;outline-offset:2px;}
+.lab-panel{display:none;padding:22px 16px 16px;}
+.lab-panel.on{display:block;}
+.lab-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:20px;align-items:stretch;}
+
+.lab-in{display:flex;flex-direction:column;border-right:1px solid #e6e6e8;padding-right:20px;}
+.lab-in label{display:block;font-size:12px;color:#6e6e73;letter-spacing:-.01em;margin-bottom:6px;}
+.lab-in textarea,.lab-in input{
+  width:100%;background:#ffffff;border:1px solid #86868b;border-radius:16px;
+  padding:11px 14px;font-family:'SF Pro Text','Inter',sans-serif;font-size:14px;line-height:1.5;
+  letter-spacing:-.01em;color:#1d1d1f;resize:vertical;margin-bottom:14px;
+}
+.lab-in textarea{min-height:74px;}
+.lab-in textarea:focus,.lab-in input:focus{outline:2px solid #0066cc;outline-offset:1px;border-color:#0066cc;}
+.lab-in .hint{font-size:11.5px;color:#6e6e73;letter-spacing:-.01em;margin:-8px 0 14px;}
+.lab-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.lab-actions .btn{padding:11px 20px;font-size:14px;}
+
+.lab-out{background:#f5f5f7;border-radius:20px;padding:20px;min-height:180px;}
+.lab-empty{color:#6e6e73;font-size:14px;line-height:1.55;margin:0;}
+
+.res-pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:500;
+  letter-spacing:-.01em;padding:5px 12px;border-radius:9999px;}
+.res-pill::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;}
+.res-pill.yes{background:rgba(0,102,204,.10);color:#005cba;}
+.res-pill.no{background:rgba(0,0,0,.06);color:#636369;}
+.res-big{font-family:'SF Pro Display','Inter',sans-serif;font-size:38px;font-weight:600;
+  letter-spacing:-.025em;line-height:1;color:#1d1d1f;margin:14px 0 4px;font-variant-numeric:tabular-nums;}
+.res-cap{font-size:12px;color:#6e6e73;letter-spacing:-.01em;}
+.res-rows{margin:16px 0 0;padding:0;border-top:1px solid #e6e6e8;}
+.res-rows div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  padding:9px 0;border-bottom:1px solid #e6e6e8;font-size:13px;}
+.res-rows dt{color:#6e6e73;margin:0;letter-spacing:-.01em;}
+.res-rows dd{margin:0;color:#1d1d1f;font-variant-numeric:tabular-nums;text-align:right;letter-spacing:-.01em;}
+.res-note{margin:14px 0 0;font-size:11.5px;line-height:1.55;color:#6e6e73;letter-spacing:-.01em;}
+.res-chart{margin-top:16px;}
+.res-chart svg{display:block;width:100%;height:auto;overflow:visible;}
+
+.res-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:12.5px;}
+.res-table caption{text-align:left;font-size:12px;color:#6e6e73;padding-bottom:8px;letter-spacing:-.01em;}
+.res-table th{text-align:left;font-weight:500;color:#6e6e73;padding:7px 8px 7px 0;
+  border-bottom:1px solid #d6d6d6;letter-spacing:-.01em;white-space:nowrap;}
+.res-table td{padding:7px 8px 7px 0;border-bottom:1px solid #e6e6e8;color:#1d1d1f;
+  font-variant-numeric:tabular-nums;letter-spacing:-.01em;}
+.res-table td:first-child{font-weight:500;}
+.res-table .num{text-align:right;}
+
+.issues{margin:14px 0 0;padding:0;list-style:none;}
+.issues li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #e6e6e8;
+  font-size:12.5px;color:#1d1d1f;line-height:1.45;letter-spacing:-.01em;}
+.issues li span:first-child{color:#6e6e73;font-variant-numeric:tabular-nums;min-width:74px;flex:none;}
+
+@media(max-width:880px){
+  .lab-grid{grid-template-columns:1fr;}
+  .lab-in{border-right:0;padding-right:0;padding-bottom:18px;border-bottom:1px solid #e6e6e8;}
+  .lab-tabs{overflow-x:auto;scrollbar-width:none;}
+  .lab-tabs::-webkit-scrollbar{display:none;}
+  .lab-tabs button{flex:none;}
+}
+
 /* --- motion: calm opacity only --- */
 .rv{transform:none!important;}
 .rv.in{transform:none!important;}
@@ -923,12 +994,12 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
   <div class="wrap nav-inner">
     <a href="#home" class="logo"><span class="logo-mark">AU</span><span>Andi Ulia Rahman</span></a>
     <nav class="nav-links" id="navLinks">
-      <a href="#sentiment">Detektor Sentimen</a>
+      <a href="#sentiment">Sentimen</a>
+      <a href="#lab">Lab</a>
       <a href="#about">Tentang</a>
       <a href="#work">Karya</a>
       <a href="#journey">Perjalanan</a>
       <a href="#contact">Kontak</a>
-      <a href="../">Semua Tautan</a>
     </nav>
     <a href="#contact" class="btn btn-primary">Mari Bicara</a>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -1027,6 +1098,99 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
         <div class="meter"><i id="meterFill"></i></div>
         <div class="tokens" id="tokens"></div>
         <p class="sent-note">Demo berbasis leksikon &amp; aturan negasi, bukan model terlatih. Cukup untuk menunjukkan cara kerja analisis teks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LABORATORIUM ================= -->
+<section id="lab">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow">Laboratorium</div>
+        <h2 class="sec-title">Tiga alat yang <em>benar-benar menghitung</em></h2>
+        <p class="sec-sub">Uji beda dua kelompok, ramalkan deret angka, dan periksa kualitas data. Semua perhitungan berjalan di browser, tanpa library dan tanpa server. Angka yang keluar adalah hasil hitung, bukan contoh.</p>
+      </div>
+    </div>
+
+    <div class="lab rv d1">
+      <div class="lab-tabs" role="tablist" aria-label="Alat statistik">
+        <button role="tab" id="tab-uji" aria-controls="panel-uji" aria-selected="true" class="on" type="button">Uji Signifikansi</button>
+        <button role="tab" id="tab-ramal" aria-controls="panel-ramal" aria-selected="false" type="button">Peramalan</button>
+        <button role="tab" id="tab-bersih" aria-controls="panel-bersih" aria-selected="false" type="button">Pembersih Data</button>
+      </div>
+
+      <!-- PANEL 1 -->
+      <div class="lab-panel on" id="panel-uji" role="tabpanel" aria-labelledby="tab-uji" tabindex="0">
+        <div class="lab-grid">
+          <div class="lab-in">
+            <label for="ujiA">Grup A</label>
+            <textarea id="ujiA" spellcheck="false" placeholder="5.1 4.9 5.4 5.0 5.3">5.1 4.9 5.4 5.0 5.3</textarea>
+            <label for="ujiB">Grup B</label>
+            <textarea id="ujiB" spellcheck="false" placeholder="4.2 4.6 4.1 4.8 4.4">4.2 4.6 4.1 4.8 4.4</textarea>
+            <p class="hint">Pisahkan dengan spasi, koma, atau baris baru. Desimal pakai titik.</p>
+            <div class="lab-actions">
+              <button class="btn btn-primary" id="ujiRun" type="button">Hitung</button>
+              <button class="btn btn-ghost" id="ujiDemo" type="button">Acak data baru</button>
+            </div>
+          </div>
+          <div class="lab-out" id="ujiOut" aria-live="polite">
+            <p class="lab-empty">Tekan Hitung untuk membandingkan dua kelompok dengan uji-t Welch, lalu diperiksa ulang dengan uji permutasi.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 2 -->
+      <div class="lab-panel" id="panel-ramal" role="tabpanel" aria-labelledby="tab-ramal" tabindex="0">
+        <div class="lab-grid">
+          <div class="lab-in">
+            <label for="ramalData">Deret angka (x,y per baris)</label>
+            <textarea id="ramalData" spellcheck="false" rows="8">1,12
+2,15
+3,14
+4,19
+5,21
+6,22
+7,26
+8,25</textarea>
+            <p class="hint">Kalau hanya satu angka per baris, x dianggap 1, 2, 3, dan seterusnya.</p>
+            <label for="ramalHorizon">Berapa periode ke depan</label>
+            <input id="ramalHorizon" type="number" min="1" max="24" value="3" />
+            <div class="lab-actions">
+              <button class="btn btn-primary" id="ramalRun" type="button">Ramalkan</button>
+              <button class="btn btn-ghost" id="ramalDemo" type="button">Pakai contoh lain</button>
+            </div>
+          </div>
+          <div class="lab-out" id="ramalOut" aria-live="polite">
+            <p class="lab-empty">Regresi kuadrat terkecil dengan pita prediksi 95%. Garis putus-putus adalah proyeksi, bukan data.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 3 -->
+      <div class="lab-panel" id="panel-bersih" role="tabpanel" aria-labelledby="tab-bersih" tabindex="0">
+        <div class="lab-grid">
+          <div class="lab-in">
+            <label for="bersihData">Tempel data CSV (baris pertama = judul kolom)</label>
+            <textarea id="bersihData" spellcheck="false" rows="9">nama,usia,skor,kota
+Ani,23,88,Bandung
+Budi,31,79,Jakarta
+Ani,23,88,Bandung
+Citra, 27,92,Surabaya
+Dewi,,85,jakarta
+Eka,45,140,Medan
+Fajar,29,81,Bandung
+Gita,34,77,Jakarta</textarea>
+            <div class="lab-actions">
+              <button class="btn btn-primary" id="bersihRun" type="button">Periksa</button>
+              <button class="btn btn-ghost" id="bersihDemo" type="button">Muat contoh</button>
+            </div>
+          </div>
+          <div class="lab-out" id="bersihOut" aria-live="polite">
+            <p class="lab-empty">Tempel data, lalu tekan Periksa. Alat ini mencari baris ganda, sel kosong, nilai ekstrem, tipe kolom yang bercampur, dan spasi berlebih.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2108,6 +2272,458 @@ $$('.bcard').forEach(card=>{
     }
   });
   setTimeout(function(){ btn.classList.remove('pulse'); }, 8000);
+})();
+
+/* ============================================================
+   LABORATORIUM STATISTIKA
+   Semua angka di bawah ini hasil hitung, bukan nilai contoh.
+   ============================================================ */
+(function(){
+  /* ---------- distribusi t (Lanczos + continued fraction) ---------- */
+  function lnGamma(z){
+    const g=[676.5203681218851,-1259.1392167224028,771.32342877765313,
+      -176.61502916214059,12.507343278686905,-0.13857109526572012,
+      9.9843695780195716e-6,1.5056327351493116e-7];
+    if(z<0.5) return Math.log(Math.PI/Math.sin(Math.PI*z))-lnGamma(1-z);
+    z-=1;
+    let x=0.99999999999980993;
+    for(let i=0;i<g.length;i++) x+=g[i]/(z+i+1);
+    const t=z+g.length-0.5;
+    return 0.5*Math.log(2*Math.PI)+(z+0.5)*Math.log(t)-t+Math.log(x);
+  }
+  function betacf(a,b,x){
+    const MAXIT=200,EPS=3e-12,FPMIN=1e-300;
+    const qab=a+b,qap=a+1,qam=a-1;
+    let c=1,d=1-qab*x/qap;
+    if(Math.abs(d)<FPMIN) d=FPMIN;
+    d=1/d; let h=d;
+    for(let m=1;m<=MAXIT;m++){
+      const m2=2*m;
+      let aa=m*(b-m)*x/((qam+m2)*(a+m2));
+      d=1+aa*d; if(Math.abs(d)<FPMIN) d=FPMIN;
+      c=1+aa/c; if(Math.abs(c)<FPMIN) c=FPMIN;
+      d=1/d; h*=d*c;
+      aa=-(a+m)*(qab+m)*x/((a+m2)*(qap+m2));
+      d=1+aa*d; if(Math.abs(d)<FPMIN) d=FPMIN;
+      c=1+aa/c; if(Math.abs(c)<FPMIN) c=FPMIN;
+      d=1/d;
+      const del=d*c; h*=del;
+      if(Math.abs(del-1)<EPS) break;
+    }
+    return h;
+  }
+  function betai(a,b,x){
+    if(x<=0) return 0;
+    if(x>=1) return 1;
+    const bt=Math.exp(lnGamma(a+b)-lnGamma(a)-lnGamma(b)+a*Math.log(x)+b*Math.log(1-x));
+    if(x<(a+1)/(a+b+2)) return bt*betacf(a,b,x)/a;
+    return 1-bt*betacf(b,a,1-x)/b;
+  }
+  function tP(t,df){
+    if(!isFinite(t)||df<=0) return NaN;
+    return betai(df/2,0.5,df/(df+t*t));
+  }
+  function tCrit(alpha,df){
+    let lo=0,hi=200;
+    for(let i=0;i<160;i++){
+      const mid=(lo+hi)/2;
+      if(tP(mid,df)>alpha) lo=mid; else hi=mid;
+    }
+    return (lo+hi)/2;
+  }
+
+  /* ---------- statistik dasar ---------- */
+  function mean(a){ return a.reduce((s,v)=>s+v,0)/a.length; }
+  function variance(a){
+    const m=mean(a);
+    return a.reduce((s,v)=>s+(v-m)*(v-m),0)/(a.length-1);
+  }
+  function welch(a,b){
+    const n1=a.length,n2=b.length;
+    const m1=mean(a),m2=mean(b);
+    const v1=variance(a),v2=variance(b);
+    const se1=v1/n1,se2=v2/n2;
+    const se=Math.sqrt(se1+se2);
+    const t=(m1-m2)/se;
+    const df=Math.pow(se1+se2,2)/((se1*se1)/(n1-1)+(se2*se2)/(n2-1));
+    return {n1,n2,m1,m2,sd1:Math.sqrt(v1),sd2:Math.sqrt(v2),se,t,df,p:tP(t,df),diff:m1-m2};
+  }
+  function permutation(a,b,iters){
+    const obs=Math.abs(mean(a)-mean(b));
+    const pool=a.concat(b), n1=a.length, N=iters||2000;
+    let hits=0;
+    for(let k=0;k<N;k++){
+      for(let i=pool.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        const tmp=pool[i]; pool[i]=pool[j]; pool[j]=tmp;
+      }
+      let s1=0;
+      for(let i=0;i<n1;i++) s1+=pool[i];
+      const ma=s1/n1;
+      const mb=(pool.reduce((s,v)=>s+v,0)-s1)/(pool.length-n1);
+      if(Math.abs(ma-mb)>=obs) hits++;
+    }
+    return {p:(hits+1)/(N+1),N};
+  }
+  function linreg(xs,ys){
+    const n=xs.length;
+    const mx=mean(xs),my=mean(ys);
+    let sxy=0,sxx=0,syy=0;
+    for(let i=0;i<n;i++){
+      sxy+=(xs[i]-mx)*(ys[i]-my);
+      sxx+=(xs[i]-mx)*(xs[i]-mx);
+      syy+=(ys[i]-my)*(ys[i]-my);
+    }
+    const slope=sxy/sxx, intercept=my-slope*mx;
+    const r=sxy/Math.sqrt(sxx*syy), r2=r*r;
+    const resid=ys.map((y,i)=>y-(intercept+slope*xs[i]));
+    const sse=resid.reduce((s,v)=>s+v*v,0);
+    const df=n-2, mse=df>0?sse/df:NaN;
+    const seSlope=df>0?Math.sqrt(mse/sxx):NaN;
+    return {n,slope,intercept,r,r2,resid,sse,mse,seSlope,sxx,mx,my,df,
+      tSlope:slope/seSlope, pSlope:df>0?tP(slope/seSlope,df):NaN};
+  }
+
+  /* ---------- util tampilan ---------- */
+  function fmt(v,d){
+    if(v===null||v===undefined||!isFinite(v)) return '&mdash;';
+    if(d>=4&&v>0&&v<0.0001) return '&lt;0.0001';
+    return v.toFixed(d);
+  }
+  function row(k,v){ return '<div><dt>'+k+'</dt><dd>'+v+'</dd></div>'; }
+  function parseNums(t){
+    return t.split(/[\s,;]+/).map(s=>s.trim()).filter(Boolean).map(Number).filter(v=>isFinite(v));
+  }
+
+  /* ---------- 1. uji signifikansi ---------- */
+  function stripPlot(A,B){
+    const all=A.concat(B);
+    const mn=Math.min.apply(null,all), mx=Math.max.apply(null,all);
+    const pad=(mx-mn)*0.14||1;
+    const lo=mn-pad, hi=mx+pad;
+    const W=320,H=112,L=20,R=12;
+    const X=v=>L+(v-lo)/(hi-lo)*(W-L-R);
+    const jit=i=>Math.sin(i*2.3)*6.5;
+    let s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Sebaran nilai Grup A dan Grup B">';
+    s+='<line x1="'+L+'" y1="36" x2="'+(W-R)+'" y2="36" stroke="#e6e6e8" stroke-width="1"/>';
+    s+='<line x1="'+L+'" y1="78" x2="'+(W-R)+'" y2="78" stroke="#e6e6e8" stroke-width="1"/>';
+    A.forEach((v,i)=>{ s+='<circle cx="'+X(v).toFixed(1)+'" cy="'+(36+jit(i)).toFixed(1)+'" r="4" fill="#0066cc" fill-opacity=".8"/>'; });
+    B.forEach((v,i)=>{ s+='<circle cx="'+X(v).toFixed(1)+'" cy="'+(78+jit(i)).toFixed(1)+'" r="4" fill="#1d1d1f" fill-opacity=".55"/>'; });
+    const ma=X(mean(A)), mb=X(mean(B));
+    s+='<line x1="'+ma.toFixed(1)+'" y1="25" x2="'+ma.toFixed(1)+'" y2="47" stroke="#0066cc" stroke-width="2.5" stroke-linecap="round"/>';
+    s+='<line x1="'+mb.toFixed(1)+'" y1="67" x2="'+mb.toFixed(1)+'" y2="89" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>';
+    s+='<text x="4" y="40" font-size="11" fill="#6e6e73" font-family="Inter,sans-serif">A</text>';
+    s+='<text x="4" y="82" font-size="11" fill="#6e6e73" font-family="Inter,sans-serif">B</text>';
+    s+='</svg>';
+    return '<div class="res-chart">'+s+'</div>';
+  }
+
+  function renderUji(){
+    const out=$('#ujiOut');
+    const A=parseNums($('#ujiA').value), B=parseNums($('#ujiB').value);
+    if(A.length<2||B.length<2){
+      out.innerHTML='<p class="lab-empty">Butuh minimal dua angka di tiap grup. Sekarang Grup A berisi '+A.length+' angka dan Grup B '+B.length+'.</p>';
+      return;
+    }
+    const r=welch(A,B);
+    const tc=tCrit(0.05,r.df);
+    const lo=r.diff-tc*r.se, hi=r.diff+tc*r.se;
+    const sig=r.p<0.05;
+    const perm=permutation(A,B,2000);
+    out.innerHTML=
+      '<span class="res-pill '+(sig?'yes':'no')+'">'+(sig?'Beda nyata':'Belum cukup bukti')+'</span>'+
+      '<div class="res-big">p = '+fmt(r.p,4)+'</div>'+
+      '<div class="res-cap">uji-t Welch, dua sisi, alpha 0,05</div>'+
+      '<dl class="res-rows">'+
+        row('Grup A', fmt(r.m1,3)+' &middot; n='+r.n1+' &middot; SD '+fmt(r.sd1,3))+
+        row('Grup B', fmt(r.m2,3)+' &middot; n='+r.n2+' &middot; SD '+fmt(r.sd2,3))+
+        row('Selisih rata-rata', fmt(r.diff,3))+
+        row('Selang 95% selisih', '['+fmt(lo,3)+' ; '+fmt(hi,3)+']')+
+        row('t (derajat bebas)', fmt(r.t,3)+' ('+fmt(r.df,2)+')')+
+        row('Uji permutasi '+perm.N+'x', 'p = '+fmt(perm.p,4))+
+      '</dl>'+
+      '<p class="res-note">Uji-t mengasumsikan data mendekati normal. Uji permutasi tidak, jadi kedua nilai p seharusnya berdekatan. Kalau jauh berbeda, sebaran datanya perlu diperiksa.</p>'+
+      stripPlot(A,B);
+  }
+
+  /* ---------- 2. peramalan ---------- */
+  function ramalChart(xs,ys,r,future){
+    const W=420,H=200,L=34,R=14,T=14,Bm=28;
+    const allY=ys.concat(future.map(f=>f.lo),future.map(f=>f.hi));
+    let y0=Math.min.apply(null,allY), y1=Math.max.apply(null,allY);
+    const yp=(y1-y0)*0.12||1; y0-=yp; y1+=yp;
+    const xFirst=xs[0], xLast=xs[xs.length-1];
+    const xEnd=future.length?future[future.length-1].x:xLast;
+    const X=v=>L+(v-xFirst)/((xEnd-xFirst)||1)*(W-L-R);
+    const Y=v=>T+(y1-v)/((y1-y0)||1)*(H-T-Bm);
+    let s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Titik data, garis regresi, dan pita prediksi">';
+
+    for(let g=0;g<=3;g++){
+      const v=y0+(y1-y0)*g/3, y=Y(v).toFixed(1);
+      s+='<line x1="'+L+'" y1="'+y+'" x2="'+(W-R)+'" y2="'+y+'" stroke="#e6e6e8" stroke-width="1"/>';
+      s+='<text x="'+(L-8)+'" y="'+(+y+4)+'" font-size="10" fill="#6e6e73" text-anchor="end" font-family="Inter,sans-serif">'+v.toFixed(0)+'</text>';
+    }
+
+    /* pita prediksi 95% */
+    if(future.length){
+      const top=future.map(f=>X(f.x).toFixed(1)+','+Y(f.hi).toFixed(1));
+      const bot=future.slice().reverse().map(f=>X(f.x).toFixed(1)+','+Y(f.lo).toFixed(1));
+      const anchor=X(xLast).toFixed(1)+','+Y(r.intercept+r.slope*xLast).toFixed(1);
+      s+='<polygon points="'+[anchor].concat(top,bot).join(' ')+'" fill="#0066cc" fill-opacity=".10"/>';
+    }
+
+    /* deret pengamatan: garis abu tipis, bukan garis regresi */
+    s+='<polyline points="'+xs.map((x,i)=>X(x).toFixed(1)+','+Y(ys[i]).toFixed(1)).join(' ')+'" fill="none" stroke="#c9c9ce" stroke-width="1.6" stroke-linejoin="round"/>';
+
+    /* residual: jarak titik ke garis */
+    xs.forEach((x,i)=>{
+      const yf=r.intercept+r.slope*x;
+      s+='<line x1="'+X(x).toFixed(1)+'" y1="'+Y(ys[i]).toFixed(1)+'" x2="'+X(x).toFixed(1)+'" y2="'+Y(yf).toFixed(1)+'" stroke="#1d1d1f" stroke-opacity=".28" stroke-width="1"/>';
+    });
+
+    /* garis regresi: lurus, biru */
+    s+='<line x1="'+X(xFirst).toFixed(1)+'" y1="'+Y(r.intercept+r.slope*xFirst).toFixed(1)+
+       '" x2="'+X(xLast).toFixed(1)+'" y2="'+Y(r.intercept+r.slope*xLast).toFixed(1)+
+       '" stroke="#0066cc" stroke-width="2.2" stroke-linecap="round"/>';
+
+    /* proyeksi putus-putus */
+    if(future.length){
+      const pts=future.map(f=>X(f.x).toFixed(1)+','+Y(f.y).toFixed(1));
+      s+='<polyline points="'+X(xLast).toFixed(1)+','+Y(r.intercept+r.slope*xLast).toFixed(1)+' '+pts.join(' ')+
+         '" fill="none" stroke="#0066cc" stroke-width="2" stroke-dasharray="5 4"/>';
+    }
+
+    /* titik pengamatan */
+    xs.forEach((x,i)=>{
+      s+='<circle cx="'+X(x).toFixed(1)+'" cy="'+Y(ys[i]).toFixed(1)+'" r="3.6" fill="#1d1d1f"/>';
+    });
+    future.forEach(f=>{
+      s+='<circle cx="'+X(f.x).toFixed(1)+'" cy="'+Y(f.y).toFixed(1)+'" r="3.4" fill="#ffffff" stroke="#0066cc" stroke-width="2"/>';
+    });
+
+    /* sumbu x */
+    s+='<line x1="'+L+'" y1="'+(H-Bm)+'" x2="'+(W-R)+'" y2="'+(H-Bm)+'" stroke="#d6d6d6" stroke-width="1"/>';
+    s+='<text x="'+L+'" y="'+(H-9)+'" font-size="10" fill="#6e6e73" text-anchor="start" font-family="Inter,sans-serif">'+xFirst+'</text>';
+    if(future.length){
+      s+='<text x="'+X(xLast).toFixed(1)+'" y="'+(H-9)+'" font-size="10" fill="#6e6e73" text-anchor="middle" font-family="Inter,sans-serif">'+xLast+'</text>';
+      s+='<text x="'+(W-R)+'" y="'+(H-9)+'" font-size="10" fill="#6e6e73" text-anchor="end" font-family="Inter,sans-serif">'+xEnd+'</text>';
+    } else {
+      s+='<text x="'+(W-R)+'" y="'+(H-9)+'" font-size="10" fill="#6e6e73" text-anchor="end" font-family="Inter,sans-serif">'+xLast+'</text>';
+    }
+    s+='</svg>';
+    return '<div class="res-chart">'+s+'</div>';
+  }
+
+  function renderRamal(){
+    const out=$('#ramalOut');
+    const lines=$('#ramalData').value.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+    const rows=lines.map(l=>l.split(/[,;\t\s]+/).map(Number));
+    const xs=[],ys=[];
+    if(!rows.length){ out.innerHTML='<p class="lab-empty">Tempel angka dulu.</p>'; return; }
+    const single=rows.every(r=>r.length===1);
+    rows.forEach((r,i)=>{
+      if(single){ xs.push(i+1); ys.push(r[0]); }
+      else { xs.push(r[0]); ys.push(r[1]); }
+    });
+    if(xs.some(v=>!isFinite(v))||ys.some(v=>!isFinite(v))||xs.length<3){
+      out.innerHTML='<p class="lab-empty">Butuh minimal tiga pasangan angka yang valid. Format tiap baris: <b>x,y</b> atau satu angka saja.</p>';
+      return;
+    }
+    const r=linreg(xs,ys);
+    if(!isFinite(r.slope)||!isFinite(r.r2)){
+      out.innerHTML='<p class="lab-empty">Nilai x semuanya sama, jadi garis tidak bisa dihitung.</p>';
+      return;
+    }
+    const k=Math.max(1,Math.min(24,parseInt($('#ramalHorizon').value,10)||3));
+    const tc=tCrit(0.05,r.df);
+    const future=[];
+    for(let i=1;i<=k;i++){
+      const x=xs[xs.length-1]+i;
+      const y=r.intercept+r.slope*x;
+      const se=Math.sqrt(r.mse*(1+1/r.n+Math.pow(x-r.mx,2)/r.sxx));
+      future.push({x,y,lo:y-tc*se,hi:y+tc*se});
+    }
+    const rmse=Math.sqrt(r.mse);
+    out.innerHTML=
+      '<span class="res-pill '+(r.pSlope<0.05?'yes':'no')+'">'+(r.pSlope<0.05?'Tren nyata':'Tren belum nyata')+'</span>'+
+      '<div class="res-big">R&sup2; = '+fmt(r.r2,3)+'</div>'+
+      '<div class="res-cap">koefisien determinasi, n = '+r.n+'</div>'+
+      '<dl class="res-rows">'+
+        row('Persamaan', 'y = '+fmt(r.intercept,2)+' + '+fmt(r.slope,2)+'x')+
+        row('Korelasi r', fmt(r.r,3))+
+        row('p kemiringan', fmt(r.pSlope,4))+
+        row('RMSE', fmt(rmse,2))+
+        row('Proyeksi '+k+' periode', future.map(f=>fmt(f.y,1)).join(' &middot; '))+
+        row('Selang 95% terakhir', '['+fmt(future[future.length-1].lo,1)+' ; '+fmt(future[future.length-1].hi,1)+']')+
+      '</dl>'+
+      '<p class="res-note">Garis abu menghubungkan titik pengamatan, garis biru adalah regresinya, garis putus-putus proyeksinya. Pita biru adalah selang prediksi 95% untuk titik baru, bukan selang kepercayaan garis.</p>'+
+      ramalChart(xs,ys,r,future);
+  }
+
+  /* ---------- 3. pembersih data ---------- */
+  function parseCSV(text){
+    const rows=[]; let row=[],cur='',q=false;
+    for(let i=0;i<text.length;i++){
+      const c=text[i];
+      if(q){
+        if(c==='"'){ if(text[i+1]==='"'){cur+='"';i++;} else q=false; }
+        else cur+=c;
+      } else if(c==='"') q=true;
+      else if(c===','||c==='\t'){ row.push(cur); cur=''; }
+      else if(c==='\n'){ row.push(cur); rows.push(row); row=[]; cur=''; }
+      else if(c!=='\r') cur+=c;
+    }
+    if(cur!==''||row.length){ row.push(cur); rows.push(row); }
+    return rows.filter(r=>r.some(v=>v.trim()!==''));
+  }
+  function quantile(sorted,p){
+    const pos=(sorted.length-1)*p, b=Math.floor(pos), rest=pos-b;
+    return sorted[b+1]!==undefined ? sorted[b]+rest*(sorted[b+1]-sorted[b]) : sorted[b];
+  }
+
+  function renderBersih(){
+    const out=$('#bersihOut');
+    const rows=parseCSV($('#bersihData').value);
+    if(rows.length<2){
+      out.innerHTML='<p class="lab-empty">Butuh baris judul kolom dan minimal satu baris data.</p>';
+      return;
+    }
+    const head=rows[0].map(h=>h.trim());
+    const body=rows.slice(1);
+    const cols=head.map((h,i)=>({name:h||('kolom '+(i+1)),cells:body.map(r=>(r[i]===undefined?'':r[i]))}));
+
+    const issues=[];
+    /* baris ganda */
+    const seen={};
+    body.forEach((r,i)=>{
+      const key=r.map(v=>v.trim().toLowerCase()).join('\u0001');
+      if(seen[key]!==undefined) issues.push(['Baris '+(i+2),'Ganda persis dengan baris '+(seen[key]+2)+'.']);
+      else seen[key]=i;
+    });
+    /* spasi berlebih */
+    let spaceRows=[];
+    body.forEach((r,i)=>{
+      if(r.some(v=>v!==v.trim()&&v.trim()!=='')) spaceRows.push(i+2);
+    });
+    if(spaceRows.length) issues.push(['Baris '+spaceRows.slice(0,6).join(', '),'Ada spasi di awal atau akhir sel.']);
+
+    const table=cols.map(c=>{
+      const vals=c.cells.map(v=>v.trim()).filter(v=>v!=='');
+      const nums=vals.map(Number).filter(v=>isFinite(v));
+      let type='teks';
+      if(vals.length&&nums.length===vals.length) type='angka';
+      else if(nums.length>0) type='campur';
+      else if(vals.length&&vals.every(v=>/^\d{4}-\d{2}-\d{2}$/.test(v)||/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(v))) type='tanggal';
+      const missing=c.cells.length-vals.length;
+      const uniq=new Set(vals).size;
+
+      if(type==='campur') issues.push([c.name, nums.length+' dari '+vals.length+' sel berisi angka, sisanya teks.']);
+      if(missing) issues.push([c.name, missing+' sel kosong.']);
+
+      /* huruf besar-kecil tidak konsisten */
+      const byLow={};
+      vals.forEach(v=>{ const k=v.toLowerCase(); (byLow[k]=byLow[k]||new Set()).add(v); });
+      const mixed=Object.keys(byLow).filter(k=>byLow[k].size>1);
+      if(mixed.length&&type!=='angka') issues.push([c.name, 'Penulisan tidak seragam: '+mixed.slice(0,3).map(k=>[...byLow[k]].join(' / ')).join(', ')+'.']);
+
+      /* outlier IQR */
+      let outN=0, outList='';
+      if(type==='angka'&&nums.length>=4){
+        const s=nums.slice().sort((a,b)=>a-b);
+        const q1=quantile(s,0.25), q3=quantile(s,0.75), iqr=q3-q1;
+        const loB=q1-1.5*iqr, hiB=q3+1.5*iqr;
+        const bad=[];
+        c.cells.forEach((v,i)=>{
+          const n=Number(v);
+          if(v.trim()!==''&&isFinite(n)&&(n<loB||n>hiB)) bad.push('baris '+(i+2)+' ('+n+')');
+        });
+        outN=bad.length;
+        outList=bad.slice(0,4).join(', ');
+        if(outN) issues.push([c.name,'Nilai ekstrem: '+outList+(outN>4?' dan '+(outN-4)+' lainnya':'')+'.']);
+      }
+      return {name:c.name,type,missing,uniq,outN};
+    });
+
+    const summary='<p class="res-note" style="margin-top:0;margin-bottom:0">'+
+      body.length+' baris &middot; '+cols.length+' kolom &middot; '+issues.length+' temuan</p>';
+    const tbl='<table class="res-table"><caption>Ringkasan kolom</caption><thead><tr>'+
+      '<th>Kolom</th><th>Tipe</th><th class="num">Kosong</th><th class="num">Unik</th><th class="num">Ekstrem</th>'+
+      '</tr></thead><tbody>'+
+      table.map(t=>'<tr><td>'+t.name+'</td><td>'+t.type+'</td><td class="num">'+t.missing+'</td><td class="num">'+t.uniq+'</td><td class="num">'+t.outN+'</td></tr>').join('')+
+      '</tbody></table>';
+
+    const list=issues.length
+      ? '<ul class="issues">'+issues.map(i=>'<li><span>'+i[0]+'</span><span>'+i[1]+'</span></li>').join('')+'</ul>'
+      : '<p class="res-note">Tidak ada masalah yang terdeteksi. Data siap dipakai.</p>';
+
+    out.innerHTML=summary+tbl+list;
+  }
+
+  /* ---------- tab ---------- */
+  const tabs=$$('.lab-tabs button');
+  function showTab(btn){
+    tabs.forEach(b=>{
+      const on=b===btn;
+      b.classList.toggle('on',on);
+      b.setAttribute('aria-selected',on?'true':'false');
+      const p=document.getElementById(b.getAttribute('aria-controls'));
+      if(p) p.classList.toggle('on',on);
+    });
+  }
+  tabs.forEach((b,i)=>{
+    b.addEventListener('click',()=>showTab(b));
+    b.addEventListener('keydown',e=>{
+      let j=null;
+      if(e.key==='ArrowRight') j=(i+1)%tabs.length;
+      if(e.key==='ArrowLeft') j=(i-1+tabs.length)%tabs.length;
+      if(e.key==='Home') j=0;
+      if(e.key==='End') j=tabs.length-1;
+      if(j!==null){ e.preventDefault(); tabs[j].focus(); showTab(tabs[j]); }
+    });
+  });
+
+  /* ---------- wiring ---------- */
+  $('#ujiRun').addEventListener('click',renderUji);
+  $('#ramalRun').addEventListener('click',renderRamal);
+  $('#bersihRun').addEventListener('click',renderBersih);
+
+  $('#ujiDemo').addEventListener('click',()=>{
+    const mk=(m,s,n)=>{
+      const out=[];
+      for(let i=0;i<n;i++){
+        const u1=Math.random()||1e-9, u2=Math.random();
+        const z=Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2);
+        out.push((m+s*z).toFixed(2));
+      }
+      return out.join(' ');
+    };
+    $('#ujiA').value=mk(5.0,0.45,9);
+    $('#ujiB').value=mk(4.3,0.55,9);
+    renderUji();
+  });
+  $('#ramalDemo').addEventListener('click',()=>{
+    const base=10+Math.random()*8;
+    const rows=[];
+    for(let i=1;i<=9;i++) rows.push(i+','+(base+i*1.9+(Math.random()-0.5)*4).toFixed(1));
+    $('#ramalData').value=rows.join('\n');
+    renderRamal();
+  });
+  $('#bersihDemo').addEventListener('click',()=>{
+    $('#bersihData').value=
+      'nama,usia,skor,kota\n'+
+      'Ani,23,88,Bandung\n'+
+      'Budi,31,79,Jakarta\n'+
+      'Ani,23,88,Bandung\n'+
+      'Citra, 27,92,Surabaya\n'+
+      'Dewi,,85,jakarta\n'+
+      'Eka,45,140,Medan\n'+
+      'Fajar,29,81,Bandung\n'+
+      'Gita,34,77,Jakarta';
+    renderBersih();
+  });
+
+  /* jalankan sekali supaya seksi tidak tampil kosong */
+  renderUji(); renderRamal(); renderBersih();
 })();
 
 /* ============================================================
