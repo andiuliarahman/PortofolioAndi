@@ -11,6 +11,7 @@ aneh tidak pernah sampai ke halaman.
 
 import json
 import sys
+import time
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
@@ -20,10 +21,21 @@ UA = "Mozilla/5.0 (compatible; andiulia-portfolio/1.0)"
 WIB = timezone(timedelta(hours=7))
 
 
-def get(url):
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.load(r)
+def get(url, tries=3):
+    """Yahoo sesekali membalas 429 atau 5xx. Satu percobaan saja berarti
+    satu kegagalan kecil bisa membuang seluruh jadwal lima menitan, jadi
+    diulang tiga kali dengan jeda yang makin panjang."""
+    last = None
+    for i in range(tries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return json.load(r)
+        except Exception as exc:  # noqa: BLE001
+            last = exc
+            if i < tries - 1:
+                time.sleep(2 * (i + 1))
+    raise last
 
 
 def result(url):

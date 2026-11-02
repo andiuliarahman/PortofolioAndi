@@ -1,15 +1,17 @@
 name: Perbarui data IHSG
 
-# GitHub tidak mengizinkan jadwal lebih rapat dari 5 menit, dan dalam praktik
-# sering mundur beberapa menit. Jadi angka di halaman bisa tertinggal 5-15
-# menit; itu sebabnya halaman selalu menampilkan jam datanya, bukan mengaku
-# "real-time".
+# GitHub tidak mengizinkan jadwal lebih rapat dari 5 menit, dan penjadwalnya
+# best-effort: sebagian jadwal bisa dilewati saat antrean sedang padat. Karena
+# itu ada tiga jaring pengaman setelah penutupan, supaya harga final tetap
+# terbit walau jadwal lima menitan sempat hilang.
 #
 # Jam bursa IDX 09:00-16:00 WIB = 02:00-09:00 UTC, Senin-Jumat.
 on:
   schedule:
-    - cron: "*/5 2-9 * * 1-5"   # sepanjang sesi bursa
-    - cron: "15 9 * * 1-5"      # satu kali setelah penutupan, untuk harga final
+    - cron: "*/5 2-9 * * 1-5"   # 09:00-16:55 WIB, sepanjang sesi bursa
+    - cron: "15 9 * * 1-5"      # 16:15 WIB, harga final setelah penutupan
+    - cron: "0 10 * * 1-5"      # 17:00 WIB, jaring pengaman
+    - cron: "30 11 * * 1-5"     # 18:30 WIB, jaring pengaman terakhir
   workflow_dispatch:
 
 permissions:
