@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Andi Ulia Rahman · Statistika &amp; Machine Learning</title>
-<meta name="description" content="Portofolio Andi Ulia Rahman, Sarjana Statistika UNS 2026. Machine learning, data cleaning, MySQL, dan visualisasi data, plus tiga alat statistik interaktif yang berjalan di browser." />
+<meta name="description" content="Portofolio Andi Ulia Rahman, Sarjana Statistika UNS 2026. Machine learning, data cleaning, MySQL, dan visualisasi data, plus empat alat statistik interaktif yang berjalan di browser." />
 <meta name="theme-color" content="#ffffff" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2306070c'/%3E%3Cpath d='M12 46 L26 32 L38 38 L52 18' fill='none' stroke='%23c9f73d' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='52' cy='18' r='5' fill='%2338e1ff'/%3E%3C/svg%3E" />
 
@@ -935,7 +935,7 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
 .res-pill::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;}
 .res-pill.yes{background:rgba(0,102,204,.10);color:#005cba;}
 .res-pill.no{background:rgba(0,0,0,.06);color:#636369;}
-.res-big{font-family:'SF Pro Display','Inter',sans-serif;font-size:38px;font-weight:600;
+.res-big{font-family:'SF Pro Display','Inter',sans-serif;font-size:clamp(26px,3.4vw,38px);font-weight:600;
   letter-spacing:-.025em;line-height:1;color:#1d1d1f;margin:14px 0 4px;font-variant-numeric:tabular-nums;}
 .res-cap{font-size:12px;color:#6e6e73;letter-spacing:-.01em;}
 .res-rows{margin:16px 0 0;padding:0;border-top:1px solid #e6e6e8;}
@@ -961,12 +961,24 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
   font-size:12.5px;color:#1d1d1f;line-height:1.45;letter-spacing:-.01em;}
 .issues li span:first-child{color:#6e6e73;font-variant-numeric:tabular-nums;min-width:74px;flex:none;}
 
+.ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;}
+.ab-grid input{font-variant-numeric:tabular-nums;}
+
+.res-read{margin-top:16px;padding-top:14px;border-top:1px solid #d6d6d6;}
+.res-read .rl{display:block;font-size:11.5px;color:#6e6e73;letter-spacing:-.01em;margin-bottom:5px;}
+.res-read p{margin:0;font-size:13.5px;line-height:1.6;color:#1d1d1f;letter-spacing:-.01em;}
+
 @media(max-width:880px){
   .lab-grid{grid-template-columns:1fr;}
   .lab-in{border-right:0;padding-right:0;padding-bottom:18px;border-bottom:1px solid #e6e6e8;}
   .lab-tabs{overflow-x:auto;scrollbar-width:none;}
   .lab-tabs::-webkit-scrollbar{display:none;}
   .lab-tabs button{flex:none;}
+}
+
+@media(max-width:560px){
+  .lab-tabs{flex-wrap:wrap;overflow:visible;}
+  .lab-tabs button{flex:1 1 calc(50% - 2px);}
 }
 
 /* --- motion: calm opacity only --- */
@@ -1028,7 +1040,7 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
         <a href="#sentiment" class="btn btn-ghost">Coba Detektor Sentimen</a>
       </div>
       <div class="hero-stats">
-        <div class="stat-chip"><b data-count="3.64">0.00</b><span>IPK / 4.00</span><i class="cum">Cumlaude</i></div>
+        <div class="stat-chip"><b data-count="3.64">0,00</b><span>IPK / 4,00</span><i class="cum">Cumlaude</i></div>
         <div class="stat-chip"><b data-count="4">0</b><span>Pengalaman Kerja</span></div>
         <div class="stat-chip"><b data-count="3">0</b><span>Proyek Data</span></div>
       </div>
@@ -1109,14 +1121,15 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
     <div class="sec-head rv">
       <div>
         <div class="eyebrow">Laboratorium</div>
-        <h2 class="sec-title">Tiga alat yang <em>benar-benar menghitung</em></h2>
-        <p class="sec-sub">Uji beda dua kelompok, ramalkan deret angka, dan periksa kualitas data. Semua perhitungan berjalan di browser, tanpa library dan tanpa server. Angka yang keluar adalah hasil hitung, bukan contoh.</p>
+        <h2 class="sec-title">Empat alat yang <em>benar-benar menghitung</em></h2>
+        <p class="sec-sub">Uji beda dua kelompok, bandingkan dua varian, ramalkan deret angka, dan periksa kualitas data. Semua perhitungan berjalan di browser, tanpa library dan tanpa server. Angka yang keluar adalah hasil hitung, bukan contoh.</p>
       </div>
     </div>
 
     <div class="lab rv d1">
       <div class="lab-tabs" role="tablist" aria-label="Alat statistik">
         <button role="tab" id="tab-uji" aria-controls="panel-uji" aria-selected="true" class="on" type="button">Uji Signifikansi</button>
+        <button role="tab" id="tab-ab" aria-controls="panel-ab" aria-selected="false" type="button">A/B Test</button>
         <button role="tab" id="tab-ramal" aria-controls="panel-ramal" aria-selected="false" type="button">Peramalan</button>
         <button role="tab" id="tab-bersih" aria-controls="panel-bersih" aria-selected="false" type="button">Pembersih Data</button>
       </div>
@@ -1137,6 +1150,28 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
           </div>
           <div class="lab-out" id="ujiOut" aria-live="polite">
             <p class="lab-empty">Tekan Hitung untuk membandingkan dua kelompok dengan uji-t Welch, lalu diperiksa ulang dengan uji permutasi.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL A/B -->
+      <div class="lab-panel" id="panel-ab" role="tabpanel" aria-labelledby="tab-ab" tabindex="0">
+        <div class="lab-grid">
+          <div class="lab-in">
+            <div class="ab-grid">
+              <div><label for="abNa">Pengunjung A</label><input id="abNa" type="number" min="0" step="1" value="4200" /></div>
+              <div><label for="abCa">Konversi A</label><input id="abCa" type="number" min="0" step="1" value="210" /></div>
+              <div><label for="abNb">Pengunjung B</label><input id="abNb" type="number" min="0" step="1" value="4600" /></div>
+              <div><label for="abCb">Konversi B</label><input id="abCb" type="number" min="0" step="1" value="299" /></div>
+            </div>
+            <p class="hint">Uji-z dua proporsi, alpha 0,05, kekuatan uji 80%.</p>
+            <div class="lab-actions">
+              <button class="btn btn-primary" id="abRun" type="button">Hitung</button>
+              <button class="btn btn-ghost" id="abDemo" type="button">Acak data baru</button>
+            </div>
+          </div>
+          <div class="lab-out" id="abOut" aria-live="polite">
+            <p class="lab-empty">Bandingkan dua varian, lalu lihat berapa pengunjung yang sebenarnya dibutuhkan untuk membuktikan selisihnya.</p>
           </div>
         </div>
       </div>
@@ -1232,7 +1267,7 @@ Gita,34,77,Jakarta</textarea>
 
       <div class="bcard b-stat rv d2">
         <div class="bt">Sekilas</div>
-        <div class="row"><b data-count="3.64">0.00</b><span>IPK &middot; <i class="cum-t">Cumlaude</i></span></div>
+        <div class="row"><b data-count="3.64">0,00</b><span>IPK &middot; <i class="cum-t">Cumlaude</i></span></div>
         <div class="row"><b data-count="4">0</b><span>Pengalaman</span></div>
         <div class="row"><b data-count="3">0</b><span>Proyek</span></div>
       </div>
@@ -1371,7 +1406,7 @@ Gita,34,77,Jakarta</textarea>
         <div>
           <div class="tl-when">2022 – 2026</div>
           <h3>S1 Statistika</h3>
-          <div class="where">Universitas Sebelas Maret (UNS) &middot; Surakarta &middot; IPK 3.64 / 4.00 &middot; Cumlaude</div>
+          <div class="where">Universitas Sebelas Maret (UNS) &middot; Surakarta &middot; IPK 3,64 / 4,00 &middot; Cumlaude</div>
           <p>Fondasi teori peluang, inferensia, dan pemodelan statistik. Di sinilah saya mulai terbiasa mempertanyakan angka sebelum mempercayainya.</p>
           <button class="dt-btn" data-detail="kampus">Lihat detail <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
@@ -1690,7 +1725,7 @@ const cObs = new IntersectionObserver((es)=>{
     const dec=(raw.split('.')[1]||'').length, t0=performance.now(), dur=1400;
     (function step(now){
       const p=clamp((now-t0)/dur,0,1), k=1-Math.pow(1-p,3);
-      el.textContent=(target*k).toFixed(dec);
+      el.textContent=(target*k).toFixed(dec).replace('.',',');
       if(p<1) requestAnimationFrame(step);
     })(t0);
     cObs.unobserve(el);
@@ -1919,7 +1954,7 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     fill.style.background = state==='pos' ? 'var(--lime)' : state==='neg' ? 'var(--pink)' : 'var(--dim)';
 
     tokens.innerHTML = r.hits.slice(0,8).map(h=>
-      '<span class="'+(h.v>0?'t-pos':'t-neg')+'">'+h.w+' '+(h.v>0?'+':'')+h.v.toFixed(1).replace('.0','')+'</span>'
+      '<span class="'+(h.v>0?'t-pos':'t-neg')+'">'+h.w+' '+(h.v>0?'+':'')+h.v.toFixed(1).replace('.0','').replace('.',',')+'</span>'
     ).join('');
   }
 
@@ -2007,8 +2042,8 @@ $$('.bcard').forEach(card=>{
     kampus:{
       when:'2022 – 2026 &middot; PENDIDIKAN',
       title:'S1 Statistika, Universitas Sebelas Maret',
-      where:'Surakarta &middot; IPK 3.64 / 4.00 &middot; cumlaude &middot; lulus 2026',
-      intro:'Sarjana Statistika di UNS dengan IPK 3.64 dari 4.00 dan predikat cumlaude. Fokus yang paling saya tekuni: pemodelan statistik dan penerapannya untuk peramalan.',
+      where:'Surakarta &middot; IPK 3,64 / 4,00 &middot; cumlaude &middot; lulus 2026',
+      intro:'Sarjana Statistika di UNS dengan IPK 3,64 dari 4,00 dan predikat cumlaude. Fokus yang paling saya tekuni: pemodelan statistik dan penerapannya untuk peramalan.',
       blocks:[
         {h:'Yang saya dalami', items:[
           'Teori peluang dan inferensia statistik sebagai dasar mengambil kesimpulan dari data sampel.',
@@ -2331,6 +2366,14 @@ $$('.bcard').forEach(card=>{
     }
     return (lo+hi)/2;
   }
+  /* ---------- distribusi normal ---------- */
+  function erf(x){
+    const s=x<0?-1:1; x=Math.abs(x);
+    const t=1/(1+0.3275911*x);
+    const y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);
+    return s*y;
+  }
+  function ncdf(x){ return 0.5*(1+erf(x/Math.SQRT2)); }
 
   /* ---------- statistik dasar ---------- */
   function mean(a){ return a.reduce((s,v)=>s+v,0)/a.length; }
@@ -2387,10 +2430,15 @@ $$('.bcard').forEach(card=>{
   /* ---------- util tampilan ---------- */
   function fmt(v,d){
     if(v===null||v===undefined||!isFinite(v)) return '&mdash;';
-    if(d>=4&&v>0&&v<0.0001) return '&lt;0.0001';
-    return v.toFixed(d);
+    if(d>=4&&v>0&&v<0.0001) return '&lt;0,0001';
+    return v.toFixed(d).replace('.',',');
   }
+  function pct(v,d){ return fmt(v*100,d)+'%'; }
   function row(k,v){ return '<div><dt>'+k+'</dt><dd>'+v+'</dd></div>'; }
+  function readBlock(text){
+    return '<div class="res-read"><span class="rl">Bacaan</span><p>'+text+'</p></div>';
+  }
+  function ribuan(v){ return Math.round(v).toLocaleString('id-ID'); }
   function parseNums(t){
     return t.split(/[\s,;]+/).map(s=>s.trim()).filter(Boolean).map(Number).filter(v=>isFinite(v));
   }
@@ -2443,7 +2491,72 @@ $$('.bcard').forEach(card=>{
         row('Uji permutasi '+perm.N+'x', 'p = '+fmt(perm.p,4))+
       '</dl>'+
       '<p class="res-note">Uji-t mengasumsikan data mendekati normal. Uji permutasi tidak, jadi kedua nilai p seharusnya berdekatan. Kalau jauh berbeda, sebaran datanya perlu diperiksa.</p>'+
-      stripPlot(A,B);
+      stripPlot(A,B)+
+      readBlock(jelaskanUji(r,lo,hi));
+  }
+
+  /* ---------- 1b. A/B test ---------- */
+  function abTest(n1,c1,n2,c2){
+    const p1=c1/n1, p2=c2/n2;
+    const pp=(c1+c2)/(n1+n2);
+    const se=Math.sqrt(pp*(1-pp)*(1/n1+1/n2));
+    const z=(p2-p1)/se;
+    const p=2*(1-ncdf(Math.abs(z)));
+    const sed=Math.sqrt(p1*(1-p1)/n1+p2*(1-p2)/n2);
+    const d=p2-p1;
+    const lo=d-1.959964*sed, hi=d+1.959964*sed;
+    const nNeed=d!==0?Math.pow(1.959964+0.841621,2)*(p1*(1-p1)+p2*(1-p2))/(d*d):NaN;
+    return {n1,c1,n2,c2,p1,p2,pp,se,z,p,sed,d,lo,hi,lift:p1>0?(p2/p1-1):NaN,nNeed};
+  }
+
+  function abChart(r){
+    const W=320,H=96,L=16,R=16;
+    const lo=Math.min(r.lo,0), hi=Math.max(r.hi,0);
+    const pad=(hi-lo)*0.18||0.001;
+    const a=lo-pad, b=hi+pad;
+    const X=v=>L+(v-a)/((b-a)||1)*(W-L-R);
+    const y=54;
+    const pct1=v=>fmt(v*100,1);
+    let s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Selisih konversi dan selang kepercayaannya">';
+    s+='<line x1="'+X(0).toFixed(1)+'" y1="30" x2="'+X(0).toFixed(1)+'" y2="78" stroke="#6e6e73" stroke-width="1" stroke-dasharray="3 3"/>';
+    s+='<text x="'+X(0).toFixed(1)+'" y="92" font-size="10" fill="#6e6e73" text-anchor="middle" font-family="Inter,sans-serif">0</text>';
+    s+='<line x1="'+X(r.lo).toFixed(1)+'" y1="'+y+'" x2="'+X(r.hi).toFixed(1)+'" y2="'+y+'" stroke="#0066cc" stroke-width="3" stroke-linecap="round"/>';
+    s+='<line x1="'+X(r.lo).toFixed(1)+'" y1="'+(y-8)+'" x2="'+X(r.lo).toFixed(1)+'" y2="'+(y+8)+'" stroke="#0066cc" stroke-width="2"/>';
+    s+='<line x1="'+X(r.hi).toFixed(1)+'" y1="'+(y-8)+'" x2="'+X(r.hi).toFixed(1)+'" y2="'+(y+8)+'" stroke="#0066cc" stroke-width="2"/>';
+    s+='<circle cx="'+X(r.d).toFixed(1)+'" cy="'+y+'" r="5" fill="#ffffff" stroke="#0066cc" stroke-width="2.5"/>';
+    s+='<text x="'+X(r.lo).toFixed(1)+'" y="24" font-size="10" fill="#6e6e73" text-anchor="middle" font-family="Inter,sans-serif">'+pct1(r.lo)+'</text>';
+    s+='<text x="'+X(r.hi).toFixed(1)+'" y="24" font-size="10" fill="#6e6e73" text-anchor="middle" font-family="Inter,sans-serif">'+pct1(r.hi)+'</text>';
+    s+='</svg>';
+    return '<div class="res-chart">'+s+'</div>';
+  }
+
+  function renderAb(){
+    const out=$('#abOut');
+    const n1=+$('#abNa').value, c1=+$('#abCa').value;
+    const n2=+$('#abNb').value, c2=+$('#abCb').value;
+    if(!(n1>0)||!(n2>0)||!(c1>=0)||!(c2>=0)||c1>n1||c2>n2){
+      out.innerHTML='<p class="lab-empty">Periksa lagi: pengunjung harus lebih dari nol, dan jumlah konversi tidak boleh melebihi pengunjung.</p>';
+      return;
+    }
+    const r=abTest(n1,c1,n2,c2);
+    const sig=r.p<0.05;
+    const pc=v=>fmt(v*100,2);
+    out.innerHTML=
+      '<span class="res-pill '+(sig?'yes':'no')+'">'+(sig?'Beda nyata':'Belum cukup bukti')+'</span>'+
+      '<div class="res-big">'+pc(r.p2)+'% vs '+pc(r.p1)+'%</div>'+
+      '<div class="res-cap">konversi B dibanding A, uji-z dua proporsi</div>'+
+      '<dl class="res-rows">'+
+        row('Varian A', pc(r.p1)+'% &middot; '+r.c1+' dari '+ribuan(r.n1))+
+        row('Varian B', pc(r.p2)+'% &middot; '+r.c2+' dari '+ribuan(r.n2))+
+        row('Lift relatif', (r.lift>=0?'+':'')+fmt(r.lift*100,1)+'%')+
+        row('Selisih', fmt(r.d*100,2)+' poin persen')+
+        row('Selang 95% selisih', '['+pc(r.lo)+' ; '+pc(r.hi)+']')+
+        row('p-value', fmt(r.p,4))+
+        row('Butuh per varian', isFinite(r.nNeed)?ribuan(Math.ceil(r.nNeed))+' orang':'&mdash;')+
+      '</dl>'+
+      '<p class="res-note">Uji-z memakai proporsi gabungan sebagai dasar galat baku. Selang kepercayaan memakai galat baku tak bergabung, karena itu yang benar untuk selisih dua proporsi.</p>'+
+      abChart(r)+
+      readBlock(jelaskanAb(r));
   }
 
   /* ---------- 2. peramalan ---------- */
@@ -2557,7 +2670,8 @@ $$('.bcard').forEach(card=>{
         row('Selang 95% terakhir', '['+fmt(future[future.length-1].lo,1)+' ; '+fmt(future[future.length-1].hi,1)+']')+
       '</dl>'+
       '<p class="res-note">Garis abu menghubungkan titik pengamatan, garis biru adalah regresinya, garis putus-putus proyeksinya. Pita biru adalah selang prediksi 95% untuk titik baru, bukan selang kepercayaan garis.</p>'+
-      ramalChart(xs,ys,r,future);
+      ramalChart(xs,ys,r,future)+
+      readBlock(jelaskanRamal(r,future));
   }
 
   /* ---------- 3. pembersih data ---------- */
@@ -2656,7 +2770,76 @@ $$('.bcard').forEach(card=>{
       ? '<ul class="issues">'+issues.map(i=>'<li><span>'+i[0]+'</span><span>'+i[1]+'</span></li>').join('')+'</ul>'
       : '<p class="res-note">Tidak ada masalah yang terdeteksi. Data siap dipakai.</p>';
 
-    out.innerHTML=summary+tbl+list;
+    out.innerHTML=summary+tbl+list+readBlock(jelaskanBersih(body.length,cols.length,issues));
+  }
+
+  /* ---------- pembaca hasil: angka jadi kalimat ---------- */
+  function jelaskanUji(r,lo,hi){
+    const p=fmt(r.p,4);
+    let t='';
+    if(r.p<0.05){
+      t='Selisih rata-rata '+fmt(r.diff,3)+' poin ini kecil kemungkinan kebetulan (p = '+p+'). ';
+      t+='Selang kepercayaannya '+fmt(lo,3)+' sampai '+fmt(hi,3)+', jadi untuk populasi yang lebih luas selisihnya masih masuk akal di kisaran itu. ';
+      const d=Math.abs(r.diff)/(((r.sd1+r.sd2)/2)||1);
+      if(d<0.4) t+='Tapi besarnya hanya sekitar '+Math.round(d*100)+'% dari simpangan baku, jadi dampak praktisnya kecil meski nyata secara statistik. ';
+    } else {
+      t='Dengan '+r.n1+' dan '+r.n2+' pengamatan, belum ada bukti cukup bahwa kedua kelompok berbeda (p = '+p+'). ';
+      t+='Ini bukan berarti keduanya sama, hanya belum terbukti beda. ';
+    }
+    if(r.n1+r.n2<12) t+='Jumlah sampelnya kecil, jadi hasil ini rapuh: menambah atau membuang satu titik bisa membalik kesimpulan.';
+    return t;
+  }
+
+  function jelaskanAb(r){
+    const pc=v=>fmt(v*100,2);
+    const naik=r.d>=0;
+    let t='Varian B mengonversi '+pc(r.p2)+'%, varian A '+pc(r.p1)+'%. Itu '+(naik?'naik':'turun')+' '+
+      fmt(Math.abs(r.lift*100),1)+'% relatif, atau '+fmt(Math.abs(r.d*100),2)+' poin persen. ';
+    if(r.p<0.05){
+      t+='Dengan '+ribuan(r.n1)+' dan '+ribuan(r.n2)+' pengunjung, selisih ini nyata (p = '+fmt(r.p,4)+'). ';
+      const extra=Math.round(10000*r.d);
+      t+='Kalau lift ini bertahan, setiap 10.000 pengunjung '+(naik?'menambah':'kehilangan')+' sekitar '+ribuan(Math.abs(extra))+' konversi.';
+    } else {
+      t+='Tapi dengan '+ribuan(r.n1)+' dan '+ribuan(r.n2)+' pengunjung, belum cukup bukti bahwa selisihnya nyata (p = '+fmt(r.p,4)+'). ';
+      if(isFinite(r.nNeed)) t+='Untuk mendeteksi selisih sebesar ini dengan yakin, butuh sekitar '+ribuan(Math.ceil(r.nNeed))+' pengunjung per varian.';
+    }
+    return t;
+  }
+
+  function jelaskanRamal(r,future){
+    let t='Model menjelaskan '+Math.round(r.r2*100)+'% keragaman data (R&sup2; = '+fmt(r.r2,3)+'), dengan pola '+
+      (r.slope>=0?'naik':'turun')+' sekitar '+fmt(Math.abs(r.slope),2)+' satuan per periode. ';
+    if(r.pSlope<0.05) t+='Kemiringan itu nyata (p = '+fmt(r.pSlope,4)+'), jadi trennya bukan kebetulan. ';
+    else t+='Tapi kemiringannya belum nyata (p = '+fmt(r.pSlope,4)+'), jadi garis ini belum bisa dipercaya sebagai tren. ';
+    if(future.length){
+      const last=future[future.length-1];
+      t+='Periode ke-'+last.x+' diperkirakan '+fmt(last.y,1)+', dengan rentang wajar '+fmt(last.lo,1)+' sampai '+fmt(last.hi,1)+'. ';
+      t+='Rentangnya melebar makin jauh dari data, dan itu wajar.';
+    }
+    if(r.r2<0.5) t+=' Karena R&sup2; di bawah 0,5, garis lurus mungkin terlalu sederhana untuk data ini.';
+    return t;
+  }
+
+  function jelaskanBersih(nRows,nCols,issues){
+    if(!issues.length) return 'Dari '+nRows+' baris dan '+nCols+' kolom, tidak ada masalah yang terdeteksi. Data siap dipakai.';
+    let g=0,k=0,e=0,s=0,sp=0;
+    issues.forEach(i=>{
+      const t=i[1];
+      if(/Ganda/.test(t)) g++;
+      else if(/kosong/.test(t)) k++;
+      else if(/ekstrem/.test(t)) e++;
+      else if(/seragam/.test(t)) s++;
+      else if(/spasi/.test(t)) sp++;
+    });
+    const parts=[];
+    if(g) parts.push(g+' baris ganda');
+    if(k) parts.push(k+' kolom punya sel kosong');
+    if(e) parts.push(e+' kolom punya nilai ekstrem');
+    if(s) parts.push(s+' kolom beda penulisan');
+    if(sp) parts.push('spasi berlebih');
+    let t='Dari '+nRows+' baris dan '+nCols+' kolom, ada '+issues.length+' hal yang perlu dibereskan: '+parts.join(', ')+'. ';
+    t+='Baris ganda dan sel kosong paling aman dibereskan lebih dulu, karena keduanya paling menggeser hasil hitung.';
+    return t;
   }
 
   /* ---------- tab ---------- */
@@ -2684,6 +2867,7 @@ $$('.bcard').forEach(card=>{
 
   /* ---------- wiring ---------- */
   $('#ujiRun').addEventListener('click',renderUji);
+  $('#abRun').addEventListener('click',renderAb);
   $('#ramalRun').addEventListener('click',renderRamal);
   $('#bersihRun').addEventListener('click',renderBersih);
 
@@ -2700,6 +2884,17 @@ $$('.bcard').forEach(card=>{
     $('#ujiA').value=mk(5.0,0.45,9);
     $('#ujiB').value=mk(4.3,0.55,9);
     renderUji();
+  });
+  $('#abDemo').addEventListener('click',()=>{
+    const n1=3000+Math.floor(Math.random()*3200);
+    const n2=3000+Math.floor(Math.random()*3200);
+    const base=0.03+Math.random()*0.05;
+    const lift=(Math.random()-0.3)*0.45;
+    const c1=Math.round(n1*base);
+    const c2=Math.min(n2,Math.round(n2*base*(1+lift)));
+    $('#abNa').value=n1; $('#abCa').value=c1;
+    $('#abNb').value=n2; $('#abCb').value=c2;
+    renderAb();
   });
   $('#ramalDemo').addEventListener('click',()=>{
     const base=10+Math.random()*8;
@@ -2723,7 +2918,7 @@ $$('.bcard').forEach(card=>{
   });
 
   /* jalankan sekali supaya seksi tidak tampil kosong */
-  renderUji(); renderRamal(); renderBersih();
+  renderUji(); renderAb(); renderRamal(); renderBersih();
 })();
 
 /* ============================================================
