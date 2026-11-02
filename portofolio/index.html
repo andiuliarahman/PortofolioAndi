@@ -176,7 +176,7 @@ header.nav.stuck{
   border:1px solid var(--line);border-radius:999px;background:rgba(0,0,0,.03);
   font-size:12.5px;color:var(--dim);margin-bottom:28px;
 }
-.dot-live{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2.4s infinite;}
+.dot-live{width:7px;height:7px;border-radius:50%;background:var(--lime);}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,102,204,.6);}70%{box-shadow:0 0 0 9px rgba(0,102,204,0);}100%{box-shadow:0 0 0 0 rgba(0,102,204,0);}}
 
 .hero h1{font-size:clamp(2.3rem,4.6vw,3.9rem);line-height:1.02;letter-spacing:-.045em;}
@@ -216,12 +216,11 @@ header.nav.stuck{
 .chart-top h4{font-size:13px;font-weight:500;color:var(--dim);letter-spacing:.01em;}
 .chart-top .big{font-family:'SF Pro Display','Inter',-apple-system,sans-serif;font-size:1.9rem;letter-spacing:-.03em;margin-top:4px;}
 .chart-top .big span{font-size:12px;color:var(--mute);font-family:'Inter';letter-spacing:0;margin-left:6px;}
-.tag-live{
-  font-family:'SF Pro Text','Inter',-apple-system,sans-serif;font-size:9.5px;letter-spacing:.12em;
-  padding:5px 9px;border-radius:6px;background:rgba(0,102,204,.12);
-  border:1px solid rgba(0,102,204,.28);color:var(--lime);display:flex;align-items:center;gap:6px;
+.tag-src{
+  font-family:'SF Pro Text','Inter',-apple-system,sans-serif;font-size:9.5px;letter-spacing:.08em;
+  padding:5px 9px;border-radius:6px;background:#f5f5f7;
+  border:1px solid #e6e6e8;color:#6e6e73;white-space:nowrap;
 }
-.tag-live i{width:5px;height:5px;border-radius:50%;background:var(--lime);display:block;animation:pulse 2s infinite;}
 #heroChart{display:block;width:100%;height:210px;cursor:crosshair;}
 .chart-foot{
   display:flex;justify-content:space-between;padding:0 22px 18px;
@@ -777,8 +776,7 @@ section{padding-top:90px;padding-bottom:90px;}
 .tags span{background:#ffffff;border-color:#e6e6e8;color:#707070;}
 
 /* launch status: bare orange text, no pill (reference) */
-.tag-live{background:none;border:0;border-radius:0;padding:0;color:#b64400;font-size:12px;font-weight:600;letter-spacing:-.01em;}
-.tag-live i{background:#b64400;}
+.tag-src{background:#f5f5f7;border:1px solid #e6e6e8;border-radius:6px;padding:4px 8px;color:#6e6e73;font-size:10px;font-weight:400;letter-spacing:.04em;}
 .dot-live{background:#0066cc;}
 .chart-top .big,.stat-chip b,.b-stat .row b{font-family:'SF Pro Display','Inter',sans-serif;color:#1d1d1f;}
 .chart-top .big span,.stat-chip span,.b-stat .row span{color:#6e6e73;}
@@ -979,6 +977,9 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
 @media(max-width:560px){
   .lab-tabs{flex-wrap:wrap;overflow:visible;}
   .lab-tabs button{flex:1 1 calc(50% - 2px);}
+  /* di layar sentuh tidak ada kursor, jadi petunjuk hover dibuang
+     daripada mendesak keterangan sumber sampai bertabrakan */
+  #chartHint{display:none;}
 }
 
 /* --- motion: calm opacity only --- */
@@ -1049,14 +1050,14 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
     <div class="chart-card rv">
       <div class="chart-top">
         <div>
-          <h4>Proyeksi Penumpang · YIA</h4>
-          <div class="big" id="chartBig">510<span>rb pax / bulan</span></div>
+          <h4>Trafik Penumpang · YIA</h4>
+          <div class="big" id="chartBig">4,28<span>juta pax · 2024</span></div>
         </div>
-        <div class="tag-live"><i></i>LIVE</div>
+        <div class="tag-src">DGCA · BPS</div>
       </div>
       <canvas id="heroChart"></canvas>
       <div class="chart-foot">
-        <span>2025 – 2026</span>
+        <span>Sumber: DGCA / BPS, 2019&ndash;2024</span>
         <span id="chartHint">geser kursor ke grafik</span>
       </div>
       <div class="chart-tip" id="chartTip"><b>–</b><span></span></div>
@@ -1749,9 +1750,27 @@ $$('.rv').forEach(el=>rvObs.observe(el));
   const ctx = c.getContext('2d');
   const tip = $('#chartTip'), big = $('#chartBig'), hint = $('#chartHint');
   const dpr = Math.min(devicePixelRatio||1, 2);
-  const DATA = [312,298,305,318,342,355,389,401,372,348,361,395,412,398,405,418,442,455,489,501,468,445,472,510];
-  const LABEL = ['Jan 25','Feb 25','Mar 25','Apr 25','Mei 25','Jun 25','Jul 25','Agu 25','Sep 25','Okt 25','Nov 25','Des 25',
-                 'Jan 26','Feb 26','Mar 26','Apr 26','Mei 26','Jun 26','Jul 26','Agu 26','Sep 26','Okt 26','Nov 26','Des 26'];
+  /* Angka asli, bukan karangan. Sumber: DGCA / BPS, Statistik
+     Transportasi Udara (lewat tabel tahunan YIA / WAHI).
+     2025 sengaja TIDAK diplot: angka tahunan Ditjen Hubud (2.185.714)
+     bertabrakan dengan data bulanan BPS DIY (Oktober 2025 saja 164.736
+     penumpang datang di YIA), jadi belum bisa dipertanggungjawabkan. */
+  const DATA = [
+    {y:'2019', v:281782},
+    {y:'2020', v:996750},
+    {y:'2021', v:1168042},
+    {y:'2022', v:2939888},
+    {y:'2023', v:4307136},
+    {y:'2024', v:4275848}
+  ];
+  const V = DATA.map(d => d.v);
+  const nf = v => v.toLocaleString('id-ID');
+  /* pisahkan angka besar dari satuannya, supaya bisa ditata beda ukuran */
+  function parts(v){
+    return v >= 1e6
+      ? [(v/1e6).toFixed(2).replace('.',','), 'juta pax']
+      : [Math.round(v/1e3).toLocaleString('id-ID'), 'rb pax'];
+  }
   let W=0,H=0,hover=-1,prog=1;
 
   function resize(){
@@ -1761,8 +1780,10 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     c.style.width = W+'px'; c.style.height = H+'px';
     ctx.setTransform(dpr,0,0,dpr,0,0);
   }
-  const PAD = {l:14, r:14, t:14, b:22};
-  const min = Math.min.apply(null,DATA)*0.92, max = Math.max.apply(null,DATA)*1.04;
+  const PAD = {l:14, r:14, t:14, b:26};
+  /* sumbu mulai dari nol. Deret ini soal besaran, bukan variasi kecil,
+     jadi memotong sumbu hanya akan membesar-besarkan naik-turunnya. */
+  const min = 0, max = Math.max.apply(null,V)*1.04;
   const X = i => PAD.l + (i/(DATA.length-1))*(W-PAD.l-PAD.r);
   const Y = v => PAD.t + (1-(v-min)/(max-min))*(H-PAD.t-PAD.b);
 
@@ -1776,25 +1797,38 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     const n = Math.max(2, Math.floor(DATA.length*prog));
 
     ctx.beginPath();
-    ctx.moveTo(X(0), Y(DATA[0]));
-    for(let i=1;i<n;i++) ctx.lineTo(X(i), Y(DATA[i]));
+    ctx.moveTo(X(0), Y(V[0]));
+    for(let i=1;i<n;i++) ctx.lineTo(X(i), Y(V[i]));
     ctx.lineTo(X(n-1), H-PAD.b); ctx.lineTo(X(0), H-PAD.b); ctx.closePath();
     ctx.fillStyle = 'rgba(0,102,204,.07)'; ctx.fill();
 
     ctx.beginPath();
-    ctx.moveTo(X(0), Y(DATA[0]));
-    for(let i=1;i<n;i++) ctx.lineTo(X(i), Y(DATA[i]));
+    ctx.moveTo(X(0), Y(V[0]));
+    for(let i=1;i<n;i++) ctx.lineTo(X(i), Y(V[i]));
     ctx.strokeStyle = '#0066cc'; ctx.lineWidth = 2; ctx.lineJoin='round';
     ctx.stroke();
 
     if(hover >= 0 && hover < n){
-      const x = X(hover), y = Y(DATA[hover]);
+      const x = X(hover);
       ctx.setLineDash([3,4]); ctx.strokeStyle='rgba(0,0,0,.25)';
       ctx.beginPath(); ctx.moveTo(x,PAD.t); ctx.lineTo(x,H-PAD.b); ctx.stroke();
       ctx.setLineDash([]);
-      ctx.beginPath(); ctx.arc(x,y,4.5,0,Math.PI*2);
-      ctx.fillStyle='#ffffff'; ctx.fill();
-      ctx.strokeStyle='#0066cc'; ctx.lineWidth=2.4; ctx.stroke();
+    }
+
+    /* tahun + titik aktif digambar paling akhir supaya tidak tertutup.
+       Label ujung dirata ke dalam supaya tidak terpotong tepi kanvas. */
+    ctx.font = '10px "SF Pro Text", Inter, sans-serif';
+    const last = DATA.length-1;
+    for(let i=0;i<n;i++){
+      const x = X(i), y = Y(V[i]);
+      if(i === hover){
+        ctx.beginPath(); ctx.arc(x,y,4.5,0,Math.PI*2);
+        ctx.fillStyle='#ffffff'; ctx.fill();
+        ctx.strokeStyle='#0066cc'; ctx.lineWidth=2.4; ctx.stroke();
+      }
+      ctx.textAlign = i===0 ? 'left' : (i===last ? 'right' : 'center');
+      ctx.fillStyle = i===hover ? '#1d1d1f' : '#6e6e73';
+      ctx.fillText(DATA[i].y, x, H-PAD.b+15);
     }
   }
 
@@ -1810,17 +1844,18 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     const i = Math.round((x-PAD.l)/((W-PAD.l-PAD.r)/(DATA.length-1)));
     hover = clamp(i, 0, DATA.length-1);
     draw();
-    const px = X(hover), py = Y(DATA[hover]);
+    const px = X(hover), py = Y(V[hover]);
+    const p = parts(V[hover]);
     tip.style.left = px+'px'; tip.style.top = Math.max(48,py)+'px'; tip.style.opacity = 1;
-    tip.querySelector('b').textContent = DATA[hover]+' rb pax';
-    tip.querySelector('span').textContent = LABEL[hover];
-    big.innerHTML = DATA[hover]+'<span>rb pax / bulan</span>';
-    hint.textContent = 'menampilkan '+LABEL[hover];
+    tip.querySelector('b').textContent = nf(V[hover])+' pax';
+    tip.querySelector('span').textContent = DATA[hover].y;
+    big.innerHTML = p[0]+'<span>'+p[1]+' · '+DATA[hover].y+'</span>';
+    hint.textContent = 'menampilkan '+DATA[hover].y;
   }
   c.addEventListener('mousemove', move);
   c.addEventListener('mouseleave', ()=>{
     hover=-1; tip.style.opacity=0; draw();
-    big.innerHTML = '510<span>rb pax / bulan</span>';
+    big.innerHTML = '4,28<span>juta pax · 2024</span>';
     hint.textContent = 'geser kursor ke grafik';
   });
 
