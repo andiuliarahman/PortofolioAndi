@@ -71,8 +71,8 @@
   --line:     rgba(0,0,0,.09);
   --line-2:   rgba(0,0,0,.18);
   --txt:      #1d1d1f;   /* Ink */
-  --dim:      #707070;   /* Slate */
-  --mute:     #6e6e73;   /* Steel */
+  --dim:      #6b6b6b;   /* Slate */
+  --mute:     #67676c;   /* Steel */
   --lime:     #0066cc;   /* Apple Blue (links) */
   --cyan:     #0071e3;   /* Pricing Blue (controls) */
   --violet:   #0066cc;
@@ -197,7 +197,7 @@ header.nav.stuck{
 }
 .stat-chip:hover{border-color:var(--line-2);background:rgba(0,0,0,.05);transform:translateY(-2px);}
 .stat-chip b{display:block;font-family:'SF Pro Display','Inter',-apple-system,sans-serif;font-size:1.45rem;letter-spacing:-.03em;line-height:1.1;}
-.stat-chip span{font-size:11px;color:#6e6e73;letter-spacing:-.01em;}
+.stat-chip span{font-size:11px;color:#67676c;letter-spacing:-.01em;}
 .cum{
   display:inline-block;margin-left:7px;padding:2px 8px;border-radius:100px;vertical-align:1px;
   font-family:'SF Pro Text','Inter',-apple-system,sans-serif;font-style:normal;font-size:8.5px;letter-spacing:.11em;
@@ -224,7 +224,7 @@ header.nav.stuck{
 .tag-src{
   font-family:'SF Pro Text','Inter',-apple-system,sans-serif;font-size:9.5px;letter-spacing:.08em;
   padding:5px 9px;border-radius:6px;background:#f5f5f7;
-  border:1px solid #e6e6e8;color:#6e6e73;white-space:nowrap;
+  border:1px solid #e6e6e8;color:#67676c;white-space:nowrap;
 }
 #heroChart{display:block;width:100%;height:210px;cursor:crosshair;}
 .chart-foot{
@@ -750,15 +750,15 @@ section{padding-top:90px;padding-bottom:90px;}
 
 /* --- typography scale --- */
 .eyebrow{font-family:'SF Pro Text','Inter',sans-serif;font-size:12px;font-weight:400;letter-spacing:-.01em;
-  text-transform:none;color:#6e6e73;margin-bottom:12px;}
+  text-transform:none;color:#67676c;margin-bottom:12px;}
 .sec-title{font-size:40px;font-weight:600;letter-spacing:-.01em;line-height:1.08;color:#1d1d1f;}
-.sec-title em,.hero h1 em,.contact-box h2 em{font-style:normal;color:#6e6e73;}
-.sec-sub{font-size:17px;line-height:1.47;letter-spacing:-.022em;color:#707070;max-width:62ch;}
+.sec-title em,.hero h1 em,.contact-box h2 em{font-style:normal;color:#67676c;}
+.sec-sub{font-size:17px;line-height:1.47;letter-spacing:-.022em;color:#6b6b6b;max-width:62ch;}
 
 /* --- hero --- */
 .hero h1{font-size:clamp(2.5rem,4.7vw,4rem);font-weight:600;letter-spacing:-.015em;line-height:1.06;color:#1d1d1f;text-wrap:balance;}
 .hero h1 .ln{display:block;}
-.hero .lede{font-size:17px;line-height:1.47;letter-spacing:-.022em;color:#707070;max-width:56ch;}
+.hero .lede{font-size:17px;line-height:1.47;letter-spacing:-.022em;color:#6b6b6b;max-width:56ch;}
 .hero .lede strong{color:#1d1d1f;font-weight:600;}
 .role-line{font-size:21px;font-weight:600;letter-spacing:.011em;color:#1d1d1f;}
 .role-line .caret{background:#0066cc;}
@@ -768,24 +768,24 @@ section{padding-top:90px;padding-bottom:90px;}
   background:#ffffff;border:1px solid #d6d6d6;border-radius:28px;box-shadow:none;}
 .card-thumb{background:#f5f5f7;border-radius:20px;}
 .card-body h3{font-size:24px;font-weight:600;letter-spacing:-.01em;color:#1d1d1f;}
-.card-body p{font-size:17px;line-height:1.47;letter-spacing:-.022em;color:#707070;}
-.card:hover{border-color:#6e6e73;transform:none;}
+.card-body p{font-size:17px;line-height:1.47;letter-spacing:-.022em;color:#6b6b6b;}
+.card:hover{border-color:#67676c;transform:none;}
 
 /* --- pills, badges, tags: bare or fully rounded, never both --- */
-.stat-chip .cum{display:block;margin:6px 0 0;padding:0;border:0;background:none;color:#6e6e73;font-size:11px;font-weight:400;letter-spacing:-.01em;text-transform:none;}
-.cum-t{color:#6e6e73;}
+.stat-chip .cum{display:block;margin:6px 0 0;padding:0;border:0;background:none;color:#67676c;font-size:11px;font-weight:400;letter-spacing:-.01em;text-transform:none;}
+.cum-t{color:#67676c;}
 .badge,.badge.hi,.pill,.chips span,.tags span{
-  background:#f5f5f7;color:#707070;border:1px solid #e6e6e8;border-radius:9999px;
+  background:#f5f5f7;color:#6b6b6b;border:1px solid #e6e6e8;border-radius:9999px;
   font-size:12px;font-weight:400;letter-spacing:-.01em;padding:4px 12px;text-transform:none;}
 .badge.hi{background:#ffffff;color:#b64400;border-color:#e6e6e8;}
-.tags span{background:#ffffff;border-color:#e6e6e8;color:#707070;}
+.tags span{background:#ffffff;border-color:#e6e6e8;color:#6b6b6b;}
 
 /* launch status: bare orange text, no pill (reference) */
-.tag-src{background:#f5f5f7;border:1px solid #e6e6e8;border-radius:6px;padding:4px 8px;color:#6e6e73;font-size:10px;font-weight:400;letter-spacing:.04em;}
+.tag-src{background:#f5f5f7;border:1px solid #e6e6e8;border-radius:6px;padding:4px 8px;color:#67676c;font-size:10px;font-weight:400;letter-spacing:.04em;}
 .dot-live{background:#0066cc;}
 .chart-top .big,.stat-chip b,.b-stat .row b{font-family:'SF Pro Display','Inter',sans-serif;color:#1d1d1f;}
-.chart-top .big span,.stat-chip span,.b-stat .row span{color:#6e6e73;}
-.chart-top h4{font-size:14px;font-weight:400;color:#707070;letter-spacing:-.01em;}
+.chart-top .big span,.stat-chip span,.b-stat .row span{color:#67676c;}
+.chart-top h4{font-size:14px;font-weight:400;color:#6b6b6b;letter-spacing:-.01em;}
 
 /* --- hero chart on light --- */
 #heroChart{border-radius:20px;}
@@ -796,20 +796,20 @@ section{padding-top:90px;padding-bottom:90px;}
 .filters button.on{background:#1d1d1f;border-color:#1d1d1f;color:#ffffff;}
 
 /* --- timeline --- */
-.grp span{color:#6e6e73;font-family:'SF Pro Display','Inter',sans-serif;font-size:12px;}
+.grp span{color:#67676c;font-family:'SF Pro Display','Inter',sans-serif;font-size:12px;}
 .grp b{font-size:21px;font-weight:600;color:#1d1d1f;}
-.tl-when{font-size:12px;color:#6e6e73;letter-spacing:-.01em;}
+.tl-when{font-size:12px;color:#67676c;letter-spacing:-.01em;}
 .tl-item h3{font-size:24px;font-weight:600;color:#1d1d1f;}
-.tl-item .where{font-size:14px;color:#707070;letter-spacing:-.016em;}
-.tl-item p{font-size:17px;line-height:1.47;color:#707070;letter-spacing:-.022em;}
+.tl-item .where{font-size:14px;color:#6b6b6b;letter-spacing:-.016em;}
+.tl-item p{font-size:17px;line-height:1.47;color:#6b6b6b;letter-spacing:-.022em;}
 .tl-item{border-color:#e6e6e8;}
 .tl-item .ph{border-radius:20px;}
 
 /* --- bento / about --- */
-.bcard .bt{font-size:12px;color:#6e6e73;letter-spacing:-.01em;}
+.bcard .bt{font-size:12px;color:#67676c;letter-spacing:-.01em;}
 .b-quote blockquote{font-size:24px;line-height:1.33;letter-spacing:-.01em;color:#1d1d1f;}
-.b-quote blockquote em{color:#6e6e73;font-style:normal;}
-.b-quote .sig{color:#6e6e73;}
+.b-quote blockquote em{color:#67676c;font-style:normal;}
+.b-quote .sig{color:#67676c;}
 .step i{background:#f5f5f7;color:#0066cc;border:1px solid #e6e6e8;}
 
 /* --- sentiment detector --- */
@@ -820,11 +820,11 @@ section{padding-top:90px;padding-bottom:90px;}
 .avatar.pos,.avatar.neg{filter:none!important;background:transparent;border-color:transparent;}
 .avatar.pos{--av:#0066cc;}
 .avatar.neg{--av:#b64400;}
-.avatar.neu{--av:#6e6e73;}
+.avatar.neu{--av:#67676c;}
 .verdict{font-family:'SF Pro Display','Inter',sans-serif;font-size:21px;font-weight:600;letter-spacing:-.01em;}
 .verdict.pos{color:#0066cc;}
 .verdict.neg{color:#b64400;}
-.verdict.neu{color:#6e6e73;}
+.verdict.neu{color:#67676c;}
 .meter{background:#e6e6e8;border-radius:9999px;}
 .meter i{background:#0066cc;border-radius:9999px;}
 .preview{background:#f5f5f7;border-radius:20px;color:#1d1d1f;font-size:17px;line-height:1.47;}
@@ -833,24 +833,24 @@ section{padding-top:90px;padding-bottom:90px;}
 .preview .w-flip{background:rgba(0,0,0,.06);color:#1d1d1f;border-radius:4px;}
 .samples button{background:transparent;border:1px solid #d6d6d6;border-radius:9999px;color:#0066cc;font-size:12px;padding:7px 14px;}
 .samples button:hover{background:#ffffff;border-color:#0066cc;}
-.tokens span{background:#f5f5f7;border:1px solid #e6e6e8;border-radius:9999px;color:#707070;font-size:12px;}
+.tokens span{background:#f5f5f7;border:1px solid #e6e6e8;border-radius:9999px;color:#6b6b6b;font-size:12px;}
 .tokens .t-pos{background:rgba(0,102,204,.10);color:#005cba;border-color:rgba(0,102,204,.3);}
 .tokens .t-neg{background:rgba(182,68,0,.10);color:#a63d00;border-color:rgba(182,68,0,.3);}
 #sentText{background:#ffffff;border:1px solid #86868b;border-radius:20px;color:#1d1d1f;
   font-family:'SF Pro Text','Inter',sans-serif;font-size:17px;letter-spacing:-.022em;padding:16px;}
 #sentText:focus{border-color:#0066cc;background:#ffffff;}
-#sentText::placeholder{color:#6e6e73;}
-.sent-label{font-size:12px;color:#6e6e73;letter-spacing:-.01em;}
-.sent-note{font-size:12px;color:#6e6e73;line-height:1.43;}
+#sentText::placeholder{color:#67676c;}
+.sent-label{font-size:12px;color:#67676c;letter-spacing:-.01em;}
+.sent-note{font-size:12px;color:#67676c;line-height:1.43;}
 
 /* --- contact --- */
 .contact-box h2{font-size:40px;font-weight:600;letter-spacing:-.01em;}
-.contact-box p{color:#707070;}
+.contact-box p{color:#6b6b6b;}
 .contact-box .sj-quote p{font-size:21px;line-height:1.33;color:#1d1d1f;letter-spacing:-.01em;}
-.contact-box .sj-quote cite{color:#6e6e73;}
+.contact-box .sj-quote cite{color:#67676c;}
 .c-item{background:#ffffff;border:1px solid #e6e6e8;border-radius:20px;}
-.c-item:hover{border-color:#6e6e73;}
-.c-lbl{font-size:12px;color:#6e6e73;}
+.c-item:hover{border-color:#67676c;}
+.c-lbl{font-size:12px;color:#67676c;}
 .c-val{font-size:14px;color:#1d1d1f;}
 .c-ico{background:#f5f5f7;border:1px solid #e6e6e8;border-radius:12px;}
 
@@ -858,10 +858,10 @@ section{padding-top:90px;padding-bottom:90px;}
 .dt{background:rgba(0,0,0,.5);}
 .dt-panel{background:#ffffff;}
 .dt-panel h3{font-size:28px;font-weight:600;color:#1d1d1f;}
-.dt-when{font-size:12px;color:#6e6e73;}
-.dt-where{font-size:14px;color:#707070;}
-.dt-block h5{font-size:12px;color:#6e6e73;}
-.dt-block li{font-size:17px;line-height:1.47;color:#707070;}
+.dt-when{font-size:12px;color:#67676c;}
+.dt-where{font-size:14px;color:#6b6b6b;}
+.dt-block h5{font-size:12px;color:#67676c;}
+.dt-block li{font-size:17px;line-height:1.47;color:#6b6b6b;}
 .dt-btn{border-radius:9999px;border:1px solid #86868b;color:#1d1d1f;background:transparent;font-size:12px;}
 .dt-btn:hover{background:#f5f5f7;}
 .dt-close,.lb button{background:#f5f5f7;color:#1d1d1f;border:1px solid #e6e6e8;border-radius:9999px;}
@@ -869,19 +869,19 @@ section{padding-top:90px;padding-bottom:90px;}
 .lb img{border-radius:20px;border:0;}
 
 /* --- footer --- */
-footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:12px;letter-spacing:-.01em;}
+footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#67676c;font-size:12px;letter-spacing:-.01em;}
 
 .music{display:none;background:#ffffff;border:1px solid #d6d6d6;color:#1d1d1f;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;}
 .music.ready{display:grid;}
 .music:hover{background:#f5f5f7;border-color:#1d1d1f;color:#1d1d1f;transform:none;}
 .music.playing{background:#f5f5f7;border-color:#0066cc;color:#0066cc;}
-.music::after{background:#ffffff;border:1px solid #d6d6d6;color:#6e6e73;font-size:11px;letter-spacing:-.01em;text-transform:none;padding:5px 9px;}
+.music::after{background:#ffffff;border:1px solid #d6d6d6;color:#67676c;font-size:11px;letter-spacing:-.01em;text-transform:none;padding:5px 9px;}
 .music.pulse::before{display:none;}
 
 /* --- placeholders --- */
 .ph{background:#f5f5f7;border:1px solid #d6d6d6;border-radius:20px;}
-.ph-empty{color:#6e6e73;}
-.ph-empty svg{stroke:#6e6e73;}
+.ph-empty{color:#67676c;}
+.ph-empty svg{stroke:#67676c;}
 
 
 /* --- labels: sentence case, no wide tracking (reference typography) --- */
@@ -890,7 +890,7 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
 .badge.hi,.pill,.filters button,.stat-chip span{
   text-transform:none!important;letter-spacing:-.01em!important;
 }
-.ticker-track span{font-size:14px;color:#6e6e73;}
+.ticker-track span{font-size:14px;color:#67676c;}
 .dt-btn{font-size:12px;font-weight:400;padding:8px 16px;}
 
 
@@ -898,7 +898,7 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
 .c-ig,.c-wa,.c-li,.c-email{color:#1d1d1f!important;}
 .c-item:hover .c-ig,.c-item:hover .c-wa,.c-item:hover .c-li,.c-item:hover .c-email{color:#0066cc!important;}
 .contact-box .sj-quote p{font-style:normal;font-size:21px;line-height:1.33;letter-spacing:-.01em;color:#1d1d1f;}
-.contact-box .sj-quote cite{font-style:normal;text-transform:none;letter-spacing:-.01em;color:#6e6e73;font-size:12px;}
+.contact-box .sj-quote cite{font-style:normal;text-transform:none;letter-spacing:-.01em;color:#67676c;font-size:12px;}
 .contact-box .sj-quote{border-top:1px solid #d6d6d6;}
 
 /* --- laboratorium --- */
@@ -907,7 +907,7 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
 .lab-tabs button{
   flex:1;border:0;background:transparent;border-radius:9999px;cursor:pointer;
   font-family:'SF Pro Text','Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:-.01em;
-  color:#707070;padding:11px 14px;white-space:nowrap;
+  color:#6b6b6b;padding:11px 14px;white-space:nowrap;
   transition:background .22s var(--ease),color .22s var(--ease);
 }
 .lab-tabs button:hover{color:#1d1d1f;}
@@ -918,7 +918,7 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
 .lab-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:20px;align-items:stretch;}
 
 .lab-in{display:flex;flex-direction:column;border-right:1px solid #e6e6e8;padding-right:20px;}
-.lab-in label{display:block;font-size:12px;color:#6e6e73;letter-spacing:-.01em;margin-bottom:6px;}
+.lab-in label{display:block;font-size:12px;color:#67676c;letter-spacing:-.01em;margin-bottom:6px;}
 .lab-in textarea,.lab-in input{
   width:100%;background:#ffffff;border:1px solid #86868b;border-radius:16px;
   padding:11px 14px;font-family:'SF Pro Text','Inter',sans-serif;font-size:14px;line-height:1.5;
@@ -926,12 +926,12 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
 }
 .lab-in textarea{min-height:74px;}
 .lab-in textarea:focus,.lab-in input:focus{outline:2px solid #0066cc;outline-offset:1px;border-color:#0066cc;}
-.lab-in .hint{font-size:11.5px;color:#6e6e73;letter-spacing:-.01em;margin:-8px 0 14px;}
+.lab-in .hint{font-size:11.5px;color:#67676c;letter-spacing:-.01em;margin:-8px 0 14px;}
 .lab-actions{display:flex;gap:10px;flex-wrap:wrap;}
 .lab-actions .btn{padding:11px 20px;font-size:14px;}
 
 .lab-out{background:#f5f5f7;border-radius:20px;padding:20px;min-height:180px;}
-.lab-empty{color:#6e6e73;font-size:14px;line-height:1.55;margin:0;}
+.lab-empty{color:#67676c;font-size:14px;line-height:1.55;margin:0;}
 
 .res-pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:500;
   letter-spacing:-.01em;padding:5px 12px;border-radius:9999px;}
@@ -940,19 +940,19 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
 .res-pill.no{background:rgba(0,0,0,.06);color:#636369;}
 .res-big{font-family:'SF Pro Display','Inter',sans-serif;font-size:clamp(26px,3.4vw,38px);font-weight:600;
   letter-spacing:-.025em;line-height:1;color:#1d1d1f;margin:14px 0 4px;font-variant-numeric:tabular-nums;}
-.res-cap{font-size:12px;color:#6e6e73;letter-spacing:-.01em;}
+.res-cap{font-size:12px;color:#67676c;letter-spacing:-.01em;}
 .res-rows{margin:16px 0 0;padding:0;border-top:1px solid #e6e6e8;}
 .res-rows div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
   padding:9px 0;border-bottom:1px solid #e6e6e8;font-size:13px;}
-.res-rows dt{color:#6e6e73;margin:0;letter-spacing:-.01em;}
+.res-rows dt{color:#67676c;margin:0;letter-spacing:-.01em;}
 .res-rows dd{margin:0;color:#1d1d1f;font-variant-numeric:tabular-nums;text-align:right;letter-spacing:-.01em;}
-.res-note{margin:14px 0 0;font-size:11.5px;line-height:1.55;color:#6e6e73;letter-spacing:-.01em;}
+.res-note{margin:14px 0 0;font-size:11.5px;line-height:1.55;color:#67676c;letter-spacing:-.01em;}
 .res-chart{margin-top:16px;}
 .res-chart svg{display:block;width:100%;height:auto;overflow:visible;}
 
 .res-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:12.5px;}
-.res-table caption{text-align:left;font-size:12px;color:#6e6e73;padding-bottom:8px;letter-spacing:-.01em;}
-.res-table th{text-align:left;font-weight:500;color:#6e6e73;padding:7px 8px 7px 0;
+.res-table caption{text-align:left;font-size:12px;color:#67676c;padding-bottom:8px;letter-spacing:-.01em;}
+.res-table th{text-align:left;font-weight:500;color:#67676c;padding:7px 8px 7px 0;
   border-bottom:1px solid #d6d6d6;letter-spacing:-.01em;white-space:nowrap;}
 .res-table td{padding:7px 8px 7px 0;border-bottom:1px solid #e6e6e8;color:#1d1d1f;
   font-variant-numeric:tabular-nums;letter-spacing:-.01em;}
@@ -962,13 +962,13 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
 .issues{margin:14px 0 0;padding:0;list-style:none;}
 .issues li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #e6e6e8;
   font-size:12.5px;color:#1d1d1f;line-height:1.45;letter-spacing:-.01em;}
-.issues li span:first-child{color:#6e6e73;font-variant-numeric:tabular-nums;min-width:74px;flex:none;}
+.issues li span:first-child{color:#67676c;font-variant-numeric:tabular-nums;min-width:74px;flex:none;}
 
 .ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;}
 .ab-grid input{font-variant-numeric:tabular-nums;}
 
 .res-read{margin-top:16px;padding-top:14px;border-top:1px solid #d6d6d6;}
-.res-read .rl{display:block;font-size:11.5px;color:#6e6e73;letter-spacing:-.01em;margin-bottom:5px;}
+.res-read .rl{display:block;font-size:11.5px;color:#67676c;letter-spacing:-.01em;margin-bottom:5px;}
 .res-read p{margin:0;font-size:13.5px;line-height:1.6;color:#1d1d1f;letter-spacing:-.01em;}
 
 @media(max-width:880px){
@@ -985,6 +985,138 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
   /* di layar sentuh tidak ada kursor, jadi petunjuk hover dibuang
      daripada mendesak keterangan sumber sampai bertabrakan */
   #chartHint{display:none;}
+}
+
+/* ============================================================
+   13 · WARNA
+   Warna di sini membawa informasi, bukan hiasan: tiap bagian
+   memegang satu hue, dan panel sentimen memakai hijau / mawar
+   karena itu arti katanya. Semua pasangan teks di bawah sudah
+   diukur terhadap WCAG AA (>= 4,5:1) di atas #ffffff dan #f5f5f7.
+   ============================================================ */
+:root{
+  --c-blue:#0066cc;    /* aksi dan tautan */
+  --c-teal:#0b6e63;    /* hitungan */
+  --c-violet:#5b3fd1;  /* teks dan bahasa */
+  --c-rose:#b0245c;    /* jejak waktu */
+  --c-amber:#b45309;   /* karya */
+  --c-green:#0b7a3b;
+  --pos:#0b7a3b;       /* sentimen positif */
+  --neg:#b0245c;       /* sentimen negatif */
+  --ac:var(--c-blue);  /* aksen aktif, diwarisi tiap bagian */
+  --ac-t:rgba(0,102,204,.09);
+}
+
+/* --- satu hue per bagian --- */
+.hero,#about,#contact{--ac:var(--c-blue);--ac-t:rgba(0,102,204,.09);}
+#sentiment{--ac:var(--c-violet);--ac-t:rgba(91,63,209,.09);}
+#lab{--ac:var(--c-teal);--ac-t:rgba(11,110,99,.09);}
+#work{--ac:var(--c-amber);--ac-t:rgba(180,83,9,.08);}
+#journey{--ac:var(--c-rose);--ac-t:rgba(176,36,92,.08);}
+
+.eyebrow{color:var(--ac);}
+.eyebrow::before{width:20px;background:var(--ac);}
+.sec-title em,.hero h1 em,.contact-box h2 em{color:var(--ac);}
+.sec-title em,.hero h1 em{transition:color .3s var(--ease);}
+
+/* bilah kemajuan: lima hue, urutan yang sama dengan bagian halaman */
+.progress{height:3px;background:linear-gradient(90deg,#0066cc,#0b6e63,#5b3fd1,#b0245c,#9a5b00);}
+
+/* --- hero: cuci warna tipis, bukan gradien dekoratif --- */
+/* pita bagian: satu cuci warna per bagian, cukup pekat untuk terlihat
+   sebagai warna, cukup pucat untuk menjaga teks abu tetap di atas 4,5:1 */
+#sentiment{background:#f4f2fc;}
+#lab{background:#eef5f4;}
+#about{background:#ffffff;}
+#work{background:#faf5f0;}
+#journey{background:#faf2f5;}
+#contact{background:#ffffff;}
+
+.hero{
+  background:
+    radial-gradient(1250px 560px at 14% -6%, rgba(91,63,209,.15), transparent 70%),
+    radial-gradient(980px 520px at 88% 104%, rgba(11,110,99,.13), transparent 70%),
+    radial-gradient(720px 420px at 50% 46%, rgba(0,102,204,.05), transparent 72%),
+    #ffffff;
+}
+.pill{background:rgba(91,63,209,.07);border-color:rgba(91,63,209,.22);}
+.dot-live{background:var(--c-violet);}
+
+/* tiga chip: warna ada di keterangan, angkanya tetap tinta */
+.hero-stats .stat-chip:nth-child(1) span{color:var(--c-blue);}
+.hero-stats .stat-chip:nth-child(2) span{color:var(--c-teal);}
+.hero-stats .stat-chip:nth-child(3) span{color:var(--c-violet);}
+.hero-stats .stat-chip:nth-child(1){border-color:rgba(0,102,204,.26);}
+.hero-stats .stat-chip:nth-child(2){border-color:rgba(11,110,99,.26);}
+.hero-stats .stat-chip:nth-child(3){border-color:rgba(91,63,209,.26);}
+
+/* kartu grafik: dua cuci warna sudut, garis tetap satu warna */
+.chart-card{
+  background:
+    radial-gradient(120% 92% at 100% 0%, rgba(91,63,209,.07), transparent 58%),
+    radial-gradient(92% 80% at 0% 100%, rgba(11,110,99,.06), transparent 60%),
+    #ffffff;
+  border-color:#e2e2e6;
+}
+
+/* --- sentimen: hijau dan mawar, karena itu arti kalimatnya --- */
+.avatar.pos{--av:var(--pos);}
+.avatar.neg{--av:var(--neg);}
+/* wajahnya ikut warna, bukan tetap tinta: ini sinyal, bukan hiasan */
+.avatar .av-head{stroke:var(--av,#1d1d1f);}
+.avatar .av-eye,.avatar .av-mouth{stroke:var(--av,#1d1d1f);}
+.verdict.pos{color:var(--pos);}
+.verdict.neg{color:var(--neg);}
+.preview .w-pos{background:rgba(11,122,59,.12);color:#0a6b34;}
+.preview .w-neg{background:rgba(176,36,92,.10);color:#9c1f50;}
+.tokens .t-pos{background:rgba(11,122,59,.10);color:#0a6b34;border-color:rgba(11,122,59,.28);}
+.tokens .t-neg{background:rgba(176,36,92,.09);color:#9c1f50;border-color:rgba(176,36,92,.26);}
+#sentiment .samples button{color:var(--ac);border-color:rgba(91,63,209,.32);}
+#sentiment .samples button:hover{background:rgba(91,63,209,.06);border-color:var(--ac);}
+
+/* --- laboratorium: tab aktif dan label bacaan memakai teal --- */
+.lab-tabs button.on{background:var(--c-teal);color:#ffffff;}
+.lab-tabs button:hover{color:var(--c-teal);}
+.lab-tabs button.on:hover{color:#ffffff;}
+.res-read{border-left:3px solid var(--ac);padding-left:14px;}
+.res-read .rl{color:var(--ac);}
+.res-big{color:#1d1d1f;}
+
+/* --- karya: satu hue per kartu, ilustrasi ikut berganti --- */
+#work .card:nth-child(1){--tc:var(--c-blue);--tc-t:rgba(0,102,204,.06);}
+#work .card:nth-child(2){--tc:var(--c-teal);--tc-t:rgba(11,110,99,.07);}
+#work .card:nth-child(3){--tc:var(--c-violet);--tc-t:rgba(91,63,209,.06);}
+.card-thumb{background:var(--tc-t);}
+#work .card:hover{border-color:var(--tc);}
+#work .card svg [fill="#0066cc"],#work .card svg [fill="#0071e3"]{fill:var(--tc);}
+#work .card svg [stroke="#0066cc"],#work .card svg [stroke="#0071e3"]{stroke:var(--tc);}
+#work .badge.hi{background:rgba(180,83,9,.10);color:#8a5100;border-color:rgba(180,83,9,.24);}
+
+/* --- perjalanan: tanggal dan titik terdepan memakai mawar --- */
+#journey .tl-when{color:var(--ac);}
+#journey .grp span{color:var(--ac);}
+#journey .tl-item::before{border-color:rgba(176,36,92,.45);box-shadow:0 0 0 4px rgba(176,36,92,.06);}
+#journey .tl-item:first-child::before{background:var(--ac);border-color:var(--ac);box-shadow:0 0 0 4px rgba(176,36,92,.14);}
+
+/* --- permukaan netral ikut tint bagiannya, bukan abu-abu seragam --- */
+.hero,#about,#contact{--ac-w:rgba(0,102,204,.05);}
+#sentiment{--ac-w:rgba(91,63,209,.06);}
+#lab{--ac-w:rgba(11,110,99,.06);}
+#work{--ac-w:rgba(180,83,9,.05);}
+#journey{--ac-w:rgba(176,36,92,.05);}
+.bcard,.lab-out,.preview{background:var(--ac-w);}
+.lab-out .res-rows div,.lab-out .res-table td{border-bottom-color:rgba(0,0,0,.07);}
+.bcard{border-color:rgba(0,0,0,.10);}
+/* slot foto di atas pita mawar: abu netral akan tampak kehijauan
+   karena kontras serentak, jadi dibuat putih saja */
+#journey .ph{background:#ffffff;border-color:rgba(0,0,0,.11);}
+
+/* --- kontak: cuci warna, tombol tetap biru karena biru berarti aksi --- */
+#contact .contact-box{
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(91,63,209,.07), transparent 58%),
+    radial-gradient(100% 90% at 100% 100%, rgba(11,110,99,.06), transparent 60%),
+    #ffffff;
 }
 
 /* --- motion: calm opacity only --- */
@@ -1858,7 +1990,7 @@ $$('.rv').forEach(el=>rvObs.observe(el));
       if(yy < PAD.t-1 || yy > H-PAD.b+1) return;
       ctx.strokeStyle='rgba(0,0,0,.055)'; ctx.lineWidth=1;
       ctx.beginPath(); ctx.moveTo(PAD.l,yy); ctx.lineTo(W-PAD.r+5,yy); ctx.stroke();
-      ctx.fillStyle='#6e6e73';
+      ctx.fillStyle='#67676c';
       ctx.fillText(nf0(tv), W-2, yy);
     });
 
@@ -1886,7 +2018,7 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     ctx.font = '10px "SF Pro Text", Inter, sans-serif';
     for(let i=0;i<n;i++){
       if(DATA[i].ym.slice(5) === '01'){
-        ctx.fillStyle='#6e6e73';
+        ctx.fillStyle='#67676c';
         ctx.fillText(DATA[i].ym.slice(0,4), X(i), H-PAD.b+15);
       }
     }
@@ -2147,7 +2279,9 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     const pct = Math.abs(r.val)*50;
     fill.style.width = pct+'%';
     fill.style.left = r.val>=0 ? '50%' : (50-pct)+'%';
-    fill.style.background = state==='pos' ? 'var(--lime)' : state==='neg' ? 'var(--pink)' : 'var(--dim)';
+    /* meter memakai warna semantik, bukan aksen bagian: hijau dan mawar
+       di sini berarti positif dan negatif, bukan sekadar hiasan */
+    fill.style.background = state==='pos' ? 'var(--pos)' : state==='neg' ? 'var(--neg)' : 'var(--dim)';
 
     tokens.innerHTML = r.hits.slice(0,8).map(h=>
       '<span class="'+(h.v>0?'t-pos':'t-neg')+'">'+h.w+' '+(h.v>0?'+':'')+h.v.toFixed(1).replace('.0','').replace('.',',')+'</span>'
@@ -2656,8 +2790,8 @@ $$('.bcard').forEach(card=>{
     const ma=X(mean(A)), mb=X(mean(B));
     s+='<line x1="'+ma.toFixed(1)+'" y1="25" x2="'+ma.toFixed(1)+'" y2="47" stroke="#0066cc" stroke-width="2.5" stroke-linecap="round"/>';
     s+='<line x1="'+mb.toFixed(1)+'" y1="67" x2="'+mb.toFixed(1)+'" y2="89" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>';
-    s+='<text x="4" y="40" font-size="11" fill="#6e6e73" font-family="Inter,sans-serif">A</text>';
-    s+='<text x="4" y="82" font-size="11" fill="#6e6e73" font-family="Inter,sans-serif">B</text>';
+    s+='<text x="4" y="40" font-size="11" fill="#67676c" font-family="Inter,sans-serif">A</text>';
+    s+='<text x="4" y="82" font-size="11" fill="#67676c" font-family="Inter,sans-serif">B</text>';
     s+='</svg>';
     return '<div class="res-chart">'+s+'</div>';
   }
@@ -2714,14 +2848,14 @@ $$('.bcard').forEach(card=>{
     const y=54;
     const pct1=v=>fmt(v*100,1);
     let s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Selisih konversi dan selang kepercayaannya">';
-    s+='<line x1="'+X(0).toFixed(1)+'" y1="30" x2="'+X(0).toFixed(1)+'" y2="78" stroke="#6e6e73" stroke-width="1" stroke-dasharray="3 3"/>';
-    s+='<text x="'+X(0).toFixed(1)+'" y="92" font-size="10" fill="#6e6e73" text-anchor="middle" font-family="Inter,sans-serif">0</text>';
+    s+='<line x1="'+X(0).toFixed(1)+'" y1="30" x2="'+X(0).toFixed(1)+'" y2="78" stroke="#67676c" stroke-width="1" stroke-dasharray="3 3"/>';
+    s+='<text x="'+X(0).toFixed(1)+'" y="92" font-size="10" fill="#67676c" text-anchor="middle" font-family="Inter,sans-serif">0</text>';
     s+='<line x1="'+X(r.lo).toFixed(1)+'" y1="'+y+'" x2="'+X(r.hi).toFixed(1)+'" y2="'+y+'" stroke="#0066cc" stroke-width="3" stroke-linecap="round"/>';
     s+='<line x1="'+X(r.lo).toFixed(1)+'" y1="'+(y-8)+'" x2="'+X(r.lo).toFixed(1)+'" y2="'+(y+8)+'" stroke="#0066cc" stroke-width="2"/>';
     s+='<line x1="'+X(r.hi).toFixed(1)+'" y1="'+(y-8)+'" x2="'+X(r.hi).toFixed(1)+'" y2="'+(y+8)+'" stroke="#0066cc" stroke-width="2"/>';
     s+='<circle cx="'+X(r.d).toFixed(1)+'" cy="'+y+'" r="5" fill="#ffffff" stroke="#0066cc" stroke-width="2.5"/>';
-    s+='<text x="'+X(r.lo).toFixed(1)+'" y="24" font-size="10" fill="#6e6e73" text-anchor="middle" font-family="Inter,sans-serif">'+pct1(r.lo)+'</text>';
-    s+='<text x="'+X(r.hi).toFixed(1)+'" y="24" font-size="10" fill="#6e6e73" text-anchor="middle" font-family="Inter,sans-serif">'+pct1(r.hi)+'</text>';
+    s+='<text x="'+X(r.lo).toFixed(1)+'" y="24" font-size="10" fill="#67676c" text-anchor="middle" font-family="Inter,sans-serif">'+pct1(r.lo)+'</text>';
+    s+='<text x="'+X(r.hi).toFixed(1)+'" y="24" font-size="10" fill="#67676c" text-anchor="middle" font-family="Inter,sans-serif">'+pct1(r.hi)+'</text>';
     s+='</svg>';
     return '<div class="res-chart">'+s+'</div>';
   }
@@ -2770,7 +2904,7 @@ $$('.bcard').forEach(card=>{
     for(let g=0;g<=3;g++){
       const v=y0+(y1-y0)*g/3, y=Y(v).toFixed(1);
       s+='<line x1="'+L+'" y1="'+y+'" x2="'+(W-R)+'" y2="'+y+'" stroke="#e6e6e8" stroke-width="1"/>';
-      s+='<text x="'+(L-8)+'" y="'+(+y+4)+'" font-size="10" fill="#6e6e73" text-anchor="end" font-family="Inter,sans-serif">'+v.toFixed(0)+'</text>';
+      s+='<text x="'+(L-8)+'" y="'+(+y+4)+'" font-size="10" fill="#67676c" text-anchor="end" font-family="Inter,sans-serif">'+v.toFixed(0)+'</text>';
     }
 
     /* pita prediksi 95% */
@@ -2812,12 +2946,12 @@ $$('.bcard').forEach(card=>{
 
     /* sumbu x */
     s+='<line x1="'+L+'" y1="'+(H-Bm)+'" x2="'+(W-R)+'" y2="'+(H-Bm)+'" stroke="#d6d6d6" stroke-width="1"/>';
-    s+='<text x="'+L+'" y="'+(H-9)+'" font-size="10" fill="#6e6e73" text-anchor="start" font-family="Inter,sans-serif">'+xFirst+'</text>';
+    s+='<text x="'+L+'" y="'+(H-9)+'" font-size="10" fill="#67676c" text-anchor="start" font-family="Inter,sans-serif">'+xFirst+'</text>';
     if(future.length){
-      s+='<text x="'+X(xLast).toFixed(1)+'" y="'+(H-9)+'" font-size="10" fill="#6e6e73" text-anchor="middle" font-family="Inter,sans-serif">'+xLast+'</text>';
-      s+='<text x="'+(W-R)+'" y="'+(H-9)+'" font-size="10" fill="#6e6e73" text-anchor="end" font-family="Inter,sans-serif">'+xEnd+'</text>';
+      s+='<text x="'+X(xLast).toFixed(1)+'" y="'+(H-9)+'" font-size="10" fill="#67676c" text-anchor="middle" font-family="Inter,sans-serif">'+xLast+'</text>';
+      s+='<text x="'+(W-R)+'" y="'+(H-9)+'" font-size="10" fill="#67676c" text-anchor="end" font-family="Inter,sans-serif">'+xEnd+'</text>';
     } else {
-      s+='<text x="'+(W-R)+'" y="'+(H-9)+'" font-size="10" fill="#6e6e73" text-anchor="end" font-family="Inter,sans-serif">'+xLast+'</text>';
+      s+='<text x="'+(W-R)+'" y="'+(H-9)+'" font-size="10" fill="#67676c" text-anchor="end" font-family="Inter,sans-serif">'+xLast+'</text>';
     }
     s+='</svg>';
     return '<div class="res-chart">'+s+'</div>';
