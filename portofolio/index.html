@@ -217,7 +217,8 @@ header.nav.stuck{
 .chart-top .big{font-family:'SF Pro Display','Inter',-apple-system,sans-serif;font-size:1.9rem;letter-spacing:-.03em;margin-top:4px;}
 .chart-top .big span{font-size:12px;color:var(--mute);font-family:'Inter';letter-spacing:0;margin-left:6px;}
 /* konvensi pasar Indonesia: naik merah, turun hijau */
-.chart-top .chg{font-size:11px;font-weight:500;letter-spacing:-.005em;margin-top:7px;display:inline-block;}
+.chart-top .chg{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:-.005em;margin-top:7px;min-height:16px;}
+.chart-top .chg .sep{color:#c7c7cc;font-weight:400;}
 .chg-down{color:#0b7a3b;}
 .chg-up{color:#b3261e;}
 .tag-src{
@@ -1056,7 +1057,7 @@ footer{background:#f5f5f7;border-top:1px solid #d6d6d6;color:#6e6e73;font-size:1
         <div>
           <h4>IHSG · Jakarta Composite</h4>
           <div class="big" id="chartBig">5.057,05<span>poin · Okt 2026</span></div>
-          <div class="chg chg-down" id="chartChg">&minus;41,5% YTD</div>
+          <div class="chg" id="chartStats"><span class="chg-up">+0,8% hari ini</span><span class="sep">&middot;</span><span class="chg-down">&minus;41,5% YTD</span></div>
         </div>
         <div class="tag-src">IDX</div>
       </div>
@@ -1760,8 +1761,10 @@ $$('.rv').forEach(el=>rvObs.observe(el));
      Hanya bulan yang sudah selesai yang diplot: titik November 2026 baru
      berisi satu hari bursa, jadi tidak sebanding dengan bulan penuh.
      Dua angka kunci sudah dicek silang dengan pemberitaan dan cocok:
-     tutup 30 Des 2025 = 8.646,94 dan tutup 30 Okt 2026 = 5.057,05. */
-  const DATA = [
+     tutup 30 Des 2025 = 8.646,94 dan tutup 30 Okt 2026 = 5.057,05.
+     Angka di bawah ini adalah cadangan: kalau data live gagal diambil,
+     grafik tetap tampil dengan snapshot ini, bukan kosong. */
+  let DATA = [
     {ym:'2023-12', v:7272.80},
     {ym:'2024-01', v:7207.94},
     {ym:'2024-02', v:7316.11},
@@ -1798,12 +1801,23 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     {ym:'2026-09', v:6071.14},
     {ym:'2026-10', v:5057.05}
   ];
-  const V = DATA.map(d => d.v);
   const MO = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
   const nf0 = v => Math.round(v).toLocaleString('id-ID');
   const nf2 = v => v.toLocaleString('id-ID',{minimumFractionDigits:2,maximumFractionDigits:2});
   const lab = d => MO[+d.ym.slice(5,7)-1]+' '+d.ym.slice(0,4);
-  const BASE = DATA.findIndex(d => d.ym === '2025-12');  /* acuan tahun berjalan */
+  let V, min, max, STEP, TICKS, BASE;
+
+  /* skala dihitung ulang tiap deret berganti, yaitu saat data live masuk */
+  function recompute(){
+    V = DATA.map(d => d.v);
+    min = Math.min.apply(null,V)*0.985;
+    max = Math.max.apply(null,V)*1.015;
+    STEP = niceStep(max-min, 5);
+    TICKS = [];
+    for(let t = Math.ceil(min/STEP)*STEP; t <= max; t += STEP) TICKS.push(t);
+    BASE = DATA.findIndex(d => d.ym === '2025-12');  /* acuan tahun berjalan */
+  }
+  recompute();
   let W=0,H=0,hover=-1,prog=1;
 
   function resize(){
@@ -1817,7 +1831,6 @@ $$('.rv').forEach(el=>rvObs.observe(el));
   /* Indeks tidak wajar diukur dari nol: 5.000 sampai 8.600 cuma sebagian
      kecil rentang di atas nol. Sumbu dipangkas, tapi tiap garis bantu
      diberi label nilai supaya skalanya tetap terbaca dan tidak menipu. */
-  const min = Math.min.apply(null,V)*0.985, max = Math.max.apply(null,V)*1.015;
   const X = i => PAD.l + (i/(DATA.length-1))*(W-PAD.l-PAD.r);
   const Y = v => PAD.t + (1-(v-min)/(max-min))*(H-PAD.t-PAD.b);
 
@@ -1826,11 +1839,8 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     const raw = range/target, mag = Math.pow(10, Math.floor(Math.log10(raw))), norm = raw/mag;
     return (norm<=1?1:norm<=2?2:norm<=5?5:10)*mag;
   }
-  const STEP = niceStep(max-min, 5);
-  const TICKS = [];
-  for(let t = Math.ceil(min/STEP)*STEP; t <= max; t += STEP) TICKS.push(t);
 
-  const chgEl = $('#chartChg');
+  const statsEl = $('#chartStats');
   function chgParts(p){
     const neg = p < 0;
     return {cls: neg ? 'chg-down' : 'chg-up',
@@ -1896,13 +1906,60 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     if(prog<1) requestAnimationFrame(animate);
   }
 
+  /* ---------------- data live ----------------
+     Yahoo tidak mengirim header CORS, jadi browser tidak bisa memanggilnya
+     langsung dari halaman ini. Yang dibaca di sini adalah salinan yang
+     diterbitkan .github/workflows/ihsg.yml ke branch ihsg-data, dan
+     raw.githubusercontent mengirim Access-Control-Allow-Origin: * sehingga
+     aman dipanggil dari domain mana pun.
+     Kalau gagal, grafik memakai angka cadangan di atas dan label sumber
+     berubah jadi tanggal, bukan pura-pura segar. */
+  const LIVE_URL = window.__IHSG_JSON__ ||
+    'https://raw.githubusercontent.com/andiuliarahman/PortofolioAndi/ihsg-data/ihsg.json';
+  let quote = null, fails = 0, timer = 0;
+
+  /* jam pakai titik dua, bukan titik desimal, supaya "16:00" tidak
+     terbaca sebagai angka enam belas koma nol */
+  const clock = iso => new Date(iso).toLocaleTimeString('id-ID',
+    {hour:'2-digit', minute:'2-digit', timeZone:'Asia/Jakarta'}).replace('.', ':');
+  const dayMonth = iso => new Date(iso).toLocaleDateString('id-ID',
+    {day:'numeric', month:'short', timeZone:'Asia/Jakarta'});
+
+  function paintStats(){
+    const last = DATA.length-1;
+    if(hover >= 0){
+      /* titik pertama tidak punya bulan pembanding, jadi dikosongkan */
+      if(hover === 0){ statsEl.innerHTML = ''; return; }
+      const s = chgParts((V[hover]/V[hover-1]-1)*100);
+      statsEl.innerHTML = '<span class="'+s.cls+'">'+s.txt+' MoM</span>';
+      return;
+    }
+    const p = quote ? quote.price : V[last];
+    const prev = (quote && quote.prevClose) ? quote.prevClose : V[last-1];
+    const base = BASE >= 0 ? V[BASE] : V[0];
+    const a = chgParts((p/prev-1)*100), b = chgParts((p/base-1)*100);
+    const aLab = quote ? 'hari ini' : lab(DATA[last]);
+    statsEl.innerHTML =
+      '<span class="'+a.cls+'">'+a.txt+' '+aLab+'</span>' +
+      '<span class="sep">\u00b7</span>' +
+      '<span class="'+b.cls+'">'+b.txt+' YTD</span>';
+  }
+
+  /* keterangan waktu menempel pada angka yang diterangkannya. Kalau data
+     sudah lebih dari 36 jam (misalnya akhir pekan), jamnya diganti tanggal
+     supaya tidak terkesan baru. */
+  function stampOf(){
+    if(!quote || !quote.time) return lab(DATA[DATA.length-1]);
+    const ageH = (Date.now() - new Date(quote.time).getTime())/36e5;
+    return ageH < 36 ? clock(quote.time) : dayMonth(quote.time);
+  }
+
   function reset(){
-    const last = DATA.length-1, s = chgParts((V[last]/V[BASE]-1)*100);
-    big.innerHTML = nf2(V[last])+'<span>poin · '+lab(DATA[last])+'</span>';
+    const last = DATA.length-1;
+    const val = quote ? quote.price : V[last];
+    big.innerHTML = nf2(val)+'<span>poin \u00b7 '+stampOf()+'</span>';
     hint.textContent = 'geser kursor ke grafik';
-    chgEl.style.visibility = 'visible';
-    chgEl.className = 'chg '+s.cls;
-    chgEl.textContent = s.txt+' YTD';
+    paintStats();
   }
 
   function move(e){    const r = c.getBoundingClientRect();
@@ -1914,30 +1971,56 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     tip.style.left = px+'px'; tip.style.top = Math.max(48,py)+'px'; tip.style.opacity = 1;
     tip.querySelector('b').textContent = nf2(V[hover]);
     tip.querySelector('span').textContent = lab(d);
-    big.innerHTML = nf2(V[hover])+'<span>poin · '+lab(d)+'</span>';
+    big.innerHTML = nf2(V[hover])+'<span>poin \u00b7 '+lab(d)+'</span>';
     hint.textContent = 'menampilkan '+lab(d);
     /* perubahan selalu dibanding bulan sebelumnya, jadi angkanya tidak
        pernah menempel pada nilai yang sedang tidak ditampilkan */
-    if(hover > 0){
-      const s = chgParts((V[hover]/V[hover-1]-1)*100);
-      chgEl.style.visibility = 'visible';
-      chgEl.className = 'chg '+s.cls;
-      chgEl.textContent = s.txt+' MoM';
-    }else{
-      /* titik pertama tidak punya bulan pembanding: kosongkan isinya,
-         jangan cuma disembunyikan, supaya tidak ada teks lama yang
-         tertinggal untuk pembaca layar */
-      chgEl.className = 'chg';
-      chgEl.textContent = '';
-      chgEl.style.visibility = 'hidden';
-    }
+    paintStats();
   }
   c.addEventListener('mousemove', move);
   c.addEventListener('mouseleave', ()=>{
     hover=-1; tip.style.opacity=0; draw(); reset();
   });
 
+  function apply(d){
+    if(!d) return;
+    if(d.quote && d.quote.price > 0) quote = d.quote;
+    if(Array.isArray(d.monthly) && d.monthly.length > 5){
+      const sig = d.monthly.map(x => x.ym+':'+x.v).join('|');
+      if(sig !== DATA.map(x => x.ym+':'+x.v).join('|')){
+        DATA = d.monthly.map(x => ({ym:String(x.ym), v:Number(x.v)}));
+        recompute();
+        if(hover >= DATA.length) hover = -1;
+        draw();
+      }
+    }
+    if(hover < 0) reset(); else paintStats();
+  }
+
+  function pull(){
+    fetch(LIVE_URL + (LIVE_URL.indexOf('?') < 0 ? '?' : '&') + 't=' + Date.now(),
+          {cache:'no-store'})
+      .then(r => { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(d => { fails = 0; apply(d); })
+      .catch(() => { fails++; })
+      .then(() => { schedule(); });
+  }
+
+  /* sekali semenit selama tab terlihat. Kalau gagal, jeda dilipatkan
+     supaya server tidak dihajar terus saat sedang bermasalah. */
+  function schedule(){
+    clearTimeout(timer);
+    if(document.hidden) return;
+    timer = setTimeout(pull,
+      fails ? Math.min(60000*Math.pow(2,Math.min(fails,4)), 600000) : 60000);
+  }
+  document.addEventListener('visibilitychange', ()=>{
+    if(document.hidden){ clearTimeout(timer); }
+    else { clearTimeout(timer); pull(); }
+  });
+
   resize(); reset(); draw();
+  pull();
   addEventListener('resize', ()=>{ resize(); draw(); });
 })();
 

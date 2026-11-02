@@ -1,0 +1,75 @@
+name: Perbarui data IHSG
+
+# GitHub tidak mengizinkan jadwal lebih rapat dari 5 menit, dan dalam praktik
+# sering mundur beberapa menit. Jadi angka di halaman bisa tertinggal 5-15
+# menit; itu sebabnya halaman selalu menampilkan jam datanya, bukan mengaku
+# "real-time".
+#
+# Jam bursa IDX 09:00-16:00 WIB = 02:00-09:00 UTC, Senin-Jumat.
+on:
+  schedule:
+    - cron: "*/5 2-9 * * 1-5"   # sepanjang sesi bursa
+    - cron: "15 9 * * 1-5"      # satu kali setelah penutupan, untuk harga final
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ihsg
+  cancel-in-progress: true
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ambil data
+        run: |
+          cd "$RUNNER_TEMP"
+          python3 "$GITHUB_WORKSPACE/.github/scripts/fetch_ihsg.py"
+
+      - name: Bandingkan dengan yang sudah terbit
+        id: diff
+        run: |
+          set +e
+          curl -fsS --max-time 20 \
+            "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/ihsg-data/ihsg.json" \
+            -o "$RUNNER_TEMP/prev.json"
+          if [ ! -s "$RUNNER_TEMP/prev.json" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          python3 - "$RUNNER_TEMP/prev.json" "$RUNNER_TEMP/ihsg.json" <<'PY'
+          import json, sys
+          def core(p):
+              d = json.load(open(p, encoding="utf-8"))
+              return (d.get("quote", {}).get("price"), d.get("monthly"))
+          a, b = core(sys.argv[1]), core(sys.argv[2])
+          print("sama" if a == b else "berubah")
+          open(sys.argv[1] + ".flag", "w").write("1" if a == b else "0")
+          PY
+          if [ "$(cat "$RUNNER_TEMP/prev.json.flag")" = "1" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Terbitkan ke branch ihsg-data
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          cd "$RUNNER_TEMP"
+          git init -q
+          git config user.name  "ihsg-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git checkout -q --orphan ihsg-data
+          git add ihsg.json
+          git commit -q -m "IHSG $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          # force-push: branch ini selalu tepat satu commit, jadi riwayat
+          # portofolio tidak menggelembung oleh pembaruan tiap lima menit
+          git push -f -q \
+            "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
+            ihsg-data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
