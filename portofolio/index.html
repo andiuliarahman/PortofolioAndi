@@ -1849,6 +1849,9 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     {hour:'2-digit', minute:'2-digit', timeZone:'Asia/Jakarta'}).replace('.', ':');
   const dayMonth = iso => new Date(iso).toLocaleDateString('id-ID',
     {day:'numeric', month:'short', timeZone:'Asia/Jakarta'});
+  /* tanggal kalender Jakarta, untuk memutuskan apakah data ini "hari ini" */
+  const jakartaDay = iso => new Date(iso).toLocaleDateString('en-CA',{timeZone:'Asia/Jakarta'});
+  const isToday = iso => !!iso && jakartaDay(iso) === jakartaDay(new Date().toISOString());
 
   function paintStats(){
     const last = DATA.length-1;
@@ -1863,7 +1866,12 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     const prev = (quote && quote.prevClose) ? quote.prevClose : V[last-1];
     const base = BASE >= 0 ? V[BASE] : V[0];
     const a = chgParts((p/prev-1)*100), b = chgParts((p/base-1)*100);
-    const aLab = quote ? 'hari ini' : lab(DATA[last]);
+    /* "hari ini" hanya boleh dipakai kalau tanggalnya memang hari ini.
+       Kalau tidak, labelnya menyebut tanggal, karena pasar tutup dan
+       angkanya milik sesi sebelumnya. */
+    const aLab = quote
+      ? (isToday(quote.time) ? 'hari ini' : 'per '+dayMonth(quote.time))
+      : lab(DATA[last]);
     statsEl.innerHTML =
       '<span class="'+a.cls+'">'+a.txt+' '+aLab+'</span>' +
       '<span class="sep">\u00b7</span>' +
@@ -1871,12 +1879,11 @@ $$('.rv').forEach(el=>rvObs.observe(el));
   }
 
   /* keterangan waktu menempel pada angka yang diterangkannya. Kalau data
-     sudah lebih dari 36 jam (misalnya akhir pekan), jamnya diganti tanggal
+     bukan dari hari ini (misalnya akhir pekan), jamnya diganti tanggal
      supaya tidak terkesan baru. */
   function stampOf(){
     if(!quote || !quote.time) return lab(DATA[DATA.length-1]);
-    const ageH = (Date.now() - new Date(quote.time).getTime())/36e5;
-    return ageH < 36 ? clock(quote.time) : dayMonth(quote.time);
+    return isToday(quote.time) ? clock(quote.time) : dayMonth(quote.time);
   }
 
   function reset(){
