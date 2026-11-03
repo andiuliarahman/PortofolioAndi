@@ -1340,68 +1340,6 @@ footer{background:var(--paper-2)!important;border-top:2px solid var(--ink)!impor
 }
 .music.pulse::before{border:1.5px solid var(--brick)!important;border-radius:4px!important;}
 
-/* ============================================================
-   17 · KURSOR
-   Kursor bawaan diganti puck siku bertepi tinta: kotak kecil di
-   atas permukaan, kotak bata di atas tautan, batang tegak di atas
-   teks. Satu kotak gema menyusul lebih lambat supaya geraknya
-   terasa hidup, bukan kaku. Di atas grafik dan kolom isian puck
-   menyingkir dan kursor asli kembali, karena di situ presisi lebih
-   penting daripada gaya.
-   Hanya hidup di perangkat berpenunjuk presisi, dan mati total
-   bila pengguna meminta gerak dikurangi.
-   ============================================================ */
-#cur,#curE{
-  position:fixed;left:0;top:0;z-index:9999;pointer-events:none;
-  opacity:0;transform:translate3d(-200px,-200px,0);will-change:transform;
-}
-#cur{
-  width:16px;height:16px;margin:-8px 0 0 -8px;
-  border:2px solid var(--ink);border-radius:3px;background:var(--paper);
-  box-shadow:0 0 0 1.5px rgba(250,248,243,.92);
-  transition:width .18s var(--ease),height .18s var(--ease),margin .18s var(--ease),
-             border-radius .18s,background .18s,border-color .18s,opacity .12s;
-}
-#cur::after{
-  content:'';position:absolute;left:50%;top:50%;width:4px;height:4px;margin:-2px 0 0 -2px;
-  background:var(--ink);transition:opacity .12s,width .12s,height .12s,margin .12s,background .12s;
-}
-#curE{
-  width:30px;height:30px;margin:-15px 0 0 -15px;
-  border:1.5px solid rgba(29,29,31,.30);border-radius:4px;
-  box-shadow:0 0 0 1.5px rgba(250,248,243,.75);
-  transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease),
-             border-color .3s,opacity .2s;
-}
-html.cur-live #cur,html.cur-live #curE{opacity:1;}
-html.cur-off #cur,html.cur-off #curE{opacity:0!important;}
-
-/* sembunyikan kursor asli hanya saat efeknya benar-benar jalan */
-html.cur-on,html.cur-on *{cursor:none!important;}
-html.cur-on.cur-off,html.cur-on.cur-off *{cursor:auto!important;}
-html.cur-on #heroChart,html.cur-on.cur-off #heroChart{cursor:crosshair!important;}
-html.cur-on input,html.cur-on textarea,html.cur-on select,
-html.cur-on.cur-off input,html.cur-on.cur-off textarea,html.cur-on.cur-off select{cursor:text!important;}
-
-/* keadaan: tautan, teks, tekan */
-#cur.is-link{width:18px;height:18px;margin:-9px 0 0 -9px;}
-#cur.is-link::after{width:6px;height:6px;margin:-3px 0 0 -3px;background:var(--brick);}
-#curE.is-link{width:56px;height:56px;margin:-28px 0 0 -28px;border-color:rgba(29,29,31,.62);}
-#cur.is-text{
-  width:2px;height:20px;margin:-10px 0 0 -1px;
-  border:0;border-radius:0;background:var(--ink);
-  box-shadow:0 0 0 1.5px rgba(250,248,243,.85);
-}
-#cur.is-text::after{opacity:0;}
-#curE.is-text{opacity:0!important;}
-#cur.is-down{width:12px;height:12px;margin:-6px 0 0 -6px;background:var(--brick);border-color:var(--ink);}
-#cur.is-down::after{background:var(--paper);}
-
-@media (hover:none),(pointer:coarse){
-  #cur,#curE{display:none;}
-  html.cur-on,html.cur-on *{cursor:auto!important;}
-}
-
 </style>
 </head>
 <body>
@@ -1961,9 +1899,6 @@ html.cur-on.cur-off input,html.cur-on.cur-off textarea,html.cur-on.cur-off selec
 
 <div class="lb" id="lb"><button aria-label="Tutup">×</button><img id="lbImg" alt="Dokumentasi" width="1000" height="750" /></div>
 
-<div id="cur" aria-hidden="true"></div>
-<div id="curE" aria-hidden="true"></div>
-
 <script>
 /* ============================================================
    UTIL
@@ -1972,80 +1907,6 @@ const $ = (s,c=document)=>c.querySelector(s);
 const $$ = (s,c=document)=>[...c.querySelectorAll(s)];
 const clamp = (v,a,b)=>Math.min(b,Math.max(a,v));
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ============================================================
-   CURSOR
-   Puck siku mengikuti tetikus tanpa jeda, satu kotak gema
-   menyusul dengan interpolasi. Keadaan ditentukan dari elemen di
-   bawah kursor: tautan, teks, atau lepas (grafik dan isian).
-   ============================================================ */
-(function(){
-  const fine = matchMedia('(hover:hover) and (pointer:fine)');
-  if(!fine.matches || reduce) return;
-  const puck = $('#cur'), echo = $('#curE'), root = document.documentElement;
-  if(!puck || !echo) return;
-  root.classList.add('cur-on');
-
-  const HIT = 'a,button,.card,.c-item,.ph,.bcard,.stat-chip,.badge,.music,.dt-btn,'+
-              '.filters button,.samples button,.sent-wrap,.chart-card,.preview';
-  const TXT = 'p,li,h1,h2,h3,h4,blockquote,figcaption,time,td,th,label,'+
-              '.c-val,.c-lbl,.verdict,.lede,.sec-sub,.dt-block,.sj-quote';
-
-  let tx=0, ty=0, ex=0, ey=0, live=false, running=false;
-
-  function kind(el){
-    if(!el || !el.closest) return 'off';
-    if(el.closest('input,textarea,select,#heroChart')) return 'off';
-    if(el.closest(HIT)) return 'link';
-    if(el.closest(TXT)) return 'text';
-    return 'idle';
-  }
-
-  function paint(s){
-    puck.classList.toggle('is-link', s==='link');
-    puck.classList.toggle('is-text', s==='text');
-    echo.classList.toggle('is-link', s==='link');
-    echo.classList.toggle('is-text', s==='text');
-    root.classList.toggle('cur-off', s==='off');
-  }
-
-  function frame(){
-    ex += (tx-ex)*0.16;
-    ey += (ty-ey)*0.16;
-    if(Math.abs(tx-ex) < 0.4 && Math.abs(ty-ey) < 0.4){ ex = tx; ey = ty; }
-    puck.style.transform = 'translate3d('+tx+'px,'+ty+'px,0)';
-    echo.style.transform = 'translate3d('+ex+'px,'+ey+'px,0)';
-    if(ex === tx && ey === ty){ running = false; return; }
-    requestAnimationFrame(frame);
-  }
-
-  addEventListener('pointermove', function(e){
-    tx = e.clientX; ty = e.clientY;
-    if(!live){
-      ex = tx; ey = ty; live = true;
-      root.classList.add('cur-live');
-    }
-    if(!running){ running = true; requestAnimationFrame(frame); }
-    paint(kind(e.target));
-  }, {passive:true});
-
-  addEventListener('pointerdown', function(){
-    puck.classList.add('is-down');
-  }, {passive:true});
-
-  addEventListener('pointerup', function(){
-    puck.classList.remove('is-down');
-  }, {passive:true});
-
-  function leave(){
-    live = false;
-    root.classList.remove('cur-live','cur-off');
-    puck.classList.remove('is-link','is-text','is-down');
-    echo.classList.remove('is-link','is-text');
-  }
-  addEventListener('blur', leave);
-  document.documentElement.addEventListener('pointerleave', leave);
-})();
 
 /* ============================================================
    NAV / PROGRESS / SPY
