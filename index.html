@@ -92,11 +92,10 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--brick);outline-offs
 /* ---------- kepala ---------- */
 .head{text-align:center;margin-bottom:34px;}
 .avatar{
-  width:96px;height:96px;margin:0 auto 22px;border-radius:var(--r);
-  display:grid;place-items:center;
-  font-size:30px;font-weight:700;letter-spacing:-.02em;
-  color:var(--paper);background:var(--brick);
-  border:2px solid var(--ink);box-shadow:var(--sh-sm);
+  display:block;width:96px;height:96px;margin:0 auto 22px;
+  border-radius:var(--r);border:2px solid var(--ink);
+  box-shadow:var(--sh-sm);background:var(--paper-2);
+  object-fit:cover;object-position:50% 50%;
 }
 h1{font-size:clamp(2.1rem,7.6vw,2.7rem);letter-spacing:-.035em;}
 .role{
@@ -207,7 +206,7 @@ h1{font-size:clamp(2.1rem,7.6vw,2.7rem);letter-spacing:-.035em;}
 @media(max-width:520px){
   .shell{padding:66px 16px 48px;}
   h1{font-size:2rem;}
-  .avatar{width:84px;height:84px;font-size:26px;}
+  .avatar{width:84px;height:84px;}
   .featured{padding:20px;}
   .featured h3{font-size:1.32rem;}
   .featured p{font-size:14px;}
@@ -247,10 +246,10 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
 <div class="shell">
 
   <header class="head">
-    <div class="avatar" aria-hidden="true">AU</div>
+    <img class="avatar" src="assets/img/avatar.jpg" width="96" height="96" alt="" />
     <h1>Andi Ulia Rahman</h1>
     <div class="role">Statistika &middot; Machine Learning &middot; Data</div>
-    <p class="bio">Sarjana Statistika UNS 2026. Merapikan data yang berantakan, memodelkannya, lalu menyajikannya jadi sesuatu yang bisa langsung dipakai.</p>
+    <p class="bio">Sarjana Statistika UNS 2026. Rapiin data, bangun model, hasilnya langsung kepakai.</p>
     <div class="chips">
       <span class="chip hi">Open to Work</span>
       <span class="chip cum">IPK 3.64 &middot; Cumlaude</span>
@@ -261,7 +260,7 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
   <a class="featured" href="portofolio/" aria-label="Buka portofolio lengkap">
     <div class="fl"><i></i> Portofolio Lengkap</div>
     <h3>Membedakan pola dari kebetulan.</h3>
-    <p>Detektor sentimen interaktif, grafik IHSG yang menyegarkan sendiri, tiga karya data, timeline pendidikan &amp; kerja lengkap dengan dokumentasi, serta panel detail per pengalaman.</p>
+    <p>Detektor sentimen, grafik IHSG yang update sendiri, tiga studi kasus, dan perjalanan lengkap.</p>
     <span class="go">Buka Portofolio <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
   </a>
 
@@ -328,8 +327,8 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
   </ul>
 
   <footer class="foot">
-    <div>Butuh Kolaborasi atau Posisi Data? <a href="mailto:andiuliarahman@gmail.com">Kirim email</a> &middot; <a href="https://wa.me/6282285103001" target="_blank" rel="noopener">Chat WhatsApp</a></div>
-    <div class="sig">&copy; <span id="year">2026</span> Andi Ulia Rahman &middot; Statistics · Machine Learning · Data</div>
+    <div>Ada peluang atau proyek? <a href="mailto:andiuliarahman@gmail.com">Email</a> &middot; <a href="https://wa.me/6282285103001" target="_blank" rel="noopener">WhatsApp</a></div>
+    <div class="sig">&copy; <span id="year">2026</span> Andi Ulia Rahman &middot; Surakarta</div>
   </footer>
 
 </div>
