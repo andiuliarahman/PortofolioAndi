@@ -354,6 +354,8 @@ header.nav.stuck{
 .b-quote .sig i{width:26px;height:1px;background:var(--lime);display:block;}
 .b-photo{grid-column:span 1;grid-row:span 2;padding:0;overflow:hidden;}
 .b-photo .ph{height:100%;border:0;border-radius:0;aspect-ratio:auto;}
+/* wajah ada di sepertiga atas potret: jangan dipotong tengah saat bingkai melebar */
+.b-photo .ph img{object-position:50% 22%;}
 .b-stat{display:flex;flex-direction:column;justify-content:center;}
 .b-stat .row{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line);}
 .b-stat .row:last-child{border-bottom:0;}
@@ -452,7 +454,7 @@ header.nav.stuck{
 .ph.has-img .ph-empty{display:none;}
 .ph-cap{
   position:absolute;left:0;right:0;bottom:0;padding:22px 12px 9px;
-  font-size:10px;color:#1d1d1f;background:linear-gradient(transparent,rgba(6,7,12,.92));
+  font-size:10px;color:#faf8f3;background:linear-gradient(transparent,rgba(6,7,12,.92));
   opacity:0;transition:opacity .35s;
 }
 .ph.has-img:hover .ph-cap{opacity:1;}
@@ -565,6 +567,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;}
   .bento{grid-template-columns:repeat(2,1fr);}
   .b-quote{grid-column:span 2;grid-row:auto;}
   .b-photo{grid-column:span 1;grid-row:auto;}
+  /* kartu foto tidak lagi setinggi dua baris, jadi tingginya diambil dari rasio */
+  .b-photo .ph{aspect-ratio:4/5;height:auto;}
   .b-steps{grid-column:span 2;}
   .work-grid{grid-template-columns:1fr 1fr;}
   .org-grid{grid-template-columns:1fr 1fr;}
@@ -590,6 +594,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;}
   .stat-chip{padding:11px 14px;}
   .bento{grid-template-columns:1fr;}
   .b-quote,.b-steps,.b-photo{grid-column:span 1;grid-row:auto;}
+  .b-photo .ph{aspect-ratio:4/5;height:auto;}
   .work-grid{grid-template-columns:1fr;}
   .org-grid{grid-template-columns:1fr;}
   .tl-item{grid-template-columns:1fr;}
@@ -1266,7 +1271,10 @@ h1,h2,h3,h4{font-weight:700!important;letter-spacing:-.025em!important;}
   background:var(--paper)!important;box-shadow:none!important;width:10px!important;height:10px!important;
 }
 .tl-item:first-child::before{background:var(--brick)!important;}
-.ph{border:2px dashed var(--ink)!important;border-radius:var(--r)!important;background:var(--paper-2)!important;}
+/* kotak kosong ditandai garis putus-putus; begitu foto masuk, garisnya
+   jadi garis penuh supaya tidak terbaca seperti kotak seleksi */
+.ph:not(.has-img){border:2px dashed var(--ink)!important;border-radius:var(--r)!important;background:var(--paper-2)!important;}
+.ph.has-img{border:2px solid var(--ink)!important;border-radius:var(--r)!important;}
 .dt-btn{
   border:1.5px solid var(--ink)!important;border-radius:4px!important;
   background:#ffffff!important;color:var(--ink)!important;
@@ -1515,7 +1523,7 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
 
       <div class="bcard b-photo rv d2">
         <figure class="ph" data-cap="Andi Ulia Rahman">
-          <img src="../assets/photos/portrait.jpg" alt="Foto Andi Ulia Rahman" width="800" height="600" fetchpriority="high" />
+          <img src="../assets/photos/portrait.jpg" alt="Andi Ulia Rahman memegang buket bunga usai wisuda, di depan gedung Center for Fintech and Banking" width="720" height="864" fetchpriority="high" />
           <div class="ph-empty">
             <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg>
             <span>PORTRAIT<br>portrait.jpg</span>

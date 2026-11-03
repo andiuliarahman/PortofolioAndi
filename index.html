@@ -47,7 +47,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500&display=swap" rel="stylesheet" />
 
 <style>
 :root{
@@ -92,10 +92,21 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--brick);outline-offs
 /* ---------- kepala ---------- */
 .head{text-align:center;margin-bottom:34px;}
 .avatar{
-  display:block;width:96px;height:96px;margin:0 auto 22px;
-  border-radius:var(--r);border:2px solid var(--ink);
-  box-shadow:var(--sh-sm);background:var(--paper-2);
-  object-fit:cover;object-position:50% 50%;
+  position:relative;display:grid;place-items:center;
+  width:96px;height:96px;margin:0 auto 22px;
+  background:var(--paper);border:2px solid var(--ink);border-radius:var(--r);
+  box-shadow:var(--sh-sm);
+}
+/* garis rambut di dalam bingkai: dua garis tipis terasa seperti monogram
+   cetak, bukan kotak kosong */
+.avatar::before{
+  content:'';position:absolute;inset:6px;border-radius:2px;
+  border:1px solid rgba(29,29,31,.2);pointer-events:none;
+}
+.avatar .mono{
+  font-family:'Playfair Display',Georgia,'Times New Roman',serif;
+  font-size:52px;line-height:1;font-weight:500;color:var(--ink);
+  letter-spacing:.01em;transform:translateY(-1px);
 }
 h1{font-size:clamp(2.1rem,7.6vw,2.7rem);letter-spacing:-.035em;}
 .role{
@@ -207,6 +218,7 @@ h1{font-size:clamp(2.1rem,7.6vw,2.7rem);letter-spacing:-.035em;}
   .shell{padding:66px 16px 48px;}
   h1{font-size:2rem;}
   .avatar{width:84px;height:84px;}
+  .avatar .mono{font-size:44px;}
   .featured{padding:20px;}
   .featured h3{font-size:1.32rem;}
   .featured p{font-size:14px;}
@@ -246,7 +258,7 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
 <div class="shell">
 
   <header class="head">
-    <img class="avatar" src="assets/img/avatar.jpg" width="96" height="96" alt="" />
+    <div class="avatar" aria-hidden="true"><span class="mono">A</span></div>
     <h1>Andi Ulia Rahman</h1>
     <div class="role">Statistika &middot; Machine Learning &middot; Data</div>
     <p class="bio">Sarjana Statistika UNS 2026. Rapiin data, bangun model, hasilnya langsung kepakai.</p>

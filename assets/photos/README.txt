@@ -36,7 +36,7 @@ ORGANISASI
       -> Envilm Production
 
 BENTO / PORTOFOLIO
-  portrait.jpg      -> foto profil (potret, rasio 3:4 lebih bagus)
+  portrait.jpg      -> foto profil (potret, rasio 5:6 lebih bagus)
 
 
 CATATAN
