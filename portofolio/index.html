@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Andi Ulia Rahman · Statistika &amp; Machine Learning</title>
 <meta name="description" content="Portofolio Andi Ulia Rahman, Sarjana Statistika UNS 2026. Machine learning, data cleaning, MySQL, dan visualisasi data, plus detektor sentimen yang berjalan sepenuhnya di browser." />
-<meta name="theme-color" content="#ffffff" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2306070c'/%3E%3Cpath d='M12 46 L26 32 L38 38 L52 18' fill='none' stroke='%23c9f73d' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='52' cy='18' r='5' fill='%2338e1ff'/%3E%3C/svg%3E" />
+<meta name="theme-color" content="#faf8f3" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231d1d1f'/%3E%3Cpath d='M12 46 L26 32 L38 38 L52 18' fill='none' stroke='%23faf8f3' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='52' cy='18' r='5' fill='%239c4a2f'/%3E%3C/svg%3E" />
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Andi Ulia Rahman" />
@@ -1105,7 +1105,7 @@ header.nav.stuck{
 
 /* --- ticker: latar putih, garis tegas --- */
 .ticker{background:#ffffff!important;border-color:var(--edge)!important;}
-.chg .sep{color:#8a8a90;}
+.chart-top .chg .sep{color:#5c5c63;}
 
 /* --- kartu karya: cuci gambar lebih pekat, ikut warna kartunya --- */
 #work .card:nth-child(1){--tc-t:rgba(0,102,204,.10);}
@@ -1132,6 +1132,170 @@ header.nav.stuck{
 .c-item{box-shadow:var(--sh-rest)!important;background:#ffffff!important;}
 .c-lbl{font-size:11px!important;font-weight:600!important;letter-spacing:.1em!important;text-transform:uppercase!important;color:var(--ac)!important;}
 .c-val{font-size:14.5px!important;color:#1d1d1f!important;}
+/* ============================================================
+   15 · NEO-BRUTALISM
+   Permukaan kertas, garis tinta 2px, bayangan offset keras tanpa
+   blur, dan aksen tanah: bata, okra, plum, zaitun. Tidak ada
+   gradien, tidak ada glow, tidak ada warna menyala.
+   Semua warna lewat variabel, jadi satu nilai bisa mengubah
+   seluruh halaman.
+   ============================================================ */
+:root{
+  --paper:#faf8f3;
+  --paper-2:#f2ece0;
+  --ink:#1d1d1f;
+  --brick:#9c4a2f;
+  --brick-d:#8a3f27;
+  --ochre:#8f5f1d;
+  --plum:#6b4a72;
+  --olive:#5a6b3a;
+  --wine:#7f3b4d;
+  --edge:#1d1d1f;
+  --r:5px;
+  --sh:6px 6px 0 #1d1d1f;
+  --sh-sm:4px 4px 0 #1d1d1f;
+  /* peta ulang token lama supaya seluruh halaman ikut tanpa
+     menyentuh ratusan aturan di lapisan sebelumnya */
+  --lime:var(--brick);
+  --cyan:var(--brick-d);
+  --violet:var(--brick);
+  --pink:var(--wine);
+  --c-blue:var(--brick);
+  --c-teal:var(--olive);
+  --c-violet:var(--plum);
+  --c-rose:var(--wine);
+  --c-amber:var(--ochre);
+  --pos:#2f6b45;
+  --neg:#8a3f52;
+}
+
+/* --- kanvas --- */
+body{background:var(--paper)!important;color:var(--ink)!important;}
+.hero{background:var(--paper)!important;}
+#about,#contact{background:var(--paper)!important;}
+#sentiment,#work,#journey{background:var(--paper-2)!important;}
+section{border-top:2px solid var(--ink);}
+.hero{border-top:0;}
+
+/* --- navigasi --- */
+header{background:var(--paper)!important;border-bottom:2px solid var(--ink)!important;}
+header.nav.stuck{
+  background:var(--paper)!important;border-bottom:2px solid var(--ink)!important;
+  box-shadow:0 6px 0 rgba(29,29,31,.08)!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+.nav-links a{color:var(--ink)!important;}
+.nav-links a:hover,.nav-links a.active{color:var(--brick)!important;}
+.logo{color:var(--ink)!important;}
+.logo-mark{background:var(--ink)!important;color:var(--paper)!important;border-radius:4px!important;}
+.progress{height:5px;background:var(--brick)!important;border-bottom:2px solid var(--ink);}
+
+/* --- permukaan: kertas putih, garis tinta, bayangan offset --- */
+.card,.bcard,.stat-chip,.sent-wrap,.contact-box,.c-item,.chart-card,.pill,
+.dt-panel,.music,.tag-src,.badge,.tokens span,.preview{
+  border:2px solid var(--ink)!important;border-radius:var(--r)!important;
+  box-shadow:var(--sh)!important;background:#ffffff!important;
+}
+.card:hover,.bcard:hover,.c-item:hover{
+  box-shadow:8px 8px 0 #1d1d1f!important;transform:translate(-2px,-2px)!important;
+}
+.pill{box-shadow:var(--sh-sm)!important;}
+.badge,.tag-src,.tokens span,.preview{box-shadow:none!important;border-width:1.5px!important;}
+.preview{border-radius:var(--r)!important;background:var(--paper-2)!important;}
+.bcard{background:var(--paper-2)!important;}
+.card-thumb{border-radius:0!important;border-bottom:2px solid var(--ink)!important;}
+
+/* --- tombol: menekan ke dalam saat disentuh --- */
+.btn{
+  border:2px solid var(--ink)!important;border-radius:var(--r)!important;
+  box-shadow:var(--sh-sm)!important;font-weight:600!important;
+  transition:transform .12s,box-shadow .12s,background .12s!important;
+}
+.btn:hover{transform:translate(2px,2px)!important;box-shadow:2px 2px 0 #1d1d1f!important;}
+.btn:active{transform:translate(4px,4px)!important;box-shadow:0 0 0 #1d1d1f!important;}
+.btn-primary{background:var(--brick)!important;color:#ffffff!important;border-color:var(--ink)!important;}
+.btn-primary:hover{background:var(--brick-d)!important;}
+.btn-ghost{background:#ffffff!important;color:var(--ink)!important;border-color:var(--ink)!important;}
+.btn-ghost:hover{background:var(--paper-2)!important;}
+
+/* --- tipografi --- */
+h1,h2,h3,h4{font-weight:700!important;letter-spacing:-.025em!important;}
+.hero h1{letter-spacing:-.035em!important;}
+.hero h1 em,.sec-title em,.contact-box h2 em{color:var(--brick)!important;font-style:normal!important;}
+.sec-title{font-weight:700!important;}
+.eyebrow{
+  color:var(--ink)!important;font-weight:700!important;
+  background:var(--paper);border:1.5px solid var(--ink);border-radius:3px;
+  padding:5px 10px!important;box-shadow:2px 2px 0 #1d1d1f;
+}
+.eyebrow::before{display:none!important;}
+.sec-sub,.hero .lede{color:#4a4a50!important;}
+
+/* --- input sentimen --- */
+#sentText{border:2px solid var(--ink)!important;border-radius:var(--r)!important;background:#ffffff!important;}
+#sentText:focus{border-color:var(--brick)!important;box-shadow:3px 3px 0 rgba(156,74,47,.35)!important;}
+.samples button{
+  border:1.5px solid var(--ink)!important;border-radius:var(--r)!important;
+  background:#ffffff!important;color:var(--ink)!important;box-shadow:2px 2px 0 #1d1d1f!important;
+}
+.samples button:hover{background:var(--paper-2)!important;transform:translate(1px,1px);box-shadow:1px 1px 0 #1d1d1f!important;}
+.meter{background:#e6e0d4!important;border:1.5px solid var(--ink);height:10px!important;}
+.meter i{background:var(--brick)!important;}
+.avatar{border:2px solid var(--ink)!important;border-radius:var(--r)!important;background:var(--paper-2)!important;box-shadow:var(--sh-sm)!important;}
+.verdict.pos{color:var(--pos)!important;}
+.verdict.neg{color:var(--neg)!important;}
+
+/* --- karya: filter dan label --- */
+.filters button{
+  border:1.5px solid var(--ink)!important;border-radius:var(--r)!important;
+  background:#ffffff!important;color:var(--ink)!important;box-shadow:2px 2px 0 #1d1d1f!important;
+}
+.filters button.on{background:var(--ink)!important;color:var(--paper)!important;}
+#work .card{--tc-t:var(--paper-2);}
+#work .card:nth-child(1){--tc:var(--brick);--tc-t:#f4e5dd;}
+#work .card:nth-child(2){--tc:var(--olive);--tc-t:#e9ecdf;}
+#work .card:nth-child(3){--tc:var(--plum);--tc-t:#ece4ee;}
+#work .badge.hi{background:#e8d9a8!important;color:var(--ink)!important;border-color:var(--ink)!important;}
+.card-body h3{font-weight:700!important;}
+.sent-left{border-right:2px solid var(--ink)!important;}
+
+/* --- perjalanan: titik jadi kotak, garis jadi tinta --- */
+.tl::before{width:2px!important;background:var(--ink)!important;}
+.tl-item::before,.tl-item:first-child::before{
+  border-radius:0!important;border:2px solid var(--ink)!important;
+  background:var(--paper)!important;box-shadow:none!important;width:10px!important;height:10px!important;
+}
+.tl-item:first-child::before{background:var(--brick)!important;}
+.ph{border:2px dashed var(--ink)!important;border-radius:var(--r)!important;background:var(--paper-2)!important;}
+.dt-btn{
+  border:1.5px solid var(--ink)!important;border-radius:4px!important;
+  background:#ffffff!important;color:var(--ink)!important;
+  box-shadow:2px 2px 0 #1d1d1f!important;font-weight:600!important;
+}
+.dt-btn:hover{background:var(--brick)!important;color:#ffffff!important;transform:translate(1px,1px);box-shadow:1px 1px 0 #1d1d1f!important;}
+
+/* --- kontak --- */
+.c-item{box-shadow:var(--sh-sm)!important;}
+.c-lbl{color:var(--ink)!important;}
+.contact-box .sj-quote{border-top:2px solid var(--ink)!important;}
+footer{background:var(--paper-2)!important;border-top:2px solid var(--ink)!important;color:#4a4a50!important;}
+
+/* --- ticker --- */
+.ticker{background:var(--paper)!important;border-top:2px solid var(--ink)!important;border-bottom:2px solid var(--ink)!important;}
+.ticker-track span::after{color:var(--brick)!important;}
+
+/* --- label kecil: garis tinta tipis, sudut hampir siku --- */
+.tags span,.chips span{
+  border:1px solid var(--ink)!important;border-radius:3px!important;
+  background:#ffffff!important;color:var(--ink)!important;
+}
+.badge{border-radius:3px!important;}
+
+/* --- ponsel: bayangan lebih pendek supaya tidak sempit --- */
+@media(max-width:560px){
+  :root{--sh:4px 4px 0 #1d1d1f;--sh-sm:3px 3px 0 #1d1d1f;}
+  .eyebrow{box-shadow:2px 2px 0 #1d1d1f;}
+}
 
 </style>
 </head>
@@ -1852,6 +2016,9 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     ctx.setTransform(dpr,0,0,dpr,0,0);
   }
   const PAD = {l:12, r:42, t:14, b:26};
+  /* warna garis grafik dibaca dari CSS supaya palet cuma diatur di satu tempat */
+  const CHART_INK = (getComputedStyle(document.documentElement)
+    .getPropertyValue('--brick') || '#9c4a2f').trim() || '#9c4a2f';
   /* Indeks tidak wajar diukur dari nol: 5.000 sampai 8.600 cuma sebagian
      kecil rentang di atas nol. Sumbu dipangkas, tapi tiap garis bantu
      diberi label nilai supaya skalanya tetap terbaca dan tidak menipu. */
@@ -1880,9 +2047,9 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     TICKS.forEach(tv=>{
       const yy = Y(tv);
       if(yy < PAD.t-1 || yy > H-PAD.b+1) return;
-      ctx.strokeStyle='rgba(0,0,0,.055)'; ctx.lineWidth=1;
+      ctx.strokeStyle='rgba(29,29,31,.14)'; ctx.lineWidth=1;
       ctx.beginPath(); ctx.moveTo(PAD.l,yy); ctx.lineTo(W-PAD.r+5,yy); ctx.stroke();
-      ctx.fillStyle='#5c5c63';
+      ctx.fillStyle='#4a4a50';
       ctx.fillText(nf0(tv), W-2, yy);
     });
 
@@ -1890,12 +2057,12 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     ctx.moveTo(X(0), Y(V[0]));
     for(let i=1;i<n;i++) ctx.lineTo(X(i), Y(V[i]));
     ctx.lineTo(X(n-1), H-PAD.b); ctx.lineTo(X(0), H-PAD.b); ctx.closePath();
-    ctx.fillStyle = 'rgba(0,102,204,.07)'; ctx.fill();
+    ctx.fillStyle = 'rgba(156,74,47,.12)'; ctx.fill();
 
     ctx.beginPath();
     ctx.moveTo(X(0), Y(V[0]));
     for(let i=1;i<n;i++) ctx.lineTo(X(i), Y(V[i]));
-    ctx.strokeStyle = '#0066cc'; ctx.lineWidth = 1.8; ctx.lineJoin='round'; ctx.lineCap='round';
+    ctx.strokeStyle = CHART_INK; ctx.lineWidth = 1.8; ctx.lineJoin='round'; ctx.lineCap='round';
     ctx.stroke();
 
     if(hover >= 0 && hover < n){
@@ -1910,7 +2077,7 @@ $$('.rv').forEach(el=>rvObs.observe(el));
     ctx.font = '10px "SF Pro Text", Inter, sans-serif';
     for(let i=0;i<n;i++){
       if(DATA[i].ym.slice(5) === '01'){
-        ctx.fillStyle='#5c5c63';
+        ctx.fillStyle='#4a4a50';
         ctx.fillText(DATA[i].ym.slice(0,4), X(i), H-PAD.b+15);
       }
     }
@@ -1919,7 +2086,7 @@ $$('.rv').forEach(el=>rvObs.observe(el));
       const x = X(hover), y = Y(V[hover]);
       ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2);
       ctx.fillStyle='#ffffff'; ctx.fill();
-      ctx.strokeStyle='#0066cc'; ctx.lineWidth=2.2; ctx.stroke();
+      ctx.strokeStyle=CHART_INK; ctx.lineWidth=2.2; ctx.stroke();
     }
   }
 
