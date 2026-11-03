@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Andi Ulia Rahman · Statistika, Data &amp; Machine Learning</title>
 <meta name="description" content="Andi Ulia Rahman, Sarjana Statistika UNS 2026 (IPK 3.64, Cumlaude). Semua tautan: portofolio, LinkedIn, Instagram, WhatsApp, email, dan CV." />
-<meta name="theme-color" content="#ffffff" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2306070c'/%3E%3Cpath d='M12 46 L26 32 L38 38 L52 18' fill='none' stroke='%23c9f73d' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='52' cy='18' r='5' fill='%2338e1ff'/%3E%3C/svg%3E" />
+<meta name="theme-color" content="#faf8f3" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231d1d1f'/%3E%3Cpath d='M12 46 L26 32 L38 38 L52 18' fill='none' stroke='%23faf8f3' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='52' cy='18' r='5' fill='%239c4a2f'/%3E%3C/svg%3E" />
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Andi Ulia Rahman" />
@@ -51,110 +51,170 @@
 
 <style>
 :root{
-  --white:#ffffff; --mist:#f5f5f7; --frost:#fafafc;
-  --hairline:#d6d6d6; --control:#e6e6e8;
-  --ink:#1d1d1f; --slate:#707070; --steel:#6e6e73;
-  --blue:#0066cc; --blue-fill:#0071e3; --orange:#b64400;
+  --paper:#faf8f3; --paper-2:#f2ece0; --ink:#1d1d1f;
+  --brick:#9c4a2f; --brick-t:#f4e5dd;
+  --olive:#5a6b3a; --olive-t:#e9ecdf;
+  --slate:#33566b; --slate-t:#e2e8ed;
+  --plum:#6b4a72;  --plum-t:#ece4ee;
+  --ochre:#8f5f1d; --ochre-t:#f6ecdc;
+  --wine:#7f3b4d;  --wine-t:#f2e3e7;
+  --dim:#4a4a50; --mute:#55555c;
+  --r:6px; --sh:8px 8px 0 #1d1d1f; --sh-sm:5px 5px 0 #1d1d1f;
   --maxw:600px; --ease:cubic-bezier(.22,1,.36,1);
 }
 *,*::before,*::after{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
-  margin:0;background:var(--white);color:var(--ink);
-  font-family:'SF Pro Text','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  font-size:17px;line-height:1.47;letter-spacing:-.022em;
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:'Inter','SF Pro Text',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:17px;line-height:1.5;letter-spacing:-.01em;
   -webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden;
 }
-h1,h2,h3{font-family:'SF Pro Display','Inter',-apple-system,sans-serif;line-height:1.08;margin:0;letter-spacing:-.015em;font-weight:600;}
+/* bilah warna di puncak: enam aksen tanah, seperti pita cetak */
+body::before{
+  content:'';position:fixed;top:0;left:0;right:0;height:8px;z-index:30;
+  border-bottom:2px solid var(--ink);
+  background:linear-gradient(90deg,
+    var(--brick) 0 16.67%, var(--ochre) 16.67% 33.34%,
+    var(--olive) 33.34% 50.01%, var(--slate) 50.01% 66.68%,
+    var(--plum) 66.68% 83.35%, var(--wine) 83.35% 100%);
+}
+h1,h2,h3{font-family:'Inter','SF Pro Display',-apple-system,sans-serif;line-height:1.1;margin:0;letter-spacing:-.03em;font-weight:700;}
 p{margin:0;}
 a{color:inherit;text-decoration:none;}
 button{font-family:inherit;}
-::selection{background:var(--blue);color:#ffffff;}
+::selection{background:var(--brick);color:#ffffff;}
+a:focus-visible,button:focus-visible{outline:3px solid var(--brick);outline-offset:3px;}
 .bg{display:none;}
 
-.shell{position:relative;max-width:var(--maxw);margin:0 auto;padding:76px 22px 64px;}
+.shell{position:relative;max-width:var(--maxw);margin:0 auto;padding:86px 20px 60px;}
 
-/* ---------- header ---------- */
-.head{text-align:center;margin-bottom:40px;}
+/* ---------- kepala ---------- */
+.head{text-align:center;margin-bottom:34px;}
 .avatar{
-  width:96px;height:96px;margin:0 auto 24px;border-radius:50%;
+  width:96px;height:96px;margin:0 auto 22px;border-radius:var(--r);
   display:grid;place-items:center;
-  font-family:'SF Pro Display','Inter',-apple-system,sans-serif;font-weight:600;font-size:28px;letter-spacing:-.01em;
-  color:#ffffff;background:var(--ink);
+  font-size:30px;font-weight:700;letter-spacing:-.02em;
+  color:var(--paper);background:var(--brick);
+  border:2px solid var(--ink);box-shadow:var(--sh-sm);
 }
-h1{font-size:40px;letter-spacing:-.01em;}
-.role{font-size:17px;letter-spacing:-.022em;color:var(--slate);margin-top:10px;}
-.bio{color:var(--slate);font-size:17px;line-height:1.47;margin:18px auto 0;max-width:46ch;text-wrap:balance;}
-.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:22px;}
+h1{font-size:clamp(2.1rem,7.6vw,2.7rem);letter-spacing:-.035em;}
+.role{
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);margin-top:12px;
+}
+.bio{color:var(--dim);font-size:16px;line-height:1.55;margin:14px auto 0;max-width:44ch;text-wrap:balance;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px;}
 .chip{
-  font-size:12px;letter-spacing:-.01em;padding:5px 12px;border-radius:9999px;
-  border:1px solid var(--control);color:var(--slate);background:var(--mist);
+  font-size:11.5px;font-weight:600;letter-spacing:.02em;
+  padding:5px 10px;border-radius:4px;
+  border:1.5px solid var(--ink);color:var(--ink);background:#ffffff;
+  box-shadow:2px 2px 0 var(--ink);
 }
-.chip.hi{color:var(--blue);background:#ffffff;border-color:var(--control);font-weight:500;}
-.chip.cum{color:var(--slate);background:var(--mist);border-color:var(--control);font-weight:400;}
+.chip.hi{background:var(--olive);color:var(--paper);}
+.chip.cum{background:var(--ochre-t);}
 
-/* ---------- featured ---------- */
+/* ---------- kartu utama ---------- */
 .featured{
   display:block;position:relative;overflow:hidden;
-  border:1px solid var(--hairline);border-radius:28px;
-  background:var(--white);padding:28px;margin-bottom:40px;
-  transition:border-color .2s var(--ease);
+  border:2px solid var(--ink);border-radius:var(--r);
+  background:var(--brick);color:#ffffff;
+  padding:24px 24px 26px;margin-bottom:34px;
+  box-shadow:var(--sh);
+  transition:transform .12s,box-shadow .12s;
 }
-.featured:hover{border-color:var(--steel);}
-.featured .fl{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:-.01em;color:var(--steel);margin-bottom:12px;}
-.featured .fl i{width:6px;height:6px;border-radius:50%;background:var(--blue);}
-.featured h3{font-size:28px;letter-spacing:-.01em;}
-.featured p{color:var(--slate);font-size:17px;line-height:1.47;margin-top:10px;}
-.featured .go{display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:17px;color:var(--blue);}
-.featured .go svg{transition:transform .2s var(--ease);}
+.featured:hover{transform:translate(3px,3px);box-shadow:4px 4px 0 var(--ink);}
+.featured:active{transform:translate(5px,5px);box-shadow:1px 1px 0 var(--ink);}
+.featured .fl{
+  display:flex;align-items:center;gap:8px;
+  font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:#f3ddd4;margin-bottom:12px;
+}
+.featured .fl i{width:8px;height:8px;background:var(--paper);border:1.5px solid var(--ink);}
+.featured h3{font-size:1.55rem;color:#ffffff;line-height:1.15;}
+.featured p{color:#f6e6df;font-size:15px;line-height:1.5;margin-top:10px;}
+.featured .go{
+  display:inline-flex;align-items:center;gap:7px;margin-top:18px;
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--paper);color:var(--ink);
+  border:2px solid var(--ink);border-radius:4px;padding:9px 13px;
+  box-shadow:3px 3px 0 rgba(29,29,31,.55);
+}
+.featured .go svg{transition:transform .15s;}
 .featured:hover .go svg{transform:translateX(3px);}
 
-/* ---------- link list ---------- */
-.group-label{font-size:12px;letter-spacing:-.01em;color:var(--steel);margin:0 0 12px 2px;}
-.list{list-style:none;margin:0 0 36px;padding:0;display:flex;flex-direction:column;gap:10px;}
-.link{
-  display:flex;align-items:center;gap:14px;
-  padding:16px 18px;border-radius:20px;
-  border:1px solid var(--control);background:var(--white);
-  transition:border-color .2s var(--ease),background .2s var(--ease);
+/* ---------- daftar tautan ---------- */
+.group-label{
+  display:flex;align-items:center;gap:8px;
+  font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink);margin:0 0 10px 2px;
 }
-.link:hover{border-color:var(--steel);background:var(--frost);}
-.link .ico{
-  flex:0 0 40px;height:40px;border-radius:12px;display:grid;place-items:center;
-  background:var(--mist);border:1px solid var(--control);color:var(--ink);
-}
-.link .ico svg{width:19px;height:19px;}
-.link .tx{min-width:0;flex:1;}
-.link .tx b{display:block;font-size:17px;font-weight:500;letter-spacing:-.022em;color:var(--ink);}
-.link .tx span{display:block;font-size:12px;color:var(--steel);letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.link .ar{flex:0 0 auto;color:var(--steel);transition:transform .2s var(--ease),color .2s var(--ease);}
-.link:hover .ar{transform:translateX(3px);color:var(--blue);}
-.link.primary{border-color:var(--hairline);background:var(--white);}
-.link.primary .ico{background:rgba(0,102,204,.08);border-color:rgba(0,102,204,.28);color:var(--blue);}
-.link.primary .tx b{font-size:17px;}
+.group-label::before{content:'';width:9px;height:9px;background:var(--brick);border:1.5px solid var(--ink);}
+.group-label.doc::before{background:var(--plum);}
 
-/* ---------- footer ---------- */
-.foot{text-align:center;padding-top:28px;border-top:1px solid var(--hairline);color:var(--steel);font-size:12px;letter-spacing:-.01em;}
-.foot a{color:var(--slate);border-bottom:1px solid var(--control);}
-.foot a:hover{color:var(--blue);border-color:var(--blue);}
-.foot .sig{font-size:12px;letter-spacing:-.01em;margin-top:10px;color:var(--steel);}
+.list{list-style:none;margin:0 0 30px;padding:0;display:flex;flex-direction:column;gap:9px;}
+.link{
+  position:relative;display:flex;align-items:center;gap:13px;
+  padding:13px 15px 13px 24px;border-radius:var(--r);
+  border:2px solid var(--ink);background:var(--ac-t,var(--brick-t));
+  box-shadow:var(--sh-sm);overflow:hidden;
+  transition:transform .12s,box-shadow .12s,background .12s;
+}
+/* tulang warna per kanal */
+.link::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:8px;
+  background:var(--ac,var(--brick));border-right:2px solid var(--ink);
+}
+.link:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink);}
+.link:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--ink);}
+.link .ico{
+  flex:0 0 38px;height:38px;border-radius:4px;display:grid;place-items:center;
+  background:#ffffff;border:1.5px solid var(--ink);
+  color:var(--ac,var(--brick));
+  transition:background .12s,color .12s;
+}
+.link:hover .ico{background:var(--ac,var(--brick));color:var(--paper);}
+.link .ico svg{width:18px;height:18px;}
+.link .tx{min-width:0;flex:1;}
+.link .tx b{display:block;font-size:16px;font-weight:700;letter-spacing:-.02em;color:var(--ink);}
+.link .tx span{display:block;font-size:12px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.link .ar{flex:0 0 auto;color:var(--ink);opacity:.45;transition:transform .12s,opacity .12s;}
+.link:hover .ar{transform:translateX(3px);opacity:1;}
+
+.l-email{--ac:var(--brick);--ac-t:var(--brick-t);}
+.l-wa   {--ac:var(--olive);--ac-t:var(--olive-t);}
+.l-li   {--ac:var(--slate);--ac-t:var(--slate-t);}
+.l-ig   {--ac:var(--plum); --ac-t:var(--plum-t);}
+.l-cv   {--ac:var(--ochre);--ac-t:var(--ochre-t);}
+.l-pf   {--ac:var(--wine); --ac-t:var(--wine-t);}
+
+/* ---------- kaki ---------- */
+.foot{border-top:2px solid var(--ink);padding-top:22px;text-align:center;font-size:12.5px;color:var(--dim);}
+.foot a{color:var(--ink);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:2px;}
+.foot a:hover{color:var(--brick);}
+.foot .sig{margin-top:10px;font-size:11px;letter-spacing:.04em;color:var(--mute);}
 
 .toast{
-  position:fixed;left:50%;bottom:26px;transform:translate(-50%,24px);
-  background:var(--ink);color:#ffffff;font-weight:500;font-size:14px;
-  padding:12px 22px;border-radius:9999px;opacity:0;pointer-events:none;
-  transition:opacity .3s var(--ease),transform .3s var(--ease);z-index:50;
+  position:fixed;left:50%;bottom:24px;transform:translate(-50%,26px);
+  background:var(--ink);color:var(--paper);font-weight:600;font-size:13px;
+  padding:11px 18px;border:2px solid var(--ink);border-radius:4px;
+  box-shadow:4px 4px 0 rgba(29,29,31,.28);
+  opacity:0;pointer-events:none;z-index:50;
+  transition:opacity .25s var(--ease),transform .25s var(--ease);
 }
 .toast.on{opacity:1;transform:translate(-50%,0);}
 
 @media(max-width:520px){
-  .shell{padding:52px 16px 48px;}
-  h1{font-size:32px;}
-  .avatar{width:84px;height:84px;font-size:24px;}
-  .featured{padding:22px;border-radius:24px;}
-  .featured h3{font-size:24px;}
-  .link{padding:14px 15px;gap:12px;}
-  .link .ico{flex:0 0 36px;height:36px;border-radius:11px;}
+  .shell{padding:66px 16px 48px;}
+  h1{font-size:2rem;}
+  .avatar{width:84px;height:84px;font-size:26px;}
+  .featured{padding:20px;}
+  .featured h3{font-size:1.32rem;}
+  .featured p{font-size:14px;}
+  .link{padding:12px 13px 12px 22px;gap:11px;}
+  .link .ico{flex:0 0 34px;height:34px;}
+  .link .ico svg{width:16px;height:16px;}
+  .link .tx b{font-size:15px;}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
 </style>
@@ -187,7 +247,7 @@ h1{font-size:40px;letter-spacing:-.01em;}
   <div class="group-label">Hubungi Saya</div>
   <ul class="list">
     <li>
-      <a class="link primary" href="mailto:andiuliarahman@gmail.com">
+      <a class="link l-email" href="mailto:andiuliarahman@gmail.com">
         <span class="ico" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.8" width="19" height="14.4" rx="2.4"/><path d="M3.2 6.4 12 12.7l8.8-6.3"/></svg>
         </span>
@@ -196,7 +256,7 @@ h1{font-size:40px;letter-spacing:-.01em;}
       </a>
     </li>
     <li>
-      <a class="link" href="https://wa.me/6282285103001" target="_blank" rel="noopener">
+      <a class="link l-wa" href="https://wa.me/6282285103001" target="_blank" rel="noopener">
         <span class="ico" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42-.08-.12-.28-.2-.57-.34M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.89-9.88 9.89m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.41"/></svg>
         </span>
@@ -205,7 +265,7 @@ h1{font-size:40px;letter-spacing:-.01em;}
       </a>
     </li>
     <li>
-      <a class="link" href="https://www.linkedin.com/in/andiulia" target="_blank" rel="noopener">
+      <a class="link l-li" href="https://www.linkedin.com/in/andiulia" target="_blank" rel="noopener">
         <span class="ico" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.04c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
         </span>
@@ -214,7 +274,7 @@ h1{font-size:40px;letter-spacing:-.01em;}
       </a>
     </li>
     <li>
-      <a class="link" href="https://www.instagram.com/andi.ulrhmn/" target="_blank" rel="noopener">
+      <a class="link l-ig" href="https://www.instagram.com/andi.ulrhmn/" target="_blank" rel="noopener">
         <span class="ico" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.05" fill="currentColor" stroke="none"/></svg>
         </span>
@@ -224,10 +284,10 @@ h1{font-size:40px;letter-spacing:-.01em;}
     </li>
   </ul>
 
-  <div class="group-label">Dokumen</div>
+  <div class="group-label doc">Dokumen</div>
   <ul class="list">
     <li>
-      <a class="link" href="assets/CV_Andi_Ulia_Rahman.pdf" target="_blank" rel="noopener">
+      <a class="link l-cv" href="assets/CV_Andi_Ulia_Rahman.pdf" target="_blank" rel="noopener">
         <span class="ico" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H7A2.5 2.5 0 0 0 4.5 5v14A2.5 2.5 0 0 0 7 21.5h10a2.5 2.5 0 0 0 2.5-2.5V8z"/><path d="M14 2.5V8h5.5M8.5 13h7M8.5 17h5"/></svg>
         </span>
@@ -236,7 +296,7 @@ h1{font-size:40px;letter-spacing:-.01em;}
       </a>
     </li>
     <li>
-      <a class="link" href="portofolio/" >
+      <a class="link l-pf" href="portofolio/" >
         <span class="ico" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M9.5 20v-6h5v6"/></svg>
         </span>
@@ -267,15 +327,6 @@ h1{font-size:40px;letter-spacing:-.01em;}
     clearTimeout(t);
     t = setTimeout(function(){ toast.classList.remove('on'); }, 1900);
   }
-
-  // ripple-ish pointer glow on links
-  document.querySelectorAll('.link').forEach(function(el){
-    el.addEventListener('mousemove', function(e){
-      var r = el.getBoundingClientRect();
-      el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-      el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
-    });
-  });
 
   // copy button for email
   var mail = document.querySelector('a[href^="mailto:"]');
