@@ -1369,6 +1369,106 @@ a,button,summary,label[for],[role="button"],select{cursor:var(--cur-hand),pointe
 p,li,dd,dt,h1,h2,h3,h4,h5,h6,blockquote,figcaption,td,th,cite,em,strong,small,time,
 input,textarea{cursor:var(--cur-text),text;}
 a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
+
+/* ============================================================
+   19 · HIDUP
+   Lapisan gerak. Semua efek di sini memakai properti `translate`
+   dan `rotate` yang berdiri sendiri, bukan `transform`. Alasannya:
+   transform sudah dipakai efek tekan neo-brutalis (kartu dan tombol
+   bergeser 2-4 px saat ditekan) dan itu ditulis dengan !important,
+   jadi kalau digabung, salah satunya pasti kalah.
+   ============================================================ */
+
+/* --- titik kertas: grid halus yang menyingkir dari kursor --- */
+.hero{position:relative;isolation:isolate;}
+#field{
+  position:absolute;inset:0;width:100%;height:100%;
+  z-index:0;pointer-events:none;
+}
+.hero > .wrap{position:relative;z-index:1;}
+
+/* --- koreografi muat: isi hero naik satu per satu --- */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes riseIn{from{opacity:0;translate:0 15px;}to{opacity:1;translate:0 0;}}
+  .hero .pill,.hero .ln,.hero .role-line,.hero .lede,.hero .hero-cta,.hero .hero-stats{
+    animation:riseIn .72s cubic-bezier(.22,1,.36,1) both;
+  }
+  .hero .pill{animation-delay:.04s;}
+  .hero .ln:nth-child(1){animation-delay:.10s;}
+  .hero .ln:nth-child(2){animation-delay:.17s;}
+  .hero .role-line{animation-delay:.25s;}
+  .hero .lede{animation-delay:.31s;}
+  .hero .hero-cta{animation-delay:.39s;}
+  .hero .hero-stats{animation-delay:.47s;}
+}
+
+/* --- garis judul yang tumbuh saat babnya masuk --- */
+.sec-title::after{
+  content:'';display:block;width:56px;height:3px;background:var(--brick);
+  margin-top:15px;transform:scaleX(0);transform-origin:left center;
+  transition:transform .62s cubic-bezier(.22,1,.36,1) .12s;
+}
+.sec-head.in .sec-title::after{transform:scaleX(1);}
+
+/* --- rel bab di kiri: penanda posisi baca --- */
+.rail{
+  position:fixed;left:14px;top:50%;translate:0 -50%;z-index:120;
+  display:none;flex-direction:column;gap:7px;
+}
+@media (min-width:1320px){.rail{display:flex;}}
+.rail a{
+  position:relative;display:grid;place-items:center;
+  width:22px;height:22px;border:1.5px solid var(--ink);border-radius:3px;
+  background:var(--paper);text-decoration:none;
+  transition:background .18s,border-color .18s;
+}
+.rail a i{width:8px;height:8px;background:var(--ink);opacity:.32;transition:opacity .18s,background .18s;}
+.rail a b{
+  position:absolute;left:30px;white-space:nowrap;pointer-events:none;
+  background:var(--ink);color:var(--paper);border-radius:3px;padding:5px 8px;
+  font-family:'Inter',sans-serif;font-size:9px;font-weight:600;
+  letter-spacing:.13em;text-transform:uppercase;
+  opacity:0;translate:-5px 0;transition:opacity .18s,translate .18s;
+}
+.rail a:hover b,.rail a:focus-visible b{opacity:1;translate:0 0;}
+.rail a.on{background:var(--brick);}
+.rail a.on i{opacity:1;background:var(--paper);}
+.rail a:hover{border-color:var(--brick);}
+
+/* --- nomor bab raksasa sebagai latar judul --- */
+.sec-head{position:relative;}
+.sec-head::after{
+  content:attr(data-n);flex:0 0 auto;pointer-events:none;user-select:none;
+  font-family:'Inter',sans-serif;font-size:clamp(60px,8.4vw,112px);font-weight:700;
+  line-height:.76;letter-spacing:-.055em;
+  color:transparent;-webkit-text-stroke:1.5px rgba(29,29,31,.17);
+}
+@media (max-width:820px){.sec-head::after{display:none;}}
+
+/* --- pita keahlian: berhenti saat dibaca, tepinya melunak --- */
+.ticker{position:relative;overflow:hidden;}
+.ticker:hover .ticker-track{animation-play-state:paused;}
+.ticker::before,.ticker::after{
+  content:'';position:absolute;top:0;bottom:0;width:76px;z-index:2;pointer-events:none;
+}
+.ticker::before{left:0;background:linear-gradient(90deg,var(--paper) 12%,rgba(250,248,243,0));}
+.ticker::after{right:0;background:linear-gradient(270deg,var(--paper) 12%,rgba(250,248,243,0));}
+@media (max-width:640px){.ticker::before,.ticker::after{width:44px;}}
+.ticker-track span{color:var(--ink)!important;}
+
+/* --- tombol magnet: mengikuti kursor dua sampai tiga piksel --- */
+.btn,.dt-btn,.filters button,.music{
+  translate:var(--mgx,0px) var(--mgy,0px);
+  transition:translate .22s cubic-bezier(.22,1,.36,1),
+             transform .14s,box-shadow .14s,background .2s,color .2s,border-color .2s;
+}
+
+/* --- grafik hero bergerak lebih lambat dari halaman --- */
+.chart-card{translate:0 var(--py,0px);}
+
+@media (prefers-reduced-motion:reduce){
+  .sec-title::after{transition:none;transform:scaleX(1);}
+}
 </style>
 </head>
 <body>
@@ -1404,6 +1504,7 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
 
 <!-- ================= HERO ================= -->
 <section class="hero" id="home">
+  <canvas id="field" aria-hidden="true"></canvas>
   <div class="wrap hero-grid">
     <div>
       <div class="pill"><span class="dot-live"></span> Sarjana Statistika UNS · Lulus 2026</div>
@@ -1459,7 +1560,7 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
 <!-- ================= SENTIMENT ================= -->
 <section id="sentiment">
   <div class="wrap">
-    <div class="sec-head rv">
+    <div class="sec-head rv" data-n="01">
       <div>
         <div class="eyebrow">Interactive</div>
         <h2 class="sec-title">Detektor Sentimen <em>Live</em></h2>
@@ -1501,7 +1602,7 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
 <!-- ================= BENTO ================= -->
 <section id="about">
   <div class="wrap">
-    <div class="sec-head rv">
+    <div class="sec-head rv" data-n="02">
       <div>
         <div class="eyebrow">Tentang</div>
         <h2 class="sec-title">Cara saya <em>berpikir</em></h2>
@@ -1560,7 +1661,7 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
 <!-- ================= WORK ================= -->
 <section id="work">
   <div class="wrap">
-    <div class="sec-head rv">
+    <div class="sec-head rv" data-n="03">
       <div>
         <div class="eyebrow">Karya</div>
         <h2 class="sec-title">Yang pernah saya <em>bangun</em></h2>
@@ -1656,7 +1757,7 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
 <!-- ================= JOURNEY ================= -->
 <section id="journey">
   <div class="wrap">
-    <div class="sec-head rv">
+    <div class="sec-head rv" data-n="04">
       <div>
         <div class="eyebrow">Perjalanan</div>
         <h2 class="sec-title">Pendidikan, kerja, <em>dan dokumentasinya</em></h2>
@@ -2779,6 +2880,149 @@ $$('.bcard').forEach(card=>{
   const t = $('#ticker');
   t.innerHTML += t.innerHTML;
   $('#year').textContent = new Date().getFullYear();
+})();
+
+/* ============================================================
+   19 · HIDUP
+   Tiga hal: titik kertas yang menyingkir dari kursor di hero,
+   rel bab di kiri, dan tombol yang sedikit tertarik ke arah
+   kursor. Semua dimatikan kalau pengunjung meminta gerak
+   dikurangi, dan yang butuh kursor presisi dimatikan di layar
+   sentuh.
+   ============================================================ */
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine   = matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* ---------- titik kertas ---------- */
+  (function(){
+    const hero = document.querySelector('.hero');
+    const cv = document.getElementById('field');
+    if(!hero || !cv || !cv.getContext) return;
+    const ctx = cv.getContext('2d');
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const GAP = 28, REACH = 130;
+    let W = 0, H = 0, px = -9999, py = -9999, active = false, queued = false;
+
+    function paint(){
+      ctx.clearRect(0, 0, W, H);
+      for(let y = GAP / 2; y < H; y += GAP){
+        for(let x = GAP / 2; x < W; x += GAP){
+          let dx = 0, dy = 0, t = 0;
+          if(active){
+            const ox = x - px, oy = y - py;
+            const d = Math.sqrt(ox * ox + oy * oy);
+            if(d < REACH && d > 0.5){
+              t = 1 - d / REACH;
+              const push = t * t * 12;
+              dx = ox / d * push;
+              dy = oy / d * push;
+            }
+          }
+          ctx.beginPath();
+          ctx.arc(x + dx, y + dy, 1.15 + t * 1.05, 0, 6.2832);
+          ctx.fillStyle = t > 0
+            ? 'rgba(' + Math.round(29 + 127 * t) + ',' + Math.round(29 + 45 * t) + ',' +
+              Math.round(31 + 16 * t) + ',' + (0.14 + 0.34 * t).toFixed(3) + ')'
+            : 'rgba(29,29,31,.14)';
+          ctx.fill();
+        }
+      }
+    }
+    function queue(){
+      if(queued) return;
+      queued = true;
+      requestAnimationFrame(function(){ queued = false; paint(); });
+    }
+    function size(){
+      const r = hero.getBoundingClientRect();
+      W = Math.round(r.width); H = Math.round(r.height);
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      paint();
+    }
+    size();
+    addEventListener('resize', size);
+    if(!fine || reduce) return;
+    hero.addEventListener('pointermove', function(e){
+      const r = hero.getBoundingClientRect();
+      px = e.clientX - r.left;
+      py = e.clientY - r.top;
+      active = true;
+      queue();
+    }, {passive:true});
+    hero.addEventListener('pointerleave', function(){ active = false; queue(); });
+  })();
+
+  /* ---------- rel bab ---------- */
+  (function(){
+    const items = [
+      ['home','Beranda'], ['sentiment','Sentimen'], ['about','Tentang'],
+      ['work','Karya'], ['journey','Perjalanan'], ['contact','Kontak']
+    ].filter(function(it){ return document.getElementById(it[0]); });
+    if(items.length < 3) return;
+
+    const nav = document.createElement('nav');
+    nav.className = 'rail';
+    nav.setAttribute('aria-label', 'Bab halaman');
+    items.forEach(function(it, k){
+      const a = document.createElement('a');
+      a.href = '#' + it[0];
+      a.setAttribute('aria-label', it[1]);
+      a.innerHTML = '<i></i><b>' + it[1] + '</b>';
+      nav.appendChild(a);
+    });
+    document.body.appendChild(nav);
+
+    const links = Array.prototype.slice.call(nav.children);
+    function setOn(id){
+      links.forEach(function(a){
+        a.classList.toggle('on', a.getAttribute('href') === '#' + id);
+      });
+    }
+    setOn('home');
+    if(!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting) setOn(en.target.id); });
+    }, {rootMargin:'-45% 0px -50% 0px'});
+    items.forEach(function(it){ io.observe(document.getElementById(it[0])); });
+  })();
+
+  /* ---------- tombol magnet ---------- */
+  if(fine && !reduce){
+    const els = document.querySelectorAll('.btn, .dt-btn, .filters button, .music');
+    Array.prototype.forEach.call(els, function(el){
+      el.addEventListener('pointermove', function(e){
+        const r = el.getBoundingClientRect();
+        const mx = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+        const my = (e.clientY - r.top - r.height / 2) / (r.height / 2);
+        el.style.setProperty('--mgx', (mx * 3).toFixed(1) + 'px');
+        el.style.setProperty('--mgy', (my * 2).toFixed(1) + 'px');
+      });
+      el.addEventListener('pointerleave', function(){
+        el.style.setProperty('--mgx', '0px');
+        el.style.setProperty('--mgy', '0px');
+      });
+    });
+  }
+
+  /* ---------- paralaks kartu grafik ---------- */
+  (function(){
+    if(reduce) return;
+    const card = document.querySelector('.chart-card');
+    if(!card) return;
+    let tick = false;
+    function upd(){
+      tick = false;
+      const y = window.scrollY || window.pageYOffset || 0;
+      card.style.setProperty('--py', Math.min(26, y * 0.055).toFixed(1) + 'px');
+    }
+    addEventListener('scroll', function(){
+      if(tick) return;
+      tick = true;
+      requestAnimationFrame(upd);
+    }, {passive:true});
+  })();
 })();
 </script>
 </body>
