@@ -1469,6 +1469,15 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
 @media (prefers-reduced-motion:reduce){
   .sec-title::after{transition:none;transform:scaleX(1);}
 }
+
+/* --- foto yang belum diisi tidak ditampilkan sebagai kotak kosong ---
+   Pengunjung tidak perlu melihat "kampus-1.jpg" sebagai bingkai putus-putus;
+   itu terbaca seperti halaman belum selesai. Begitu berkasnya ada, JS
+   menambahkan .has-img dan fotonya muncul sendiri. */
+.ph:not(.has-img){display:none!important;}
+.tl-item:has(.ph:not(.has-img)){grid-template-columns:1fr!important;gap:0!important;}
+.b-photo:has(.ph:not(.has-img)){display:none!important;}
+.dt-gal:has(.ph:not(.has-img)){display:none!important;}
 </style>
 </head>
 <body>
@@ -1525,7 +1534,7 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
       <div class="hero-stats">
         <div class="stat-chip"><b data-count="3.64">0,00</b><span>IPK / 4,00</span><i class="cum">Cumlaude</i></div>
         <div class="stat-chip"><b data-count="4">0</b><span>Pengalaman Kerja</span></div>
-        <div class="stat-chip"><b data-count="3">0</b><span>Proyek Data</span></div>
+        <div class="stat-chip"><b data-count="3">0</b><span>Karya Data</span></div>
       </div>
     </div>
 
@@ -1637,7 +1646,7 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
         <div class="bt">Sekilas</div>
         <div class="row"><b data-count="3.64">0,00</b><span>IPK &middot; <i class="cum-t">Cumlaude</i></span></div>
         <div class="row"><b data-count="4">0</b><span>Pengalaman</span></div>
-        <div class="row"><b data-count="3">0</b><span>Proyek</span></div>
+        <div class="row"><b data-count="3">0</b><span>Karya</span></div>
       </div>
 
       <div class="bcard rv d3" style="display:flex;flex-direction:column;">
@@ -1760,8 +1769,8 @@ a *,button *,[role="button"] *{cursor:var(--cur-hand),pointer;}
     <div class="sec-head rv" data-n="04">
       <div>
         <div class="eyebrow">Perjalanan</div>
-        <h2 class="sec-title">Pendidikan, kerja, <em>dan dokumentasinya</em></h2>
-        <p class="sec-sub">Tiga bagian terpisah: pendidikan, pengalaman kerja, dan organisasi. Klik <strong style="color:var(--txt);font-weight:500">Lihat detail</strong> di tiap entri untuk penjelasan lengkap beserta dokumentasinya.</p>
+        <h2 class="sec-title">Pendidikan, kerja, <em>dan organisasi</em></h2>
+        <p class="sec-sub">Tiga bagian terpisah. Klik <strong style="color:var(--txt);font-weight:500">Lihat detail</strong> di tiap entri untuk penjelasan lengkapnya.</p>
       </div>
     </div>
 
@@ -2062,7 +2071,7 @@ onScroll();
    ============================================================ */
 (function(){
   const el = $('#typed');
-  const roles = ['Machine Learning Enthusiast','Data Analyst','Data Storyteller','Forecasting & Time Series'];
+  const roles = ['Data Analyst','Data Scientist','Business Analyst','Forecasting & Time Series'];
   if(reduce){ el.textContent = roles[0]; return; }
   let ri=0, ci=0, del=false;
   (function tick(){
